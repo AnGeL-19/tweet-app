@@ -23,7 +23,7 @@ export class UserMapper {
 
     static mapperUser( response: UserByIDResponse ): User {
 
-        const { data } = response
+        const { data, isFollowing } = response
 
         return {
             id: data.uid,
@@ -33,7 +33,8 @@ export class UserMapper {
             profileImage: data.imgUser,
             backGroundImage: data.imgUserBackground,
             numFollowers: data.nfollowers,
-            numFollowing: data.nfollowing
+            numFollowing: data.nfollowing,
+            isFollowing: isFollowing
         }
 
     }

@@ -1,9 +1,13 @@
-import { Suspense, lazy } from 'react'
+import { Suspense, lazy, useState } from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import { Button } from '../ui/button'
-import { UserPlus } from 'lucide-react'
+import { UserMinus, UserPlus } from 'lucide-react'
 import { User } from '@/core/domain/entities/user.entity'
 import { useAppSelector } from '@/app/context/store/hook'
+import { useMutation } from '@tanstack/react-query'
+import { userService } from '@/core/domain/services/index.service'
+import { CustomError } from '@/core/domain/errors/custom.error'
+import { useToast } from '../ui/use-toast'
 
 const DialogUserFollow = lazy(() => import('./DialogUserFollow'))
 
@@ -13,7 +17,41 @@ interface Props {
 
 export const BannerProfile = ({ user }:Props) => {
 
+    console.log(user);
+    
+
     const userAuth = useAppSelector(state => state.auth.user)
+
+    const { toast } = useToast()
+
+    const [isFollow, setIsFollow] = useState(user.isFollowing)
+
+    const mutation = useMutation({
+        mutationFn: (id: string) => userService.setFollowUnfollow(id), // aqui no agarra el login del metodo authRepository 
+        onSuccess: ( response ) => {
+          // Invalidate and refetch
+          console.log('FOLLOW', response );
+    
+          if (response?.ok) {
+            
+            setIsFollow(response.isFollow)
+            // authenticated(response)
+          }else{
+            setIsFollow(false)
+          }
+          
+         
+        },
+        onError: (error: CustomError) => {
+          console.log(error, 'SI HAY ERRORES', error.getDataValidation());
+          toast({
+            title: "Error follow",
+            description: 'the operation could not be performed',
+            variant:"destructive"
+        })
+        }
+      })
+
 
   return (
     <section className='relative z-10 -mt-20 p-5 bg-white rounded-lg mb-6 shadow'>
@@ -75,9 +113,15 @@ export const BannerProfile = ({ user }:Props) => {
                 {
                     userAuth?.id !== user.id
                     &&
-                    <Button className='w-fit text-xs font-medium bg-bluePrimary ' size='sm'>
-                        <UserPlus className='w-4 h-4 mr-2' />
-                        Follow
+                    <Button
+                        onClick={() => mutation.mutate(user.id)} 
+                        size='sm' 
+                        className='w-fit text-xs font-medium bg-bluePrimary'>
+                        {
+                            !isFollow
+                            ? <><UserPlus className='h-4 w-4 mr-2' /> Follow</>
+                            : <><UserMinus className='h-4 w-4 mr-2' /> Unfollow</>
+                        }
                     </Button>
                 }
                 

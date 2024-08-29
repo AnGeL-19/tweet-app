@@ -14,11 +14,11 @@ export interface TweetResponse {
     showEveryone:  boolean;
     showFollow:    boolean;
     nRetweets:     number;
-    retweets:      any[];
+    retweeted:      boolean;
     nSaved:        number;
-    saved:         any[];
+    saved:         boolean;
     nLikes:        number;
-    likes:         any[];
+    liked:         boolean;
     nComentPeople: number;
     userTweet:     UserTweetResponse;
     comentPeople:  any[];
@@ -37,5 +37,46 @@ export interface CreatedTweetResponse {
     msg:   string;
     tweet: TweetResponse;
 }
+
+
+export interface TweetLikedResponse {
+    ok:      boolean;
+    msg:     string;
+    isLiked: boolean;
+}
+
+export interface TweetRetweetedResponse {
+    ok:      boolean;
+    msg:     string;
+    isRetweeted: boolean;
+}
+
+export interface TweetSavedResponse {
+    ok:      boolean;
+    msg:     string;
+    isSaved: boolean;
+}
+
+
+export interface CreateTweetCommentResponse {
+    ok:      boolean;
+    comment: CommentResponse;
+}
+
+export interface CommentResponse {
+    cid:          string;
+    userComment:  UserTweetResponse;
+    tweetComment: string;
+    commentText:  string;
+    nLikes:       number;
+    likes:        any[];
+    date:         Date;
+}
+
+export interface CommentsResponse {
+    ok:       boolean;
+    comments: CommentResponse[];
+}
+
 
 

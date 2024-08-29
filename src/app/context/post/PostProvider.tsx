@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import { ContextPost, PostActions } from './contextPost'
 import { IComment } from '@/app/interfaces/post.interface'
-import { type Post as IPost } from '@/core/domain/entities/tweet.entity';
+import { Comment, type Post as IPost } from '@/core/domain/entities/tweet.entity';
 
 interface Props {
   post: IPost;
@@ -14,6 +14,7 @@ export const PostProvider = ({ post , children }:Props) => {
 
   const [valuesPost, setValuesPost] = useState<PostActions>({
     id: post.id,
+    user: post.user,
     comments: [],
     liked: post.liked,
     saved: post.saved,
@@ -52,7 +53,7 @@ export const PostProvider = ({ post , children }:Props) => {
     }))
   }
 
-  const createComment = (data: IComment) => {
+  const createComment = (data: Comment) => {
     console.log('dar createComment');
     
     setValuesPost((prev) => ({
@@ -62,7 +63,7 @@ export const PostProvider = ({ post , children }:Props) => {
 
   }
 
-  const setComments = (data: IComment[]) => {
+  const setComments = (data: Comment[]) => {
     setValuesPost((prev) => ({
       ...prev,
       comments: data

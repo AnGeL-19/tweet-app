@@ -20,6 +20,7 @@ export interface UserResponse {
     following:         any[];
     nfollowers:        number;
     nfollowing:        number;
+    isFollowing:       boolean;
 }
 
 export interface LogoutResponse {

@@ -2,6 +2,9 @@ import React, { useContext } from 'react'
 import { Button } from '../../ui/button'
 import { Bookmark, Heart, MessageSquare, Repeat2 } from 'lucide-react'
 import { ContextPost } from '@/app/context/post/contextPost'
+import { useMutation } from '@tanstack/react-query'
+import { tweetSservice } from '@/core/domain/services/index.service'
+import { CustomError } from '@/core/domain/errors/custom.error'
 
 
 
@@ -14,8 +17,56 @@ export const ActionsPost = () => {
     liked, 
     retweeted, 
     saved,
-    showComments
+    showComments,
+    id
   } = useContext(ContextPost)
+
+  const mutationLike = useMutation({
+    mutationFn: (id: string) => tweetSservice.setLike(id),
+    onSuccess: ( response ) => {
+      // Invalidate and refetch
+      console.log('amonos', response );
+
+      giveLike()
+
+    },
+    onError: (error: CustomError) => {
+      console.log(error, 'SI HAY ERRORES', error.getDataValidation());
+
+    }
+  })
+
+  const mutationRetweet = useMutation({
+    mutationFn: (id: string) => tweetSservice.setRetweet(id),
+    onSuccess: ( response ) => {
+      // Invalidate and refetch
+      console.log('amonos', response );
+
+
+      giveRetweet()
+   
+
+    },
+    onError: (error: CustomError) => {
+      console.log(error, 'SI HAY ERRORES', error.getDataValidation());
+
+    }
+  })
+
+  const mutationSave = useMutation({
+    mutationFn: (id: string) => tweetSservice.setSave(id),
+    onSuccess: ( response ) => {
+      // Invalidate and refetch
+      console.log('amonos', response );
+
+      giveSave()
+
+    },
+    onError: (error: CustomError) => {
+      console.log(error, 'SI HAY ERRORES', error.getDataValidation());
+
+    }
+  })
 
   return (
     <div className='w-full flex'>
@@ -28,21 +79,21 @@ export const ActionsPost = () => {
         </Button>
 
         <Button
-          onClick={giveRetweet} 
+          onClick={() => mutationRetweet.mutate(id)} 
           className={`w-1/4 flex gap-3 bg-transparent ${retweeted ? 'hover:bg-green-100' : 'hover:bg-zinc-100'}`}>
           <Repeat2 className={`h-5 w-5 ${ retweeted ? 'text-greenPrimary' : 'text-darkLight'}`}  />
           <span className={`hidden sm:flex ${retweeted ? 'text-greenPrimary' : 'text-darkLight'}`}>{ retweeted ? 'Retweeted' : 'Retweet' }</span>
         </Button>
 
         <Button 
-          onClick={giveLike}
+          onClick={() => mutationLike.mutate(id)}
           className={`w-1/4 flex gap-3 bg-transparent ${ liked ? 'hover:bg-red-100' : 'hover:bg-zinc-100' }`}>
           <Heart className={`h-5 w-5 ${ liked ? 'text-redPrimary' : 'text-darkLight' }`}  />
           <span className={`hidden sm:flex  ${ liked ? 'text-redPrimary' : 'text-darkLight' }`}>{liked ? 'Liked' : 'Like'}</span>
         </Button>
 
         <Button 
-          onClick={giveSave}
+          onClick={() => mutationSave.mutate(id) }
           className={`w-1/4 flex gap-3 bg-transparent ${ saved ? 'hover:bg-blue-100' : 'hover:bg-zinc-100' }`}>
           <Heart className={`h-5 w-5 ${ saved ? 'text-blueSave' : 'text-darkLight' }`}  />
           <span className={`hidden sm:flex  ${ saved ? 'text-blueSave' : 'text-darkLight' }`}>{saved ? 'Saved' : 'Save'}</span>

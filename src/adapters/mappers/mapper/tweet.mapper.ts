@@ -1,10 +1,33 @@
 
-import {TweetResponse, TweetsResponse } from "../responses/tweet.response";
-import { Post } from "@/core/domain/entities/tweet.entity";
+import {CommentsResponse, CreateTweetCommentResponse, TweetLikedResponse, TweetResponse, TweetRetweetedResponse, TweetSavedResponse, TweetsResponse } from "../responses/tweet.response";
+import { Comment, Post } from "@/core/domain/entities/tweet.entity";
 
 
 export class TweetMapper {
 
+    static mapperTweetLiked( response: TweetLikedResponse ): boolean {
+
+        const {  isLiked  } = response;
+
+        return isLiked 
+
+    }
+
+    static mapperTweetRetweeted( response: TweetRetweetedResponse ): boolean {
+
+        const {  isRetweeted  } = response;
+
+        return isRetweeted 
+
+    }
+
+    static mapperTweetSaved( response: TweetSavedResponse ): boolean {
+
+        const {  isSaved  } = response;
+
+        return isSaved 
+
+    }
 
     static mapperTweets( response: TweetsResponse ): Post[] {
 
@@ -14,9 +37,9 @@ export class TweetMapper {
             id: tweet.tid,
             date: tweet.date,
             imgTweet: '',
-            liked: false,
-            saved: false,
-            retweeted: false,
+            liked: tweet.liked,
+            saved: tweet.saved,
+            retweeted: tweet.retweeted,
             tweet: tweet.description,
             user: {
                 id: tweet.userTweet.uid,
@@ -54,6 +77,48 @@ export class TweetMapper {
             numRetweets: response.nRetweets,
             numSaved: response.nSaved
         }
+
+    }
+
+    static mapperComment( response: CreateTweetCommentResponse ): Comment | null {
+        
+        const { comment } = response
+
+        return {
+            id: comment.cid,
+            comment: comment.commentText,
+            date: comment.date,
+            idPost: comment.tweetComment,
+            imgComment: '',
+            liked: true,
+            numLikes: comment.nLikes,
+            user: {
+                id: comment.userComment.uid,
+                name: comment.userComment.name,
+                profileImage: comment.userComment.imgUser
+            }
+        }
+
+    }
+
+    static mapperComments( response: CommentsResponse ): Comment[] | null {
+        
+        const { comments } = response
+
+        return comments.map( comment => ({
+            id: comment.cid,
+            comment: comment.commentText,
+            date: comment.date,
+            idPost: comment.tweetComment,
+            imgComment: '',
+            liked: true,
+            numLikes: comment.nLikes,
+            user: {
+                id: comment.userComment.uid,
+                name: comment.userComment.name,
+                profileImage: comment.userComment.imgUser
+            }
+        }) )
 
     }
 

@@ -2,9 +2,9 @@ import React, { useContext, useState } from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from '../../ui/avatar'
 import { Button } from '../../ui/button'
 import { Heart } from 'lucide-react'
-import { IComment } from '@/app/interfaces/post.interface'
 import { formatNumber } from '@/app/lib/formatNumber'
 import { ContextPost } from '@/app/context/post/contextPost'
+import { Comment as IComment } from '@/core/domain/entities/tweet.entity'
 
 interface Props {
     comment: IComment
@@ -12,8 +12,6 @@ interface Props {
 
 export const Comment = ({ comment }: Props) => {
 
-    console.log(comment);
-    
     const { giveLikeComment } = useContext(ContextPost)
 
   return (
@@ -26,7 +24,7 @@ export const Comment = ({ comment }: Props) => {
             <div className='p-4 bg-gray rounded-lg'>
             <div className='flex gap-3 items-center mb-2'>
                 <span className='text-darkPrimary font-semibold text-sm'>{comment.user.name}</span>
-                <span className='font-medium text-xs text-darkLight'>{comment.date}</span>
+                <span className='font-medium text-xs text-darkLight'>{new Date(comment.date).toDateString()}</span>
             </div>
             <p className='text-base font-normal text-darkPrimary'>
                 {comment.comment}

@@ -16,16 +16,20 @@ import {
   } from "@/app/components/ui/form"
 import { Input } from "@/app/components/ui/input"
 import { Label } from "@/app/components/ui/label"
-import { Image } from 'lucide-react'
+import { Image, LoaderCircle } from 'lucide-react'
 import { ImageSelected } from '../image/ImageSelected'
 import { ContextPost } from '@/app/context/post/contextPost'
 import { IComment } from '@/app/interfaces/post.interface'
+import { tweetSservice } from '@/core/domain/services/index.service'
+import { Comment, CreateComment } from '@/core/domain/entities/tweet.entity'
+import { useMutation } from '@tanstack/react-query'
+import { CustomError } from '@/core/domain/errors/custom.error'
 
 
  
 export const FormComment = () => {
 
-    const { createComment, id } = useContext(ContextPost)
+    const { createComment, id, user, handleShowComments } = useContext(ContextPost)
 
     const form = useForm<z.infer<typeof commentSchema>>({
         resolver: zodResolver(commentSchema),
@@ -36,9 +40,28 @@ export const FormComment = () => {
     })
 
     const [url, setUrl] = useState({
-    img: '',
-    name: ''
+        img: '',
+        name: ''
     })
+
+    const mutationCreateComment = useMutation({
+        mutationFn: ({id, data}: {id: string, data: CreateComment }) => tweetSservice.createComment(id,data),
+        onSuccess: ( response ) => {
+          // Invalidate and refetch
+          console.log('amonos', response );
+
+          if (response) {
+            handleShowComments()
+            createComment(response)
+          }
+         
+    
+        },
+        onError: (error: CustomError) => {
+          console.log(error, 'SI HAY ERRORES', error.getDataValidation());
+    
+        }
+      })
     
     const removeImage = () => {
     
@@ -72,21 +95,36 @@ export const FormComment = () => {
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
         console.log(values)
-        const newComment: IComment = {
-            id: crypto.randomUUID(),
-            comment: values.comment,
-            date: new Date().toDateString(),
-            imgComment: url.img ,
-            numLikes: 0,
-            liked: false,
-            user: {
-              id: 'u41232',
-              name: 'Angel Muñoz',
-              profileImage: 'https://github.com/shadcn.png'
-            }
-          }
+        // const newComment: IComment = {
+        //     id: crypto.randomUUID(),
+        //     comment: values.comment,
+        //     date: new Date().toDateString(),
+        //     imgComment: url.img ,
+        //     numLikes: 0,
+        //     liked: false,
+        //     user: {
+        //       id: 'u41232',
+        //       name: 'Angel Muñoz',
+        //       profileImage: 'https://github.com/shadcn.png'
+        //     }
+        //   }
 
-        createComment(newComment)
+        console.log({
+            id,
+            data: {
+                comment: values.comment
+            }
+        });
+        
+        
+ 
+
+        mutationCreateComment.mutateAsync({
+            id,
+            data: {
+                comment: values.comment
+            }
+        })
 
         setUrl({
             img: '',
@@ -100,8 +138,8 @@ export const FormComment = () => {
     <div className='flex flex-col gap-4'>
         <div className='flex gap-4'>
             <Avatar>
-                <AvatarImage  src={'https://github.com/shadcn.png'} />
-                <AvatarFallback className='text-black'>Angel M</AvatarFallback>
+                <AvatarImage  src={user?.profileImage} />
+                <AvatarFallback className='text-black'>{user?.name}</AvatarFallback>
             </Avatar>
             <Form {...form} >
                 <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
@@ -150,6 +188,13 @@ export const FormComment = () => {
                 alt={url.name} 
                 removeImage={removeImage}
             />
+        }
+        {
+            mutationCreateComment.isPending
+            &&
+            <div className='w-full flex justify-center'>
+                <LoaderCircle className='w-4 h-5 animate-spin'  />
+            </div>
         }
     </div>
     

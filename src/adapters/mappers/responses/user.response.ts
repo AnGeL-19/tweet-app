@@ -36,6 +36,7 @@ export interface UserFollowUnfollowResponse {
 export interface UserByIDResponse {
     ok:   boolean;
     data: UserResponse;
+    isFollowing: boolean;
 }
 
 export interface UserFollowResponse {

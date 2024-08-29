@@ -17,7 +17,7 @@ export const ProfilePage = () => {
 
   const { data, isLoading, refetch, isFetching } = useQuery({ 
     queryKey: ['user', id], queryFn: () => userService.getUserById(id || ''),
-    staleTime: 1000 * 60 * 60, // 60 minutes 
+    // staleTime: 1000 * 60 * 60, // 60 minutes 
   })
 
   useEffect(() => {

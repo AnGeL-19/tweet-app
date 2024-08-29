@@ -4,7 +4,7 @@ import { IUser } from "./user.interface";
 export interface IPost {
     id: string;
     tweet: string;
-    user: IUserAvatar
+    user: IUserAvatar | null
     date: string;
     imgTweet: string;
     numRetweets: number;

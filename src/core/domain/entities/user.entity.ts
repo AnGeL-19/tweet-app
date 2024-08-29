@@ -8,6 +8,7 @@ export interface User{
     profileImage: string;
     numFollowers: number;
     numFollowing: number;
+    isFollowing?: boolean;
 }
 
 export interface UserAvatar extends Pick<User, 'id' | 'name' | 'profileImage' > {}

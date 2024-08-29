@@ -1,12 +1,14 @@
 import { TweetRepository } from "@/core/ports/tweet.repository";
-import { Trend } from "../entities/trend.entity";
-import { CreatePost, Post } from "../entities/tweet.entity";
+import { Comment, CreateComment, CreatePost, Post } from "../entities/tweet.entity";
 
 
 export class TweetService implements TweetRepository {
 
     constructor(private tweetRepository: TweetRepository ) {}
-    
+
+    async getComments(id: string, page: number): Promise<Comment[] | null> {
+        return await this.tweetRepository.getComments(id, page)
+    }
 
     async getTweetsByUser(id: string, page: number, query: string): Promise<Post[] | []> {
 
@@ -16,26 +18,30 @@ export class TweetService implements TweetRepository {
 
     async getTweets(page: number): Promise<Post[] | []> {
 
-        console.log(page, '----');
-        
-
         return this.tweetRepository.getTweets(page)
     }
 
-    setLike(): Promise<null> {
-        throw new Error("Method not implemented.");
+    async setLike(id: string): Promise<boolean | null> {
+        return this.tweetRepository.setLike(id)
     }
+
     setLikeComment(): Promise<null> {
         throw new Error("Method not implemented.");
     }
-    setSave(): Promise<null> {
-        throw new Error("Method not implemented.");
+
+    async setSave(id: string): Promise<boolean | null> {
+        return this.tweetRepository.setSave(id)
     }
-    setRetweet(): Promise<null> {
-        throw new Error("Method not implemented.");
+
+    async setRetweet(id: string): Promise<boolean | null> {
+        return this.tweetRepository.setRetweet(id)
     }
-    createComment(): Promise<null> {
-        throw new Error("Method not implemented.");
+
+    async createComment(id:string, data: CreateComment): Promise<Comment | null> {
+
+        console.log('entra', id, data);
+        
+        return this.tweetRepository.createComment(id, data)
     }
     
     async createTweet(values: CreatePost): Promise<Post | null> {
