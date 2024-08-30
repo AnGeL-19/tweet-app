@@ -4,13 +4,16 @@ import { Comment, CreateComment, CreatePost, Post } from "../domain/entities/twe
 
 export interface TweetRepository {
 
+    getTweetsExplore(page: number, query: string): Promise<Post[] | []>;
+    getTweetsBookmarks(page: number, query: string): Promise<Post[] | []>;
     getComments(id:string, page: number): Promise<Comment[] | null>;
     getTweets(page: number): Promise<Post[] | []>;
     getTweetsByUser(id: string, page: number, query: string): Promise<Post[] | []>;
     setLike(id: string): Promise<boolean | null>;
-    setLikeComment(): Promise<null>
+    setLikeComment(id: string): Promise<boolean | null>
     setSave(id: string): Promise<boolean | null>;
     setRetweet(id: string): Promise<boolean | null>;
     createComment(id:string, data: CreateComment): Promise<Comment | null>;
     createTweet(data: CreatePost): Promise<Post | null>;
+
 }

@@ -4,6 +4,10 @@ import { Comment } from './Comment'
 import { ContextPost } from '@/app/context/post/contextPost'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { tweetSservice } from '@/core/domain/services/index.service'
+import { Skeleton } from '../../ui/skeleton'
+import { CommentSkeleton } from './skeleton/CommentSkeleton'
+import { useInfiniteScroll } from '@/app/hooks/useInfiniteScroll'
+import { Button } from '../../ui/button'
 
 
 export const Comments = () => {
@@ -25,15 +29,35 @@ export const Comments = () => {
     },
   });
 
+
   return (
     <div>
         <Separator className='mt-2 mb-5' />
 
         {
           isLoading
-          ? <span>Loading comments</span>
-          : data?.pages.flat().map( (comment) => <Comment key={comment?.id} comment={comment!} /> )
+          ? <CommentSkeleton />
+          : data?.pages.flat().length === 0
+            ? <span>No comments</span>
+            : data?.pages.flat().map( (comment) => <Comment key={comment?.id} comment={comment!} /> )
         }
+
+      {
+        isFetchingNextPage && <CommentSkeleton />
+      }
+
+      {
+        hasNextPage 
+        &&
+        <div className='w-full flex justify-center'>
+          <Button className='text-xs bg-transparent px-4 text-darkPrimary hover:text-white' 
+            size='sm'
+            onClick={() => fetchNextPage()}
+          >
+            show more
+          </Button>
+        </div> 
+      }
 
     </div>
   )

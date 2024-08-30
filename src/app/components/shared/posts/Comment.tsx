@@ -5,6 +5,9 @@ import { Heart } from 'lucide-react'
 import { formatNumber } from '@/app/lib/formatNumber'
 import { ContextPost } from '@/app/context/post/contextPost'
 import { Comment as IComment } from '@/core/domain/entities/tweet.entity'
+import { useMutation } from '@tanstack/react-query'
+import { tweetSservice } from '@/core/domain/services/index.service'
+import { CustomError } from '@/core/domain/errors/custom.error'
 
 interface Props {
     comment: IComment
@@ -12,7 +15,31 @@ interface Props {
 
 export const Comment = ({ comment }: Props) => {
 
-    const { giveLikeComment } = useContext(ContextPost)
+    // const { giveLikeComment } = useContext(ContextPost)
+    const [isLiked, setIsLiked] = useState(comment.liked)
+    const [numLikes, setNumLikes] = useState(comment.numLikes)
+
+    const mutationLikeComment = useMutation({
+        mutationFn: (id: string) => tweetSservice.setLikeComment(id),
+        onSuccess: ( response ) => {
+          // Invalidate and refetch
+          console.log('amonos', response );
+          if (response) {
+            setIsLiked(response)
+            setNumLikes(prev => prev + 1)
+          }else{
+            setIsLiked(response || false)
+            setNumLikes(prev => prev - 1)
+          }
+         
+        //   giveLikeComment(comment.id)
+    
+        },
+        onError: (error: CustomError) => {
+          console.log(error, 'SI HAY ERRORES', error.getDataValidation());
+    
+        }
+      })
 
   return (
     <div className='flex gap-4'>
@@ -38,19 +65,21 @@ export const Comment = ({ comment }: Props) => {
             }
             </div>
             <div className='flex gap-2 items-center'>
-            <Button 
-                onClick={() => giveLikeComment(comment.id)}
-                className='p-0 bg-transparent hover:text-redPrimary hover:bg-transparent group' 
-                size='sm' 
-            >
-                <Heart className={`w-4 h-4 ${comment.liked ? 'text-redPrimary' : 'text-darkLight' }  mr-2 group-hover:text-redPrimary transition-colors duration-300`} />
-                <span className={`text-xs ${comment.liked ? 'text-redPrimary' : 'text-darkLight' } font-semibold group-hover:text-redPrimary transition-colors duration-300`}>
-                    {comment.liked ? 'Liked': 'Like'}
-                </span>
-            </Button>
-            <span>-</span>
-            <span className='text-xs text-darkLight font-semibold'>
-                {formatNumber(comment.numLikes, 'like')}
+                <Button 
+                    onClick={() => mutationLikeComment.mutate(comment.id)}
+                    className='p-0 bg-transparent hover:text-redPrimary hover:bg-transparent group' 
+                    size='sm' 
+                >
+                    <Heart className={`w-4 h-4 ${isLiked ? 'text-redPrimary' : 'text-darkLight' }  mr-2 group-hover:text-redPrimary transition-colors duration-300`} />
+                    <span className={`text-xs ${isLiked ? 'text-redPrimary' : 'text-darkLight' } font-semibold group-hover:text-redPrimary transition-colors duration-300`}>
+                        {isLiked ? 'Liked': 'Like'}
+                    </span>
+                </Button>
+                <span>-</span>
+                <span className='text-xs text-darkLight font-semibold'>
+                {
+                    formatNumber(numLikes, 'like')
+                }
                 </span>
             </div>
         </div>

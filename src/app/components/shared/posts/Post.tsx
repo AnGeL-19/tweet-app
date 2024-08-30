@@ -23,12 +23,12 @@ export const Post = ({ post }:Props) => {
 
   return (
     <div>
-        { post.userRetweet && <InfoRetweet name={post.userRetweet} /> }
+        { post.userRetweet && <InfoRetweet name={post.userRetweet || ''} /> }
         <article>
           <Card className={cn("w-full bg-white p-5 rounded-lg shadow")} >
               <CardHeader className='p-0'>
                 <UserAvatar 
-                  user={post.user} 
+                  user={post.user!} 
                   info={new Date(post.date).toDateString() || ''}
                 />
               </CardHeader>

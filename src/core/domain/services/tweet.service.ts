@@ -6,6 +6,14 @@ export class TweetService implements TweetRepository {
 
     constructor(private tweetRepository: TweetRepository ) {}
 
+    async getTweetsExplore(page: number, query: string): Promise<Post[] | []> {
+        return this.tweetRepository.getTweetsExplore(page, query)
+    }
+
+    async getTweetsBookmarks(page: number, query: string): Promise<Post[] | []> {
+        return this.tweetRepository.getTweetsBookmarks(page, query)
+    }
+
     async getComments(id: string, page: number): Promise<Comment[] | null> {
         return await this.tweetRepository.getComments(id, page)
     }
@@ -25,8 +33,8 @@ export class TweetService implements TweetRepository {
         return this.tweetRepository.setLike(id)
     }
 
-    setLikeComment(): Promise<null> {
-        throw new Error("Method not implemented.");
+    setLikeComment(id : string): Promise<boolean | null> {
+        return this.tweetRepository.setLikeComment(id)
     }
 
     async setSave(id: string): Promise<boolean | null> {

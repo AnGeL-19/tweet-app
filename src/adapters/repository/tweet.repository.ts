@@ -4,16 +4,67 @@ import { tweetApi } from "../http/api";
 import axios from "axios";
 import { CustomError } from "@/core/domain/errors/custom.error";
 import { TweetMapper } from "../mappers/mapper/tweet.mapper";
-import {  CommentsResponse, CreatedTweetResponse, CreateTweetCommentResponse, TweetLikedResponse, TweetRetweetedResponse, TweetSavedResponse, TweetsResponse } from "../mappers/responses/tweet.response";
+import {  CommentLikedResponse, CommentsResponse, CreatedTweetResponse, CreateTweetCommentResponse, TweetLikedResponse, TweetRetweetedResponse, TweetSavedResponse, TweetsResponse } from "../mappers/responses/tweet.response";
 import { Comment, CreateComment, CreatePost, Post } from "@/core/domain/entities/tweet.entity";
 
 
 export class HttpTweetRepository implements TweetRepository {
 
+    async getTweetsExplore(page: number, query: string): Promise<Post[] | []> {
+
+        console.log(page, query);
+        
+        try {
+
+            const { data } = await tweetApi.get<TweetsResponse>(`tweets/explore?page=${page}&${query}`)
+            
+            return TweetMapper.mapperTweets(data);
+
+          } catch (error) {
+            console.log(error);
+            
+            if (axios.isAxiosError(error)) {
+                if (error.response?.status === 401) {
+                    throw new CustomError('Unauthorized: Invalid credentials');
+                } else if (error.response?.status === 500) {
+                    throw new CustomError('Server error: Please try again later');
+                } else {
+                    throw new CustomError(`Unexpected error: ${error.message}`, error.response?.data);
+                }
+            } else {
+                throw new CustomError('An unknown error occurred');
+            }
+          }
+    }
+
+    async getTweetsBookmarks(page: number, query: string): Promise<Post[] | []> {
+        try {
+
+            const { data } = await tweetApi.get<TweetsResponse>(`tweets/bookmarks?page=${page}&filter=${query}`)
+            
+            return TweetMapper.mapperTweets(data);
+
+          } catch (error) {
+            console.log(error);
+            
+            if (axios.isAxiosError(error)) {
+                if (error.response?.status === 401) {
+                    throw new CustomError('Unauthorized: Invalid credentials');
+                } else if (error.response?.status === 500) {
+                    throw new CustomError('Server error: Please try again later');
+                } else {
+                    throw new CustomError(`Unexpected error: ${error.message}`, error.response?.data);
+                }
+            } else {
+                throw new CustomError('An unknown error occurred');
+            }
+          }
+    }
+
     async getComments(id:string, page: number): Promise<Comment[] | null> {
         try {
 
-            const { data } = await tweetApi.get<CommentsResponse>(`tweet/${id}/comments`)
+            const { data } = await tweetApi.get<CommentsResponse>(`tweet/${id}/comments?page=${page}`)
             
             return TweetMapper.mapperComments(data);
 
@@ -106,8 +157,28 @@ export class HttpTweetRepository implements TweetRepository {
         }
     }
 
-    setLikeComment(): Promise<null> {
-        throw new Error("Method not implemented.");
+    async setLikeComment(id: string): Promise<boolean | null> {
+        try {
+
+            const { data } = await tweetApi.put<CommentLikedResponse>(`tweet/${id}/like-comment`)
+            
+            return TweetMapper.mapperTweetLiked(data);
+
+          } catch (error) {
+            console.log(error);
+            
+            if (axios.isAxiosError(error)) {
+                if (error.response?.status === 401) {
+                    throw new CustomError('Unauthorized: Invalid credentials');
+                } else if (error.response?.status === 500) {
+                    throw new CustomError('Server error: Please try again later');
+                } else {
+                    throw new CustomError(`Unexpected error: ${error.message}`, error.response?.data);
+                }
+            } else {
+                throw new CustomError('An unknown error occurred');
+            }
+        }
     }
 
     async setSave(id: string): Promise<boolean | null> {

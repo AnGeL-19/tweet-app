@@ -45,6 +45,8 @@ export interface TweetLikedResponse {
     isLiked: boolean;
 }
 
+export interface CommentLikedResponse extends TweetLikedResponse {}
+
 export interface TweetRetweetedResponse {
     ok:      boolean;
     msg:     string;
@@ -71,6 +73,7 @@ export interface CommentResponse {
     nLikes:       number;
     likes:        any[];
     date:         Date;
+    liked:        boolean;
 }
 
 export interface CommentsResponse {

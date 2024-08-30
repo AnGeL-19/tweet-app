@@ -17,8 +17,11 @@ export const SearchTweet = () => {
 
   const onSubmit = (values: any) => {
     if (values.search.length === 0) {
-      searchParams.delete('search','')
+      console.log('entra');
+      
+      searchParams.delete('search')
     }else{
+      console.log('entra');
       searchParams.set('search', values.search)
     }
     setSearchParams(searchParams)

@@ -9,18 +9,18 @@ import { PostsList } from '../../shared/posts/PostsList'
 
 
 
-export const TabPostList = () => {
+export const TabPostListBookMarks = () => {
 
     const { id } = useParams()
     
     const [searchParams, _] = useSearchParams()
 
     const {isLoading, data, fetchNextPage, isFetchingNextPage, hasNextPage, refetch, isRefetching} = useInfiniteQuery({
-        queryKey: ['posts-profile', 'infinite'],
+        queryKey: ['posts-bookmarks', 'infinite'],
         initialPageParam: 1,
         staleTime: 1000 * 60 * 60, // 60 minutes
         queryFn: async params => {
-          const posts = await tweetSservice.getTweetsByUser(id!, params.pageParam, searchParams.get('filter') || '');
+          const posts = await tweetSservice.getTweetsBookmarks(params.pageParam, searchParams.get('filter') || '');
           return posts;
         },
         getNextPageParam: (lastPage, allPages, lastPageParam) => {

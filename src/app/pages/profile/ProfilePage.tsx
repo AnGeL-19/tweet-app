@@ -15,7 +15,7 @@ export const ProfilePage = () => {
   // const user = useAppSelector( state => state.auth.user )
   const { id } = useParams()
 
-  const { data, isLoading, refetch, isFetching } = useQuery({ 
+  const { data, isLoading, refetch, isRefetching } = useQuery({ 
     queryKey: ['user', id], queryFn: () => userService.getUserById(id || ''),
     // staleTime: 1000 * 60 * 60, // 60 minutes 
   })
@@ -33,7 +33,7 @@ export const ProfilePage = () => {
       componentRender: () => <TabPostList />
     },
     {
-      value: 'tweets&replies',
+      value: 'tweetsReplies',
       title: 'Tweets & replies',
       selected: false,
       componentRender: () => <TabPostList />
@@ -56,7 +56,7 @@ export const ProfilePage = () => {
     <div className='w-full px-4'>
       
       {
-        isLoading || isFetching
+        isLoading || isRefetching
         ?
         <>
          <BannerBgImageSkeleton />

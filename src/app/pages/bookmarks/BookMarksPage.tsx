@@ -1,37 +1,40 @@
 
+import { TabPostListBookMarks } from '@/app/components/bookmarks/tab/TabPostListBookMarks'
 import { TabTweet } from '@/app/components/shared/tabs/TabTweet'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef,  } from 'react'
 
 
 export const BookMarksPage = () => {
 
   // tweets/saved
   // tweets/liked
-
   const tabs = useRef([
     {
       value: 'tweets',
       title: 'Tweets',
-      selected: true
+      selected: true,
+      componentRender: () => <TabPostListBookMarks />
     },
     {
-      value: 'tweets&replies',
+      value: 'tweetsReplies',
       title: 'Tweets & replies',
-      selected: false
+      selected: false,
+      componentRender: () => <TabPostListBookMarks />
     },
     {
       value: 'media',
       title: 'Media',
-      selected: false
+      selected: false,
+      componentRender: () => <span>Coming soon</span>
     },
     {
       value: 'likes',
       title: 'Likes',
-      selected: false
+      selected: false,
+      componentRender: () => <TabPostListBookMarks />
     }
   ])
 
-  
   return (
     <div className='w-full px-4'>
 

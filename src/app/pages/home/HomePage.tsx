@@ -45,7 +45,7 @@ export const HomePage = () => {
           isLoading
           ? <PostSkeleton />
           : <PostsList 
-              posts={data?.pages.flat() ?? []} 
+              posts={ data?.pages.flat() ?? []} 
               isFetching={isFetchingNextPage} 
               onEndReached={fetchNextPage} 
               hasNextPage={hasNextPage} 

@@ -1,9 +1,17 @@
 
-import {CommentsResponse, CreateTweetCommentResponse, TweetLikedResponse, TweetResponse, TweetRetweetedResponse, TweetSavedResponse, TweetsResponse } from "../responses/tweet.response";
+import {CommentLikedResponse, CommentsResponse, CreateTweetCommentResponse, TweetLikedResponse, TweetResponse, TweetRetweetedResponse, TweetSavedResponse, TweetsResponse } from "../responses/tweet.response";
 import { Comment, Post } from "@/core/domain/entities/tweet.entity";
 
 
 export class TweetMapper {
+
+    static mapperCommentLiked( response: CommentLikedResponse ): boolean {
+
+        const {  isLiked  } = response;
+
+        return isLiked 
+
+    }
 
     static mapperTweetLiked( response: TweetLikedResponse ): boolean {
 
@@ -46,7 +54,7 @@ export class TweetMapper {
                 name: tweet.userTweet.name,
                 profileImage: tweet.userTweet.imgUser
             },
-            userRetweet: null,
+            userRetweet: tweet.userRetweet,
             numComments: tweet.nComentPeople,
             numLikes: tweet.nLikes,
             numRetweets: tweet.nRetweets,
@@ -111,7 +119,7 @@ export class TweetMapper {
             date: comment.date,
             idPost: comment.tweetComment,
             imgComment: '',
-            liked: true,
+            liked: comment.liked,
             numLikes: comment.nLikes,
             user: {
                 id: comment.userComment.uid,

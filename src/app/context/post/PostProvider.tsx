@@ -15,7 +15,7 @@ export const PostProvider = ({ post , children }:Props) => {
   const [valuesPost, setValuesPost] = useState<PostActions>({
     id: post.id,
     user: post.user,
-    comments: [],
+    // comments: [],
     liked: post.liked,
     saved: post.saved,
     retweeted: post.retweeted,
@@ -53,15 +53,15 @@ export const PostProvider = ({ post , children }:Props) => {
     }))
   }
 
-  const createComment = (data: Comment) => {
-    console.log('dar createComment');
+  // const createComment = (data: Comment) => {
+  //   console.log('dar createComment');
     
-    setValuesPost((prev) => ({
-      ...prev,
-      comments: [...prev.comments, data]
-    }))
+  //   setValuesPost((prev) => ({
+  //     ...prev,
+  //     comments: [...prev.comments, data]
+  //   }))
 
-  }
+  // }
 
   const setComments = (data: Comment[]) => {
     setValuesPost((prev) => ({
@@ -70,25 +70,25 @@ export const PostProvider = ({ post , children }:Props) => {
     }))
   }
 
-  const giveLikeComment = (commentId: string) => {
-    console.log('dar giveLikeComment', commentId);
+  // const giveLikeComment = (commentId: string) => {
+  //   console.log('dar giveLikeComment', commentId);
 
-    setValuesPost((prev) => ({
-      ...prev,
-      comments: prev.comments.map( (comment) => {
-        if (comment.id === commentId) {
-          return {
-            ...comment,
-            liked: !comment.liked,
-            numLikes: !comment.liked ? comment.numLikes+1 : comment.numLikes-1
-          }
-        }else{
-          return comment
-        }
-      })
-    }))
+  //   setValuesPost((prev) => ({
+  //     ...prev,
+  //     comments: prev.comments.map( (comment) => {
+  //       if (comment.id === commentId) {
+  //         return {
+  //           ...comment,
+  //           liked: !comment.liked,
+  //           numLikes: !comment.liked ? comment.numLikes+1 : comment.numLikes-1
+  //         }
+  //       }else{
+  //         return comment
+  //       }
+  //     })
+  //   }))
 
-  }
+  // }
 
   const handleShowComments = () => {
     console.log('show commments');
@@ -106,8 +106,8 @@ export const PostProvider = ({ post , children }:Props) => {
           giveLike,
           giveRetweet,
           giveSave,
-          createComment,
-          giveLikeComment,
+          // createComment,
+          // giveLikeComment,
           handleShowComments,
           setComments
         }}

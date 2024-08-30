@@ -3,24 +3,24 @@ import { Comment, Post } from "@/core/domain/entities/tweet.entity";
 import { createContext } from "react";
 
 export interface PostContext extends PostActions {
-    createComment: (data: Comment) => void;
+    // createComment: (data: Comment) => void;
     giveLike: () => void;
     giveRetweet: () => void;
     giveSave: () => void;
-    giveLikeComment: (commentId: string) => void;
+    // giveLikeComment: (commentId: string) => void;
     handleShowComments: () => void;
     setComments: (data: Comment[]) => void;
 }
 
 export interface PostActions extends Omit<Post,  'tweet' | 'date' | 'imgTweet' | 'userRetweet'> {
-    comments: Comment[],
+    // comments: Comment[],
     showComments: boolean;
 }
 
 export const INITAL_VALUES: PostActions = {
     id: '',
     user: null,
-    comments: [],
+    // comments: [],
     liked: false,
     retweeted: false,
     saved: false,
@@ -36,8 +36,8 @@ export const INITAL_ACTIONS: PostContext = {
     giveLike: () => {},
     giveRetweet: () => {},
     giveSave: () => {},
-    giveLikeComment: () => {},
-    createComment: () => {},
+    // giveLikeComment: () => {},
+    // createComment: () => {},
     handleShowComments: () => {},
     setComments: () => {}
 }
