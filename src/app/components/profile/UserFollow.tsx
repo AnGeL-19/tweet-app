@@ -9,6 +9,7 @@ import { userService } from '@/core/domain/services/index.service';
 import { CustomError } from '@/core/domain/errors/custom.error';
 import { useToast } from '../ui/use-toast';
 import { useAppSelector } from '@/app/context/store/hook';
+import { formatNumber } from '@/app/lib/formatNumber';
 
 interface Props {
     user: IUserFollow;
@@ -54,7 +55,7 @@ export const UserFollow = ({user}:Props) => {
   return (
     <div className='flex flex-col gap-3 pb-4 mr-4'>
         <div className='flex justify-between'>
-            <UserAvatar user={user} info='142k followers' />
+            <UserAvatar user={user} info={formatNumber(user.numFollowers,'follower')} />
             {
               userAuth?.id !== user.id
               &&

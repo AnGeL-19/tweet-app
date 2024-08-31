@@ -1,6 +1,7 @@
 import React from 'react'
 import { Trend } from './Trend'
 import { Trend as ITrend } from '@/core/domain/entities/trend.entity'
+import { DataEmpty } from '../../shared/DataEmpty'
 
 
 
@@ -15,9 +16,7 @@ export const TrendList = ({ trends }:Props) => {
         trends.length !== 0
         ? trends.map((trend) => (<Trend key={trend.id} trend={trend} />))
         : (
-          <div className='text-center'>
-            <span className='text-base'>No trends</span>
-          </div>
+          <DataEmpty text='No trends' />
         )
       }
       

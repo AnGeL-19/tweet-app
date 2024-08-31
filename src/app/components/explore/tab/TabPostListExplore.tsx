@@ -13,7 +13,7 @@ export const TabPostListExplore = () => {
     const {isLoading, data, fetchNextPage, isFetchingNextPage, hasNextPage, refetch, isRefetching} = useInfiniteQuery({
         queryKey: ['posts-explore', 'infinite'],
         initialPageParam: 1,
-        staleTime: 1000 * 60 * 60, // 60 minutes
+        // staleTime: 1000 * 60 * 60, // 60 minutes
         queryFn: async params => {
           
             const search = searchParams.get('search');

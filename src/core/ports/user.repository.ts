@@ -3,6 +3,7 @@ import { User, UserFollow, UserFollowUnfollow, UserRecomment } from "../domain/e
 
 export interface UserRepository {
 
+    getUsers(page: number, query: string): Promise<UserRecomment[] | []>;
     getTrends(): Promise< Trend[] | []>;
     getUsersRecomented(): Promise<UserRecomment[] | []>;
     setFollowUnfollow(id: string): Promise<UserFollowUnfollow | null>;

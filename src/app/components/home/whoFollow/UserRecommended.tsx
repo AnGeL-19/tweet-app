@@ -65,12 +65,18 @@ export const UserRecommended = ({user}:Props) => {
                 }
             </Button>
         </div>
-        <p className='text-darkLight text-sm font-medium'>{user.bio}</p>
-        <img 
+        <p className='text-darkLight text-sm font-medium'>{user.bio || ''}</p>
+        
+        {
+          user.backGroundImage
+          &&
+          <img 
             className='max-h-20 rounded-md bg-contain'
             src={user.backGroundImage} 
             alt={user.name} 
-        />                
+          /> 
+        }
+                       
     </div>
   )
 }

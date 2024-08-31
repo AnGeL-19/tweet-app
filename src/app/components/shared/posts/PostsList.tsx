@@ -4,6 +4,7 @@ import { PostProvider } from '@/app/context/post/PostProvider'
 import { type Post as IPost } from '@/core/domain/entities/tweet.entity'
 import { useInfiniteScroll } from '@/app/hooks/useInfiniteScroll'
 import { PostSkeleton } from './skeleton/PostSkeleton'
+import { DataEmpty } from '../DataEmpty'
 
 interface Props {
   posts: IPost[],
@@ -42,7 +43,7 @@ export const PostsList = ({ posts, onEndReached, isFetching, hasNextPage }: Prop
           ))
           
         :
-        <span>No tweets</span>
+        <DataEmpty text='No tweets' />
       }
       
       {

@@ -3,6 +3,7 @@ import { TabTweet } from '@/app/components/shared/tabs/TabTweet'
 
 import { SearchTweet } from '@/app/components/explore/SearchTweet'
 import { TabPostListExplore } from '@/app/components/explore/tab/TabPostListExplore'
+import { TabPeople } from '@/app/components/explore/tab/TabPeople'
 
 
 export const ExplorePage = () => {
@@ -25,7 +26,7 @@ export const ExplorePage = () => {
       value: 'people',
       title: 'People',
       selected: false,
-      componentRender: () => <span>Comming soon People</span>
+      componentRender: () => <TabPeople />
     },
     {
       value: 'media',

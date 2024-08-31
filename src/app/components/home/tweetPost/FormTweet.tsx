@@ -11,26 +11,34 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Image } from 'lucide-react'
 import { Label } from '@radix-ui/react-label'
 import { ImageSelected } from '../../shared/image/ImageSelected'
-import { useMutation } from '@tanstack/react-query'
-import { CreatePost } from '@/core/domain/entities/tweet.entity'
+import { QueryClient, useMutation } from '@tanstack/react-query'
+import { CreatePost, Post } from '@/core/domain/entities/tweet.entity'
 import { CustomError } from '@/core/domain/errors/custom.error'
 import { useToast } from '../../ui/use-toast'
 import { tweetSservice } from '@/core/domain/services/index.service'
 
+const queryClient = new QueryClient()
 
 export const FormTweet = () => {
 
     const { toast } = useToast()
-
+    
+    
     const mutation = useMutation({
         mutationFn: (data: CreatePost) => tweetSservice.createTweet(data), // aqui no agarra el login del metodo authRepository 
-        onSuccess: ( response ) => {
+        onSuccess: ( result, variables, context ) => {
           // Invalidate and refetch
-          console.log('CREATED', response );
+          console.log('CREATED', result );
   
-          if (response) {
+          if (result) {
             console.log('si entra');
             
+              queryClient.setQueryData(['posts', 'infinite'], (old : Post[]) => {
+
+              console.log(old, result);
+              
+
+            })
 
             toast({
                 title: "Post created success",
@@ -45,7 +53,8 @@ export const FormTweet = () => {
         onError: (error: CustomError) => {
           console.log(error, 'SI HAY ERRORES', error.getDataValidation());
           
-        }
+        },
+        onSettled: () => queryClient.invalidateQueries({ queryKey: ['posts', 'infinite'] }),
       })
 
     const form = useForm<z.infer<typeof tweetSchema>>({

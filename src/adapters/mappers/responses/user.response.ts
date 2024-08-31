@@ -18,6 +18,12 @@ export interface UserRecommentsResponse {
     data: UserRecommentResponse[];
 }
 
+export interface UsersResponse {
+    ok:   boolean;
+    length: number;
+    data: UserRecommentResponse[];
+}
+
 export interface UserRecommentResponse {
     name:              string;
     bio:               string;

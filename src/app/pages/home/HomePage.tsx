@@ -5,7 +5,7 @@ import { PostsList } from "@/app/components/shared/posts/PostsList"
 import { PostSkeleton } from "@/app/components/shared/posts/skeleton/PostSkeleton"
 import { useAppSelector } from "@/app/context/store/hook"
 import { tweetSservice } from "@/core/domain/services/index.service"
-import { useInfiniteQuery} from "@tanstack/react-query"
+import { QueryClient, useInfiniteQuery, useQuery } from "@tanstack/react-query"
 import { useEffect } from "react"
 
 
@@ -14,6 +14,7 @@ import { useEffect } from "react"
 export const HomePage = () => {
 
   const user = useAppSelector( state => state.auth.user )
+  
 
   const {isLoading, data, fetchNextPage, isFetchingNextPage, hasNextPage, refetch} = useInfiniteQuery({
     queryKey: ['posts', 'infinite'],
@@ -29,6 +30,7 @@ export const HomePage = () => {
       }
       return lastPageParam + 1
     },
+    
   });
 
   // useEffect(() => {

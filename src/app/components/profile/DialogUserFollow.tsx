@@ -14,6 +14,8 @@ import { useQuery } from '@tanstack/react-query';
 import { userService } from '@/core/domain/services/index.service';
 import { DialogDescription } from '@radix-ui/react-dialog';
 import { Button } from '../ui/button';
+import { DataEmpty } from '../shared/DataEmpty';
+import { UserAvatarSkeleton } from '../shared/skeleton/UserAvatarSkeleton';
 
 interface Props {
     renderTextButton: () => JSX.Element;
@@ -24,18 +26,11 @@ interface Props {
 const DialogUserFollow = ({ user, renderTextButton, query = 'followers' }:Props) => {
 
       const [enabledFetch, setEnabledFetch] = useState(false)
-      const { data, isLoading, refetch, isFetching } = useQuery({ 
+      const { data, isLoading, isFetching } = useQuery({ 
          queryKey: [`user-${query}`], 
          queryFn: () => userService.getUsersFollow(query,user.id || ''),
          enabled: enabledFetch
        })
-
-   console.log(data, enabledFetch);
-
-   // useEffect(() => {
-   //    refetch()
-   //  }, [user.id])
-
 
   return (
     <Dialog>
@@ -54,8 +49,8 @@ const DialogUserFollow = ({ user, renderTextButton, query = 'followers' }:Props)
           <div className='max-h-[650px] flex flex-grow flex-col gap-3 m-0 overflow-auto '>
             
             {
-               isLoading || isFetching
-               ?<span>Loading...</span>
+              isLoading || isFetching
+               ? <div className='w-full pb-4'><UserAvatarSkeleton /></div>
                :               
                data && data?.length !== 0 
                ? data.map( (user, index) => (
@@ -65,9 +60,12 @@ const DialogUserFollow = ({ user, renderTextButton, query = 'followers' }:Props)
                   </div>
                   ))
                : (
-               <div className='pb-4 text-center'>
-                  <span className='font-medium'>No {query}</span>
-               </div>)
+                <div className='w-full pr-4 pb-4'>
+                  <DataEmpty text={`No ${query}`} />
+                </div>
+
+                
+              )
               
             }
           </div>

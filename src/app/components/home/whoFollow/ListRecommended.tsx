@@ -4,6 +4,7 @@ import { UserRecommended } from './UserRecommended'
 import { Separator } from '../../ui/separator'
 import { UserRecomment } from '@/core/domain/entities/user.entity'
 import { UserSearch, UserX } from 'lucide-react'
+import { DataEmpty } from '../../shared/DataEmpty'
 
 interface Props {
   users: UserRecomment[]
@@ -21,10 +22,7 @@ export const ListRecommended = ({users}:Props) => {
           </div>
         ))
         : (
-          <div className='bg-zinc-100 p-1 rounded flex justify-center items-center'>
-            <span className='font-normal mr-2'>No users</span>
-            <UserSearch className='w-4 h-4' />
-          </div>
+          <DataEmpty text='No users' iconRender={<UserSearch className='w-4 h-4' />} positionIcon='left' />
         )
       }
     </div>

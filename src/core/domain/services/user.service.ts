@@ -9,6 +9,10 @@ export class UserService implements UserRepository {
 
     constructor(private userRepository: UserRepository ) {}
 
+    async getUsers(page: number, query: string): Promise<UserRecomment[] | []> {
+        return await this.userRepository.getUsers(page, query);
+    }
+
     async getUsersFollow(query: string, id: string): Promise<UserFollow[] | null> {
         return await this.userRepository.getUsersFollow(query,id) 
     }
