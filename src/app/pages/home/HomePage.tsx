@@ -62,7 +62,7 @@ export const HomePage = () => {
 
       <div className='hidden lg:block relative w-[306px] min-h-screen '>
         
-        <div className={`h-fit mb-10 sticky top-0 transition ease-in-out delay-75 ${ positionTopDown !== null ? positionTopDown ? 'translate-y-20' : '-translate-y-10' : 'translate-y-0' } duration-200`}>
+        <div className={`h-fit mb-10 sticky top-0 transition ease-in-out delay-75 ${ positionTopDown !== null ? positionTopDown ? 'translate-y-20' : '-translate-y-10' : 'translate-y-0' } duration-150`}>
          
           <div className="flex flex-col gap-6 flex-grow">
 

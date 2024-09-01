@@ -51,23 +51,25 @@ export const TabTweet = ({ tabs, children }:Props) => {
     <Tabs defaultValue={selectedTab.find( f => f.selected)?.value} className="w-full flex flex-col lg:flex-row  gap-6">
 
         <div className='w-full lg:w-[306px]'>
-          <TabsList className="w-full lg:w-[306px] h-fit pb-0 pt-5 lg:py-5 px-0 bg-white flex flex-row items-center lg:flex-col lg:items-start gap-4 shadow">
+          <div className="w-full sticky top-20">
+            <TabsList className="w-full lg:w-[306px] h-fit pb-0 pt-5 lg:py-5 px-0 bg-white flex flex-row items-center lg:flex-col lg:items-start gap-4 shadow">
 
-            {
-              selectedTab.map((tab) => (  
-                <TabsTrigger 
-                  key={tab.value}
-                  onClick={() => handleSelect(tab.value)}
-                  value={tab.value} 
-                  className='w-full hover:bg-zinc-50 rounded-none p-0 gap-4 flex-col-reverse lg:flex-row items-center'
-                >
-                  <span className={`w-full h-1 lg:w-1 lg:h-8 rounded-r ${tab.selected && 'bg-bluePrimary'}`}></span>
-                  <span className='font-semibold '>{tab.title}</span>
-                </TabsTrigger>
-              ))
-            }
+              {
+                selectedTab.map((tab) => (  
+                  <TabsTrigger 
+                    key={tab.value}
+                    onClick={() => handleSelect(tab.value)}
+                    value={tab.value} 
+                    className='w-full hover:bg-zinc-50 rounded-none p-0 gap-4 flex-col-reverse lg:flex-row items-center'
+                  >
+                    <span className={`w-full h-1 lg:w-1 lg:h-8 rounded-r ${tab.selected && 'bg-bluePrimary'}`}></span>
+                    <span className='font-semibold '>{tab.title}</span>
+                  </TabsTrigger>
+                ))
+              }
 
-          </TabsList>
+            </TabsList>
+          </div>
         </div>
         
         <div className="flex flex-col gap-5 flex-grow">
