@@ -4,9 +4,10 @@ import { WhoFollow } from "@/app/components/home/whoFollow/WhoFollow"
 import { PostsList } from "@/app/components/shared/posts/PostsList"
 import { PostSkeleton } from "@/app/components/shared/posts/skeleton/PostSkeleton"
 import { useAppSelector } from "@/app/context/store/hook"
+import { useScrollSticky } from "@/app/hooks/useScrollSticky"
 import { tweetSservice } from "@/core/domain/services/index.service"
 import { QueryClient, useInfiniteQuery, useQuery } from "@tanstack/react-query"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 
 
@@ -37,9 +38,11 @@ export const HomePage = () => {
   //   refetch()
   // }, [user?.id])
 
+  const { positionTopDown } = useScrollSticky()
+
   return (
-    <div className='flex flex-grow gap-6 px-4'>
-      <div className='w-full relative'>
+    <div className='flex flex-grow gap-6 px-4 '>
+      <div className='w-full relative' >
 
         <CreatePost />
 
@@ -57,12 +60,18 @@ export const HomePage = () => {
 
       </div>
 
-      <div className='hidden lg:block relative w-[306px]'>
+      <div className='hidden lg:block relative w-[306px] min-h-screen '>
         
-        <div className="flex flex-col gap-6 mb-5 sticky top-20">
-          <Trends />
+        <div className={`h-fit mb-10 sticky top-0 transition ease-in-out delay-75 ${ positionTopDown !== null ? positionTopDown ? 'translate-y-20' : '-translate-y-10' : 'translate-y-0' } duration-200`}>
+         
+          <div className="flex flex-col gap-6 flex-grow">
 
-          <WhoFollow />
+            <Trends />
+
+            <WhoFollow />
+
+          </div>
+
         </div>
 
       </div>  
