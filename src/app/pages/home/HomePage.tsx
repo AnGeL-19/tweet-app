@@ -6,8 +6,8 @@ import { PostSkeleton } from "@/app/components/shared/posts/skeleton/PostSkeleto
 import { useAppSelector } from "@/app/context/store/hook"
 import { useScrollSticky } from "@/app/hooks/useScrollSticky"
 import { tweetSservice } from "@/core/domain/services/index.service"
-import { QueryClient, useInfiniteQuery, useQuery } from "@tanstack/react-query"
-import { useEffect, useState } from "react"
+import { useInfiniteQuery } from "@tanstack/react-query"
+import { useEffect } from "react"
 
 
 
@@ -17,10 +17,10 @@ export const HomePage = () => {
   const user = useAppSelector( state => state.auth.user )
   
 
-  const {isLoading, data, fetchNextPage, isFetchingNextPage, hasNextPage, refetch} = useInfiniteQuery({
+  const {isLoading, data, fetchNextPage, isFetchingNextPage, hasNextPage, refetch, isRefetching } = useInfiniteQuery({
     queryKey: ['posts', 'infinite'],
     initialPageParam: 1,
-    // staleTime: 1000 * 60 * 60, // 60 minutes
+    staleTime: 1000 * 60 * 60, // 60 minutes
     queryFn: async params => {
       const posts = await tweetSservice.getTweets(params.pageParam);
       return posts;
@@ -34,9 +34,9 @@ export const HomePage = () => {
     
   });
 
-  // useEffect(() => {
-  //   refetch()
-  // }, [user?.id])
+  useEffect(() => {
+    refetch()
+  }, [user?.id])
 
   const { positionTopDown } = useScrollSticky()
 
@@ -46,8 +46,8 @@ export const HomePage = () => {
 
         <CreatePost />
 
-        {
-          isLoading
+        { 
+          isLoading || isRefetching
           ? <PostSkeleton />
           : <PostsList 
               posts={ data?.pages.flat() ?? []} 

@@ -45,17 +45,14 @@ export class TweetService implements TweetRepository {
         return this.tweetRepository.setRetweet(id)
     }
 
-    async createComment(id:string, data: CreateComment): Promise<Comment | null> {
+    async createComment(id:string, data: FormData): Promise<Comment | null> {
 
-        console.log('entra', id, data);
-        
         return this.tweetRepository.createComment(id, data)
     }
     
-    async createTweet(values: CreatePost): Promise<Post | null> {
+    async createTweet(values: FormData): Promise<Post | null> {
 
         return await this.tweetRepository.createTweet(values)
-
     }
     
 }

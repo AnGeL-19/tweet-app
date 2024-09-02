@@ -8,10 +8,8 @@ import { Avatar, AvatarFallback, AvatarImage } from '../../ui/avatar'
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
-    FormLabel,
     FormMessage,
   } from "@/app/components/ui/form"
 import { Input } from "@/app/components/ui/input"
@@ -19,17 +17,16 @@ import { Label } from "@/app/components/ui/label"
 import { Image, LoaderCircle } from 'lucide-react'
 import { ImageSelected } from '../image/ImageSelected'
 import { ContextPost } from '@/app/context/post/contextPost'
-import { IComment } from '@/app/interfaces/post.interface'
 import { tweetSservice } from '@/core/domain/services/index.service'
-import { Comment, CreateComment } from '@/core/domain/entities/tweet.entity'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { CustomError } from '@/core/domain/errors/custom.error'
 
 
  
 export const FormComment = () => {
 
-    const { createComment, id, user, handleShowComments } = useContext(ContextPost)
+    const queryClient = useQueryClient();
+    const { id, user, handleShowComments, showComments } = useContext(ContextPost)
 
     const form = useForm<z.infer<typeof commentSchema>>({
         resolver: zodResolver(commentSchema),
@@ -45,14 +42,31 @@ export const FormComment = () => {
     })
 
     const mutationCreateComment = useMutation({
-        mutationFn: ({id, data}: {id: string, data: CreateComment }) => tweetSservice.createComment(id,data),
+        mutationFn: ({id, data}: {id: string, data: FormData }) => tweetSservice.createComment(id,data),
         onSuccess: ( response ) => {
           // Invalidate and refetch
           console.log('amonos', response );
 
           if (response) {
-            handleShowComments()
-            createComment(response)
+
+            if (!showComments) {
+                handleShowComments()
+            } 
+
+            queryClient.setQueryData(['comments', id], (data : any) => {
+
+                const { pages, ...rest } = data;
+
+                pages[0] = [response, ...pages[0]]
+
+                return {
+                    ...rest,
+                    pages
+                }
+
+            })
+            // queryClient.invalidateQueries(['projects'])
+            // createComment(response)
           }
          
     
@@ -95,19 +109,11 @@ export const FormComment = () => {
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
         console.log(values)
-        // const newComment: IComment = {
-        //     id: crypto.randomUUID(),
-        //     comment: values.comment,
-        //     date: new Date().toDateString(),
-        //     imgComment: url.img ,
-        //     numLikes: 0,
-        //     liked: false,
-        //     user: {
-        //       id: 'u41232',
-        //       name: 'Angel Muñoz',
-        //       profileImage: 'https://github.com/shadcn.png'
-        //     }
-        //   }
+        let data = new FormData();
+        data.append('comment', values.comment);
+        if (values.image) {
+          data.append('fileImage', values.image, values.image.name );
+        }
 
         console.log({
             id,
@@ -116,14 +122,10 @@ export const FormComment = () => {
             }
         });
         
-        
- 
 
         mutationCreateComment.mutateAsync({
             id,
-            data: {
-                comment: values.comment
-            }
+            data
         })
 
         setUrl({

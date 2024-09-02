@@ -73,6 +73,13 @@ export const router = createBrowserRouter([
               return { Component: ProfilePage };
             },
           },
+          {
+            path: "account/edit/",
+            async lazy() {
+              let { ConfigurationPage } = await import("../pages/configurations/ConfigurationPage");
+              return { Component: ConfigurationPage };
+            },
+          },
     ]
   }
 ]);

@@ -9,13 +9,14 @@ import { useMutation } from '@tanstack/react-query'
 import { tweetSservice } from '@/core/domain/services/index.service'
 import { CustomError } from '@/core/domain/errors/custom.error'
 
+
 interface Props {
     comment: IComment
 }
 
 export const Comment = ({ comment }: Props) => {
 
-    // const { giveLikeComment } = useContext(ContextPost)
+    // const { showComments } = useContext(ContextPost)
     const [isLiked, setIsLiked] = useState(comment.liked)
     const [numLikes, setNumLikes] = useState(comment.numLikes)
 

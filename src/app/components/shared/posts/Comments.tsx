@@ -8,15 +8,17 @@ import { Skeleton } from '../../ui/skeleton'
 import { CommentSkeleton } from './skeleton/CommentSkeleton'
 import { useInfiniteScroll } from '@/app/hooks/useInfiniteScroll'
 import { Button } from '../../ui/button'
+import { DataEmpty } from '../DataEmpty'
 
 
 export const Comments = () => {
 
-  const { id } = useContext(ContextPost)
+  const { id, showComments } = useContext(ContextPost)
   const {isLoading, data, fetchNextPage, isFetchingNextPage, hasNextPage, refetch} = useInfiniteQuery({
     queryKey: ['comments', id],
     initialPageParam: 1,
     // staleTime: 1000 * 60 * 60, // 60 minutes
+    enabled: showComments,
     queryFn: async params => {
       const comments = await tweetSservice.getComments(id,params.pageParam);
       return comments;
@@ -29,7 +31,6 @@ export const Comments = () => {
     },
   });
 
-
   return (
     <div>
         <Separator className='mt-2 mb-5' />
@@ -38,7 +39,7 @@ export const Comments = () => {
           isLoading
           ? <CommentSkeleton />
           : data?.pages.flat().length === 0
-            ? <span>No comments</span>
+            ? <DataEmpty text='No comments' />
             : data?.pages.flat().map( (comment) => <Comment key={comment?.id} comment={comment!} /> )
         }
 
