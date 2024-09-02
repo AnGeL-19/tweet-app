@@ -2,53 +2,45 @@ import React, { ChangeEvent, useState } from 'react'
 import { Textarea } from '../../ui/textarea'
 import { Button } from '../../ui/button'
 import { DropMenuAccesibility } from './DropMenuAccesibility'
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '../../ui/form'
+import { Form, FormControl,  FormField, FormItem,  FormMessage } from '../../ui/form'
 import { Input } from '../../ui/input'
 import { useForm } from 'react-hook-form'
 import { z } from "zod"
 import { tweetSchema } from '@/app/validations/tweet.schema'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Image } from 'lucide-react'
+import { Image, LoaderCircle } from 'lucide-react'
 import { Label } from '@radix-ui/react-label'
 import { ImageSelected } from '../../shared/image/ImageSelected'
-import { QueryClient, useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { CreatePost, Post } from '@/core/domain/entities/tweet.entity'
 import { CustomError } from '@/core/domain/errors/custom.error'
 import { useToast } from '../../ui/use-toast'
 import { tweetSservice } from '@/core/domain/services/index.service'
 
-const queryClient = new QueryClient()
+interface PostQuery {
+  pageParams: number[],
+  pages: Array<Record<number, Post>>
+}
 
 export const FormTweet = () => {
 
     const { toast } = useToast()
-    
+    const queryClient = useQueryClient();
     
     const mutation = useMutation({
-        mutationFn: (data: CreatePost) => tweetSservice.createTweet(data), // aqui no agarra el login del metodo authRepository 
+        mutationFn: (data: FormData) => tweetSservice.createTweet(data), // aqui no agarra el login del metodo authRepository 
         onSuccess: ( result, variables, context ) => {
+          
           // Invalidate and refetch
           console.log('CREATED', result );
   
           if (result) {
-            console.log('si entra');
-            
-              queryClient.setQueryData(['posts', 'infinite'], (old : Post[]) => {
-
-              console.log(old, result);
-              
-
-            })
-
             toast({
                 title: "Post created success",
-                description: 'Tweet see in your profile'
+                description: 'Thank you for sharing, enjoy sharing'
             })
-
-            // authenticated(response)
-          }
-          
-         
+            
+          } 
         },
         onError: (error: CustomError) => {
           console.log(error, 'SI HAY ERRORES', error.getDataValidation());
@@ -104,11 +96,15 @@ export const FormTweet = () => {
         // ✅ This will be type-safe and validated.
         console.log(values)
 
-        mutation.mutate({
-            accesibility: values.accesibility === 'public' ? true : false,
-            image: values.image,
-            tweet: values.tweet
-        })
+        let data = new FormData();
+        data.append('privacity', values.accesibility);
+        data.append('description', values.tweet );
+        if (values.image) {
+          data.append('fileImage', values.image, values.image.name );
+        }
+        
+
+        mutation.mutate(data)
 
         setUrl({
             img: '',
@@ -177,7 +173,13 @@ export const FormTweet = () => {
                         size='sm' 
                         className='bg-bluePrimary'
                         disabled={ !form.watch('tweet') && !url.img }
-                    >Tweet</Button>     
+                    >
+                      {
+                        mutation.isPending
+                        ? <LoaderCircle className='animate-spin w-5 h-5' />
+                        : 'Tweet'
+                      }
+                    </Button>     
                 </div>
             </form>
         </Form>
