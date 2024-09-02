@@ -44,7 +44,7 @@ export class TweetMapper {
         return  data.map( (tweet) => ({
             id: tweet.tid,
             date: tweet.date,
-            imgTweet: '',
+            imgTweet: tweet.imgTweet,
             liked: tweet.liked,
             saved: tweet.saved,
             retweeted: tweet.retweeted,
@@ -69,7 +69,7 @@ export class TweetMapper {
         return  {
             id: response.tid,
             date: response.date,
-            imgTweet: '',
+            imgTweet: response.imgTweet,
             liked: false,
             saved: false,
             retweeted: false,
@@ -79,7 +79,7 @@ export class TweetMapper {
                 name: response.userTweet.name,
                 profileImage: response.userTweet.imgUser
             },
-            userRetweet: null,
+            userRetweet: response.userRetweet,
             numComments: response.nComentPeople,
             numLikes: response.nLikes,
             numRetweets: response.nRetweets,
@@ -97,8 +97,8 @@ export class TweetMapper {
             comment: comment.commentText,
             date: comment.date,
             idPost: comment.tweetComment,
-            imgComment: '',
-            liked: true,
+            imgComment: comment.imgComment,
+            liked: comment.liked,
             numLikes: comment.nLikes,
             user: {
                 id: comment.userComment.uid,
