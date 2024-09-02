@@ -13,7 +13,7 @@ export interface TweetRepository {
     setLikeComment(id: string): Promise<boolean | null>
     setSave(id: string): Promise<boolean | null>;
     setRetweet(id: string): Promise<boolean | null>;
-    createComment(id:string, data: CreateComment): Promise<Comment | null>;
-    createTweet(data: CreatePost): Promise<Post | null>;
+    createComment(id:string, data: FormData): Promise<Comment | null>;
+    createTweet(data: FormData): Promise<Post | null>;
 
 }
