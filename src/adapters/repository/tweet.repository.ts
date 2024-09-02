@@ -229,12 +229,10 @@ export class HttpTweetRepository implements TweetRepository {
         }
     }
 
-    async createComment(id: string, dataComment: CreateComment): Promise<Comment | null> {
+    async createComment(id: string, dataComment: FormData): Promise<Comment | null> {
         try {
 
-            const { data } = await tweetApi.post<CreateTweetCommentResponse>(`tweet/${id}/comment`, {
-                ...dataComment
-            })
+            const { data } = await tweetApi.post<CreateTweetCommentResponse>(`tweet/${id}/comment`, dataComment)
             
             return TweetMapper.mapperComment(data);
 
@@ -255,14 +253,10 @@ export class HttpTweetRepository implements TweetRepository {
           }
     }
 
-    async createTweet(values: CreatePost): Promise<Post | null> {
+    async createTweet(values: FormData): Promise<Post | null> {
         try {
 
-            const { data } = await tweetApi.post<CreatedTweetResponse>(`tweet/`, {
-                description: values.tweet,
-                image: values.image,
-                privacity: values.accesibility
-            })
+            const { data } = await tweetApi.post<CreatedTweetResponse>(`tweet/`, values)
             
             return TweetMapper.mapperTweet(data.tweet);
 
