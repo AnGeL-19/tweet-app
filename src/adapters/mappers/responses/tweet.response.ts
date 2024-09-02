@@ -11,6 +11,7 @@ export interface TweetResponse {
     date:          Date;
     description:   string;
     hashtagsTweet: string[];
+    imgTweet:      string;
     showEveryone:  boolean;
     showFollow:    boolean;
     nRetweets:     number;
@@ -70,6 +71,7 @@ export interface CommentResponse {
     userComment:  UserTweetResponse;
     tweetComment: string;
     commentText:  string;
+    imgComment:   string;
     nLikes:       number;
     likes:        any[];
     date:         Date;
