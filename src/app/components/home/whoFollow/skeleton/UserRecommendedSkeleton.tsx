@@ -6,8 +6,6 @@ import { Skeleton } from '@/app/components/ui/skeleton'
 
 export const UserRecommendedSkeleton = () => {
 
- 
-
   return (
     <div className='flex flex-col gap-3'>
 
