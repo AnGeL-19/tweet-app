@@ -19,7 +19,7 @@ export const UserRecommendedSkeleton = () => {
 
         <Skeleton className="h-5 w-full rounded bg-zinc-300" />
 
-        <Skeleton className="h-20 w-full rounded-md bg-zinc-300" />
+        {/* <Skeleton className="h-20 w-full rounded-md bg-zinc-300" /> */}
             
     </div>
   )
