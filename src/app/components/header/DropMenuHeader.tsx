@@ -75,12 +75,14 @@ export const DropMenuHeader = () => {
             </DropdownMenuLabel>
         </DropdownMenuItem>
         <DropdownMenuItem className='cursor-pointer flex gap-1 px-3 py-1 rounded'>
+          <Link to={`/account/edit/`} className='flex items-center gap-1'>
             <Settings className='h-5 w-5' />
             <DropdownMenuLabel className='font-normal text-sm'>
                 Settings
             </DropdownMenuLabel>
+          </Link>
         </DropdownMenuItem>
-
+        
         <DropdownMenuSeparator />
 
         <DropdownMenuItem onClick={() => mutation.mutate() } className='cursor-pointer px-3 py-1 rounded hover:bg-red-300'>

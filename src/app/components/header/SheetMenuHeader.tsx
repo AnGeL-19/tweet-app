@@ -73,7 +73,7 @@ export const SheetMenuHeader = () => {
             <UsersRound className='h-5 w-5' />
             Group Chat
           </Link>
-          <Link to='/settings' className='p-2 hover:bg-zinc-100 text-center flex gap-2 items-center rounded'>
+          <Link to='/account/edit/' className='p-2 hover:bg-zinc-100 text-center flex gap-2 items-center rounded'>
             <Settings className='h-5 w-5' />
             Settings
           </Link>
