@@ -13,9 +13,6 @@ import { useAppSelector } from "@/app/context/store/hook"
   
 export const CreatePost = () => {
 
-  // tweet/
-  // upload/image`
-
   const user = useAppSelector( state => state.auth.user )
 
   return (
