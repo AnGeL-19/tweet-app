@@ -16,6 +16,7 @@ export const TabPeople = () => {
         queryKey: ['people', 'infinite'],
         initialPageParam: 1,
         // staleTime: 1000 * 60 * 60, // 60 minutes
+        
         queryFn: async params => {
           
             const search = searchParams.get('search');
@@ -32,6 +33,9 @@ export const TabPeople = () => {
           return lastPageParam + 1
         },
     });
+
+    console.log(data);
+    
 
     useEffect(() => {
         refetch()    
