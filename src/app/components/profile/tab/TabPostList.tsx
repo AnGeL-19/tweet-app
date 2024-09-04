@@ -34,8 +34,6 @@ export const TabPostList = () => {
 
     useEffect(() => {
         refetch()
-        console.log(id);
-        
     }, [id, searchParams.get('filter')])
     
 

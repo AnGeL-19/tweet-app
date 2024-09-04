@@ -34,9 +34,6 @@ export const TabPeople = () => {
         },
     });
 
-    console.log(data);
-    
-
     useEffect(() => {
         refetch()    
     }, [searchParams.get('search')])

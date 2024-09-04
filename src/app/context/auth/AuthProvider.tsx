@@ -4,8 +4,8 @@ import React, { useEffect } from 'react'
 import { ContextAuth } from './contextAuth'
 import { Auth, Login, Logout } from '@/core/domain/entities/auth.entity'
 import { useAppDispatch } from '../store/hook'
-import { login, logout } from '@/app/features/auth/authSlice'
-import { UserRegister } from '@/core/domain/entities/user.entity'
+import { login, logout, updateDataUser } from '@/app/features/auth/authSlice'
+import { User, UserRegister } from '@/core/domain/entities/user.entity'
 import { authService } from '@/core/domain/services/index.service'
 
 interface Props {
@@ -21,6 +21,10 @@ export const AuthProvider = ({children}: Props) => {
     useEffect(() => {
         checkAuth()
     }, [])
+
+    const updateUser = (data: User) => {
+        dispatch(updateDataUser(data))
+    }
     
     const authenticated = ( data: Auth ) => {
         
@@ -77,7 +81,8 @@ export const AuthProvider = ({children}: Props) => {
             authLogout,
             authenticated,
             deauthenticate,
-            authRegister
+            authRegister,
+            updateUser
         }}
     >
         { children }

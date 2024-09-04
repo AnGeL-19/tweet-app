@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../../context/store/store'
 import { IUser } from '@/app/interfaces/user.interface'
 import { Auth } from '@/core/domain/entities/auth.entity'
+import { User } from '@/core/domain/entities/user.entity'
 
 
 
@@ -29,10 +30,13 @@ export const authSlice = createSlice({
       state.token = action.payload.token;
       state.user = action.payload.user
     },
+    updateDataUser: (state, action: PayloadAction<User>) => {
+      state.user = action.payload
+    }
   }
 })
 
-export const { login, logout } = authSlice.actions
+export const { login, logout, updateDataUser } = authSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectAuth = (state: RootState) => state.auth.user

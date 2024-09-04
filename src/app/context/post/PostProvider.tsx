@@ -27,7 +27,6 @@ export const PostProvider = ({ post , children }:Props) => {
   })
 
   const giveLike = () => {
-    console.log('dar giveLike');
     setValuesPost(prev => ({
       ...prev,
       liked: !prev.liked,
@@ -36,7 +35,6 @@ export const PostProvider = ({ post , children }:Props) => {
   }
 
   const giveRetweet = () => {
-    console.log('dar giveRetweet');
     setValuesPost(prev => ({
       ...prev,
       retweeted: !prev.retweeted,
@@ -45,23 +43,12 @@ export const PostProvider = ({ post , children }:Props) => {
   }
 
   const giveSave = () => {
-    console.log('dar giveSave');
     setValuesPost(prev => ({
       ...prev,
       saved: !prev.saved,
       numSaved: !prev.saved ? prev.numSaved+1 : prev.numSaved-1
     }))
   }
-
-  // const createComment = (data: Comment) => {
-  //   console.log('dar createComment');
-    
-  //   setValuesPost((prev) => ({
-  //     ...prev,
-  //     comments: [...prev.comments, data]
-  //   }))
-
-  // }
 
   const setComments = (data: Comment[]) => {
     setValuesPost((prev) => ({
@@ -70,29 +57,9 @@ export const PostProvider = ({ post , children }:Props) => {
     }))
   }
 
-  // const giveLikeComment = (commentId: string) => {
-  //   console.log('dar giveLikeComment', commentId);
-
-  //   setValuesPost((prev) => ({
-  //     ...prev,
-  //     comments: prev.comments.map( (comment) => {
-  //       if (comment.id === commentId) {
-  //         return {
-  //           ...comment,
-  //           liked: !comment.liked,
-  //           numLikes: !comment.liked ? comment.numLikes+1 : comment.numLikes-1
-  //         }
-  //       }else{
-  //         return comment
-  //       }
-  //     })
-  //   }))
-
-  // }
 
   const handleShowComments = () => {
-    console.log('show commments');
-    
+
     setValuesPost(prev => ({
       ...prev,
       showComments: !prev.showComments

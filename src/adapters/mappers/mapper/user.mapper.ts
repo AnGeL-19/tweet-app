@@ -1,6 +1,6 @@
 import { Trend } from "@/core/domain/entities/trend.entity";
-import { TrendsResponse, UserByIDResponse, UserFollowResponse, UserFollowUnfollowResponse, UserRecommentsResponse } from "../responses/user.response";
-import { User, UserFollow, UserFollowUnfollow, UserRecomment } from "@/core/domain/entities/user.entity";
+import { TrendsResponse, UpdateImageResponse, UpdateUserResponse, UserByIDResponse, UserFollowResponse, UserFollowUnfollowResponse, UserRecommentsResponse } from "../responses/user.response";
+import { ChangeImage, User, UserFollow, UserFollowUnfollow, UserRecomment } from "@/core/domain/entities/user.entity";
 
 
 export class UserMapper {
@@ -35,6 +35,23 @@ export class UserMapper {
             numFollowers: data.nfollowers,
             numFollowing: data.nfollowing,
             isFollowing: isFollowing
+        }
+
+    }
+
+    static mapperUserUpdated( response: UpdateUserResponse ): User {
+
+        const { data } = response
+
+        return {
+            id: data.uid,
+            name: data.name,
+            email: data.email,
+            bio: data.bio,
+            profileImage: data.imgUser,
+            backGroundImage: data.imgUserBackground,
+            numFollowers: data.nfollowers,
+            numFollowing: data.nfollowing
         }
 
     }
@@ -74,6 +91,14 @@ export class UserMapper {
             numFollowers: user.followers.length
         }))
 
+    }
+
+    static mapperUpdateImage( response: UpdateImageResponse ): ChangeImage | null {
+        return {
+            ok: response.ok,
+            message: response.msg,
+            url: response.url
+        }
     }
 
 

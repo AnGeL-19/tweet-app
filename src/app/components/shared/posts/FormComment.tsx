@@ -45,7 +45,6 @@ export const FormComment = () => {
         mutationFn: ({id, data}: {id: string, data: FormData }) => tweetSservice.createComment(id,data),
         onSuccess: ( response ) => {
           // Invalidate and refetch
-          console.log('amonos', response );
 
           if (response) {
 
@@ -108,20 +107,12 @@ export const FormComment = () => {
     function onSubmit(values: z.infer<typeof commentSchema>) {
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
-        console.log(values)
+
         let data = new FormData();
         data.append('comment', values.comment);
         if (values.image) {
           data.append('fileImage', values.image, values.image.name );
         }
-
-        console.log({
-            id,
-            data: {
-                comment: values.comment
-            }
-        });
-        
 
         mutationCreateComment.mutateAsync({
             id,

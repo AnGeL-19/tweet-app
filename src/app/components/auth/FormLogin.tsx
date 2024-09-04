@@ -27,7 +27,6 @@ export const FormLogin = () => {
       mutationFn: (data: Login) => authLogin(data), // aqui no agarra el login del metodo authRepository 
       onSuccess: ( response ) => {
         // Invalidate and refetch
-        console.log('amonos', response );
 
         if (response) {
           authenticated(response)
@@ -58,8 +57,7 @@ export const FormLogin = () => {
       function onSubmit(values: z.infer<typeof loginSchema>) {
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
-        console.log(values)
-
+        
         mutation.mutateAsync(values)
 
       }

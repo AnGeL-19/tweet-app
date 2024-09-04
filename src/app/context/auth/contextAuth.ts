@@ -1,6 +1,6 @@
 
 import { Auth, Login, Logout } from "@/core/domain/entities/auth.entity";
-import { UserRegister } from "@/core/domain/entities/user.entity";
+import { User, UserRegister } from "@/core/domain/entities/user.entity";
 import { createContext } from "react";
 
 export interface AuthContext {
@@ -9,6 +9,7 @@ export interface AuthContext {
     authenticated: (data: Auth) => void;
     deauthenticate: (data: Logout) => void;
     authRegister: (data: UserRegister) =>  Promise<Auth | null>;
+    updateUser: (data: User) => void
 }
 
 
@@ -18,6 +19,7 @@ export const INITAL_VALUES: AuthContext = {
     authenticated: () => {},
     deauthenticate: () => {},
     authRegister: async () => await null,
+    updateUser: () => {}
 }
 
 

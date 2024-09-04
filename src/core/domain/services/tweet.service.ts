@@ -33,8 +33,8 @@ export class TweetService implements TweetRepository {
         return this.tweetRepository.setLike(id)
     }
 
-    setLikeComment(id : string): Promise<boolean | null> {
-        return this.tweetRepository.setLikeComment(id)
+    async setLikeComment(id : string): Promise<boolean | null> {
+        return await this.tweetRepository.setLikeComment(id)
     }
 
     async setSave(id: string): Promise<boolean | null> {

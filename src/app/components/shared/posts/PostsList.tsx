@@ -15,15 +15,6 @@ interface Props {
 
 export const PostsList = ({ posts, onEndReached, isFetching, hasNextPage }: Props) => {
 
-  // const location = useLocation()
-  // const [searchParams, _] = useSearchParams()
-
-  // useEffect(() => {
-
-  //   console.log(location, searchParams);
-    
-  // }, [searchParams])
-
   const { ref } = useInfiniteScroll({
     fn:  onEndReached ?? function(){},
     threshold: 1

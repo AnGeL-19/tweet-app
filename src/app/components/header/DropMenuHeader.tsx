@@ -36,7 +36,6 @@ export const DropMenuHeader = () => {
       mutationFn: authLogout, // aqui no agarra el login del metodo authRepository 
       onSuccess: ( response ) => {
         // Invalidate and refetch
-        console.log('amonos', response );
   
         if (response) {
           deauthenticate(response)

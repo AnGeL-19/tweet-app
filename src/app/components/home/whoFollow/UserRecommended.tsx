@@ -23,8 +23,7 @@ export const UserRecommended = ({user}:Props) => {
   const mutation = useMutation({
     mutationFn: (id: string) => userService.setFollowUnfollow(id), // aqui no agarra el login del metodo authRepository 
     onSuccess: ( response ) => {
-      // Invalidate and refetch
-      console.log('FOLLOW', response );
+      // Invalidate and refetc
 
       if (response?.ok) {
         

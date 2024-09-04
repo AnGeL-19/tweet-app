@@ -60,5 +60,14 @@ export interface UserFollowResponse {
     isFollowing: boolean;
 }
 
+export interface UpdateImageResponse {
+    ok:     boolean;
+    msg:    string;
+    url:    string;
+}
 
-
+export interface UpdateUserResponse {
+    ok:     boolean;
+    msg:    string;
+    data:    UserResponse;
+}

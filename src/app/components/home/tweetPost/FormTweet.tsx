@@ -25,15 +25,11 @@ interface PostQuery {
 export const FormTweet = () => {
 
     const { toast } = useToast()
-    const queryClient = useQueryClient();
     
     const mutation = useMutation({
         mutationFn: (data: FormData) => tweetSservice.createTweet(data), // aqui no agarra el login del metodo authRepository 
         onSuccess: ( result, variables, context ) => {
-          
-          // Invalidate and refetch
-          console.log('CREATED', result );
-  
+        
           if (result) {
             toast({
                 title: "Post created success",
@@ -45,8 +41,7 @@ export const FormTweet = () => {
         onError: (error: CustomError) => {
           console.log(error, 'SI HAY ERRORES', error.getDataValidation());
           
-        },
-        onSettled: () => queryClient.invalidateQueries({ queryKey: ['posts', 'infinite'] }),
+        }
       })
 
     const form = useForm<z.infer<typeof tweetSchema>>({
@@ -94,7 +89,6 @@ export const FormTweet = () => {
       function onSubmit(values: z.infer<typeof tweetSchema>) {
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
-        console.log(values)
 
         let data = new FormData();
         data.append('privacity', values.accesibility);

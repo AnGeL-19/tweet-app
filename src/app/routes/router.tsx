@@ -4,6 +4,7 @@ import {
 } from "react-router-dom";
 
 import { LoadingPage } from "../components/shared/LoadingPage";
+import ConfigurationsLayout from "../pages/layout/ConfigurationsLayout";
 
 
 const AuthLayout = lazy(() => import('../pages/layout/AuthLayout'));
@@ -74,12 +75,45 @@ export const router = createBrowserRouter([
             },
           },
           {
-            path: "account/edit/",
-            async lazy() {
-              let { ConfigurationPage } = await import("../pages/configurations/ConfigurationPage");
-              return { Component: ConfigurationPage };
-            },
+            path: "account/",
+            element: (
+              <Suspense fallback={<LoadingPage/>}>
+                <ConfigurationsLayout />
+              </Suspense>
+              ),
+            children: [
+              {
+                index: true,
+                path: "edit",
+                async lazy() {
+                  let { EditProfilePage } = await import("../pages/configurations/EditProfilePage");
+                  return { Component: EditProfilePage };
+                },
+              },
+              {
+                path: "notifications",
+                async lazy() {
+                  let { NotificationPage } = await import("../pages/configurations/NotificationPage");
+                  return { Component: NotificationPage };
+                },
+              },
+              {
+                path: "privacity",
+                async lazy() {
+                  let { PrivacityPage } = await import("../pages/configurations/PrivacityPage");
+                  return { Component: PrivacityPage };
+                },
+              },
+              {
+                path: "themes",
+                async lazy() {
+                  let { ThemePage } = await import("../pages/configurations/ThemePage");
+                  return { Component: ThemePage };
+                },
+              },
+            ]
           },
+        
     ]
   }
 ]);

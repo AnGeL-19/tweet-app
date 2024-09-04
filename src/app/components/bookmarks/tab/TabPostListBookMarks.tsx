@@ -34,8 +34,6 @@ export const TabPostListBookMarks = () => {
 
     useEffect(() => {
         refetch()
-        console.log(id);
-        
     }, [id, searchParams.get('filter')])
     
 

@@ -25,8 +25,6 @@ export const ActionsPost = () => {
     mutationFn: (id: string) => tweetSservice.setLike(id),
     onSuccess: ( response ) => {
       // Invalidate and refetch
-      console.log('amonos', response );
-
       giveLike()
 
     },
@@ -40,12 +38,7 @@ export const ActionsPost = () => {
     mutationFn: (id: string) => tweetSservice.setRetweet(id),
     onSuccess: ( response ) => {
       // Invalidate and refetch
-      console.log('amonos', response );
-
-
       giveRetweet()
-   
-
     },
     onError: (error: CustomError) => {
       console.log(error, 'SI HAY ERRORES', error.getDataValidation());
@@ -57,8 +50,6 @@ export const ActionsPost = () => {
     mutationFn: (id: string) => tweetSservice.setSave(id),
     onSuccess: ( response ) => {
       // Invalidate and refetch
-      console.log('amonos', response );
-
       giveSave()
 
     },

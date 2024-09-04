@@ -11,6 +11,10 @@ export interface User{
     isFollowing?: boolean;
 }
 
+export interface UpdateUser extends Pick<User, 'name' | 'bio'> {
+    password?: string;
+}
+
 export interface UserAvatar extends Pick<User, 'id' | 'name' | 'profileImage' > {}
 
 export interface UserRegister extends Pick<User, 'name' | 'email'>{
@@ -27,4 +31,10 @@ export interface UserFollowUnfollow {
 
 export interface UserFollow extends Omit<User, 'email' | 'backGroundImage' | 'numFollowing' >{
     isFollowing: boolean;
+}
+
+export interface ChangeImage {
+    ok: boolean,
+    message: string;
+    url: string;
 }

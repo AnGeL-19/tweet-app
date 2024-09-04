@@ -1,6 +1,6 @@
 import { UserRepository } from "@/core/ports/user.repository";
 import { Trend } from "../entities/trend.entity";
-import { User, UserFollow, UserFollowUnfollow, UserRecomment } from "../entities/user.entity";
+import { ChangeImage, UpdateUser, User, UserFollow, UserFollowUnfollow, UserRecomment } from "../entities/user.entity";
 
 
 
@@ -8,6 +8,14 @@ import { User, UserFollow, UserFollowUnfollow, UserRecomment } from "../entities
 export class UserService implements UserRepository {
 
     constructor(private userRepository: UserRepository ) {}
+
+    async updateUser(data: UpdateUser): Promise<User | null> {
+        return await this.userRepository.updateUser(data);
+    }
+
+    async updateImage(query: string, image: FormData): Promise<ChangeImage | null> {
+        return await this.userRepository.updateImage(query, image)
+    }
 
     async getUsers(page: number, query: string): Promise<UserRecomment[] | []> {
         return await this.userRepository.getUsers(page, query);

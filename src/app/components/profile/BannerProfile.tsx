@@ -17,9 +17,6 @@ interface Props {
 
 export const BannerProfile = ({ user }:Props) => {
 
-    console.log(user);
-    
-
     const userAuth = useAppSelector(state => state.auth.user)
 
     const { toast } = useToast()
@@ -30,7 +27,6 @@ export const BannerProfile = ({ user }:Props) => {
         mutationFn: (id: string) => userService.setFollowUnfollow(id), // aqui no agarra el login del metodo authRepository 
         onSuccess: ( response ) => {
           // Invalidate and refetch
-          console.log('FOLLOW', response );
     
           if (response?.ok) {
             

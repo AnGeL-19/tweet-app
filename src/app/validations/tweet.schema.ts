@@ -13,7 +13,6 @@ export const imageSchema = z.custom<File>((file : File ) => {
     // Verifica el tipo MIME para asegurarte de que sea una imagen
     const validMimeTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
     if (!validMimeTypes.includes(onlyFile.type)) {
-        console.log('no incluye');
       return false;
     }
   
@@ -32,7 +31,7 @@ export const imageSchema = z.custom<File>((file : File ) => {
 export const tweetSchema = z.object({
     tweet: z.string().min(2, {
       message: "Username must be at least 2 characters.",
-    }),
+    }).max(100, 'Must not be greater than 100 characters.'),
     image: imageSchema,
     accesibility: z.string()
 })

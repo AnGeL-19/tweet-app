@@ -11,8 +11,6 @@ import { Comment, CreateComment, CreatePost, Post } from "@/core/domain/entities
 export class HttpTweetRepository implements TweetRepository {
 
     async getTweetsExplore(page: number, query: string): Promise<Post[] | []> {
-
-        console.log(page, query);
         
         try {
 

@@ -24,7 +24,7 @@ export const Comment = ({ comment }: Props) => {
         mutationFn: (id: string) => tweetSservice.setLikeComment(id),
         onSuccess: ( response ) => {
           // Invalidate and refetch
-          console.log('amonos', response );
+
           if (response) {
             setIsLiked(response)
             setNumLikes(prev => prev + 1)
