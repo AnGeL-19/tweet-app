@@ -6,8 +6,6 @@ import { User } from '@/core/domain/entities/user.entity'
 import { useAppSelector } from '@/app/context/store/hook'
 import { useMutation } from '@tanstack/react-query'
 import { userService } from '@/core/domain/services/index.service'
-import { CustomError } from '@/core/domain/errors/custom.error'
-import { useToast } from '../ui/use-toast'
 
 const DialogUserFollow = lazy(() => import('./DialogUserFollow'))
 
@@ -18,8 +16,6 @@ interface Props {
 export const BannerProfile = ({ user }:Props) => {
 
     const userAuth = useAppSelector(state => state.auth.user)
-
-    const { toast } = useToast()
 
     const [isFollow, setIsFollow] = useState(user.isFollowing)
 
@@ -37,14 +33,6 @@ export const BannerProfile = ({ user }:Props) => {
           }
           
          
-        },
-        onError: (error: CustomError) => {
-          console.log(error, 'SI HAY ERRORES', error.getDataValidation());
-          toast({
-            title: "Error follow",
-            description: 'the operation could not be performed',
-            variant:"destructive"
-        })
         }
       })
 
