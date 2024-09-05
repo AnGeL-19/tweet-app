@@ -13,7 +13,7 @@ export const ContentPost = ({ description, img }:Props) => {
     {
       img
       &&
-      <div className='w-full max-h-[375px] rounded-md overflow-hidden mb-4'>
+      <div className='w-auto h-auto max-h-[375px] rounded-md overflow-hidden mb-4'>
         <img 
         loading='lazy'
         src={img}
