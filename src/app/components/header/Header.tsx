@@ -30,8 +30,8 @@ export const Header = () => {
 
         <nav className='max-w-screen h-full mx-auto flex justify-between items-center'>
             <NavLink to={'/'}>
-                <img className='hidden md:flex w-32 h-8' src="/src/assets/static/tweeter.svg" alt="Tweeter" />
-                <img className='flex md:hidden h-8 w-11' src="/src/assets/static/tweeter-small.svg" alt="Tweeter Only" />
+                <img className='hidden md:flex w-32 h-8' src="/assets/static/tweeter.svg" alt="Tweeter" />
+                <img className='flex md:hidden h-8 w-11' src="/assets/static/tweeter-small.svg" alt="Tweeter Only" />
             </NavLink>
             
             <div className='flex gap-3 md:gap-5 self-end'>

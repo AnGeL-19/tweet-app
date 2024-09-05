@@ -23,7 +23,7 @@ export const PresentationAuth = ({backgoundImage, description, headerComponent, 
           <div className='relative z-20 flex flex-col justify-between h-full p-5'>
             <img 
                 className='h-7 w-fit'
-                src="/src/assets/static/tweeter-white.svg" 
+                src="/assets/static/tweeter-white.svg" 
                 alt="tweeter-small" 
             />
             <p className='text-gray'>{description}</p>
