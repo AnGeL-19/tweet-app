@@ -1,11 +1,8 @@
-import { Suspense, lazy, useState } from 'react'
+import { Suspense, lazy } from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
-import { Button } from '../ui/button'
-import { UserMinus, UserPlus } from 'lucide-react'
 import { User } from '@/core/domain/entities/user.entity'
 import { useAppSelector } from '@/app/context/store/hook'
-import { useMutation } from '@tanstack/react-query'
-import { userService } from '@/core/domain/services/index.service'
+import { ButtonFollow } from '../shared/ButtonFollow'
 
 const DialogUserFollow = lazy(() => import('./DialogUserFollow'))
 
@@ -16,25 +13,6 @@ interface Props {
 export const BannerProfile = ({ user }:Props) => {
 
     const userAuth = useAppSelector(state => state.auth.user)
-
-    const [isFollow, setIsFollow] = useState(user.isFollowing)
-
-    const mutation = useMutation({
-        mutationFn: (id: string) => userService.setFollowUnfollow(id), // aqui no agarra el login del metodo authRepository 
-        onSuccess: ( response ) => {
-          // Invalidate and refetch
-    
-          if (response?.ok) {
-            
-            setIsFollow(response.isFollow)
-            // authenticated(response)
-          }else{
-            setIsFollow(false)
-          }
-          
-         
-        }
-      })
 
 
   return (
@@ -97,16 +75,7 @@ export const BannerProfile = ({ user }:Props) => {
                 {
                     userAuth?.id !== user.id
                     &&
-                    <Button
-                        onClick={() => mutation.mutate(user.id)} 
-                        size='sm' 
-                        className='w-fit text-xs font-medium bg-bluePrimary'>
-                        {
-                            !isFollow
-                            ? <><UserPlus className='h-4 w-4 mr-2' /> Follow</>
-                            : <><UserMinus className='h-4 w-4 mr-2' /> Unfollow</>
-                        }
-                    </Button>
+                    <ButtonFollow userId={user.id} isFolling={user.isFollowing} />
                 }
                 
 
