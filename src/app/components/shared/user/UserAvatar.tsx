@@ -1,5 +1,3 @@
-import { formatNumber } from '@/app/lib/formatNumber'
-
 import { Link } from 'react-router-dom'
 import { Avatar, AvatarFallback, AvatarImage } from '../../ui/avatar';
 

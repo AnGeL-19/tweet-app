@@ -1,7 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import {
     Dialog,
-    DialogClose,
     DialogContent,
     DialogHeader,
     DialogTitle,
@@ -13,7 +12,6 @@ import { UserFollow } from './UserFollow';
 import { useQuery } from '@tanstack/react-query';
 import { userService } from '@/core/domain/services/index.service';
 import { DialogDescription } from '@radix-ui/react-dialog';
-import { Button } from '../ui/button';
 import { DataEmpty } from '../shared/DataEmpty';
 import { UserAvatarSkeleton } from '../shared/skeleton/UserAvatarSkeleton';
 

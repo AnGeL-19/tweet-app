@@ -10,7 +10,7 @@ import { ListRecommendedSkeleton } from './skeleton/ListRecommendedSkeleton'
 
 export const WhoFollow = () => {
 
-// `user/recomment`
+
     const { data, isLoading } = useQuery({ queryKey: ['whoFollow'], queryFn: () => userService.getUsersRecomented() })
 
 

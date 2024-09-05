@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react'
 import { ContextPost, PostActions } from './contextPost'
-import { IComment } from '@/app/interfaces/post.interface'
 import { Comment, type Post as IPost } from '@/core/domain/entities/tweet.entity';
 
 interface Props {
@@ -15,7 +14,6 @@ export const PostProvider = ({ post , children }:Props) => {
   const [valuesPost, setValuesPost] = useState<PostActions>({
     id: post.id,
     user: post.user,
-    // comments: [],
     liked: post.liked,
     saved: post.saved,
     retweeted: post.retweeted,
@@ -73,8 +71,6 @@ export const PostProvider = ({ post , children }:Props) => {
           giveLike,
           giveRetweet,
           giveSave,
-          // createComment,
-          // giveLikeComment,
           handleShowComments,
           setComments
         }}

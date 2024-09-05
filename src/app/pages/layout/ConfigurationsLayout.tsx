@@ -1,7 +1,6 @@
 
 
 import { MenuConfiguration } from '@/app/components/configurations/MenuConfiguration'
-import React from 'react'
 import { Outlet } from 'react-router'
 
 const ConfigurationsLayout = () => {

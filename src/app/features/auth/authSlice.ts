@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../../context/store/store'
-import { IUser } from '@/app/interfaces/user.interface'
 import { Auth } from '@/core/domain/entities/auth.entity'
 import { User } from '@/core/domain/entities/user.entity'
 

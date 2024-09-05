@@ -1,13 +1,9 @@
-import React, { useRef } from 'react'
+import { useRef } from 'react'
 import { NavLink } from 'react-router-dom'
 import { NavLinkItem } from './NavLinkItem'
 import { AvatarHeader } from './AvatarHeader'
 import { Bookmark, Compass, Home } from 'lucide-react'
-import { SheetMenuHeader } from './SheetMenuHeader'
 
-
-
-  
 export const Header = () => {
 
     const routes = useRef([

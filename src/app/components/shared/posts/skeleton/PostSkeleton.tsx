@@ -1,6 +1,5 @@
 
 import { Card, CardContent, CardHeader } from '@/app/components/ui/card'
-import React from 'react'
 import { UserAvatarSkeleton } from '../../skeleton/UserAvatarSkeleton'
 import { cn } from '@/app/lib/utils'
 import { Skeleton } from '@/app/components/ui/skeleton'

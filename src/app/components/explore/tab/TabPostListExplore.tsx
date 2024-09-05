@@ -1,7 +1,6 @@
 import { tweetSservice } from '@/core/domain/services/index.service';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import React, { useEffect } from 'react'
-import { useParams } from 'react-router';
+import { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom';
 import { PostsList } from '../../shared/posts/PostsList';
 import { PostSkeleton } from '../../shared/posts/skeleton/PostSkeleton';

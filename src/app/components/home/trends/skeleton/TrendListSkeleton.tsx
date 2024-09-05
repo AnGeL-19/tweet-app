@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { TrendSkeleton } from './TrendSkeleton'
 
 export const TrendListSkeleton = () => {

@@ -1,5 +1,4 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/app/components/ui/tabs"
-import { PostsList } from '@/app/components/shared/posts/PostsList'
 import { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import { useRef } from 'react'
 import { Separator } from '../ui/separator'
 import { NavLink } from 'react-router-dom'
 import { Bell, Lock, LucideProps, Palette, Settings, UserCircle } from 'lucide-react'

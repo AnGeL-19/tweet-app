@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import { TabTweet } from '@/app/components/shared/tabs/TabTweet'
 
 import { SearchTweet } from '@/app/components/explore/SearchTweet'

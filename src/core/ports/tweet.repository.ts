@@ -1,5 +1,5 @@
 
-import { Comment, CreateComment, CreatePost, Post } from "../domain/entities/tweet.entity";
+import { Comment, Post } from "../domain/entities/tweet.entity";
 
 
 export interface TweetRepository {

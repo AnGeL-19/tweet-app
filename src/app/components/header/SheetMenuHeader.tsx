@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import {
     Sheet,
     SheetContent,
@@ -12,7 +12,6 @@ import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import { Link } from 'react-router-dom'
 import { Button } from '../ui/button'
 import { Separator } from '../ui/separator'
-import { logout } from '@/app/features/auth/authSlice'
 import { ContextAuth } from '@/app/context/auth/contextAuth'
 import { useMutation } from '@tanstack/react-query'
 import { CustomError } from '@/core/domain/errors/custom.error'

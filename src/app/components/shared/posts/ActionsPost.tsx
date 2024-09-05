@@ -1,6 +1,6 @@
-import React, { useContext } from 'react'
+import  { useContext } from 'react'
 import { Button } from '../../ui/button'
-import { Bookmark, Heart, MessageSquare, Repeat2 } from 'lucide-react'
+import {  Heart, MessageSquare, Repeat2 } from 'lucide-react'
 import { ContextPost } from '@/app/context/post/contextPost'
 import { useMutation } from '@tanstack/react-query'
 import { tweetSservice } from '@/core/domain/services/index.service'

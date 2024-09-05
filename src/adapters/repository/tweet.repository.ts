@@ -5,7 +5,7 @@ import axios from "axios";
 import { CustomError } from "@/core/domain/errors/custom.error";
 import { TweetMapper } from "../mappers/mapper/tweet.mapper";
 import {  CommentLikedResponse, CommentsResponse, CreatedTweetResponse, CreateTweetCommentResponse, TweetLikedResponse, TweetRetweetedResponse, TweetSavedResponse, TweetsResponse } from "../mappers/responses/tweet.response";
-import { Comment, CreateComment, CreatePost, Post } from "@/core/domain/entities/tweet.entity";
+import { Comment, Post } from "@/core/domain/entities/tweet.entity";
 
 
 export class HttpTweetRepository implements TweetRepository {

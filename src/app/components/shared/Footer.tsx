@@ -1,5 +1,3 @@
-import React from 'react'
-
 
 interface Props {
   color?: 'text-white' | 'text-black';

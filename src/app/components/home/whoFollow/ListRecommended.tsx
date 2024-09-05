@@ -1,9 +1,8 @@
-import { IUser } from '@/app/interfaces/user.interface'
-import React from 'react'
+
 import { UserRecommended } from './UserRecommended'
 import { Separator } from '../../ui/separator'
 import { UserRecomment } from '@/core/domain/entities/user.entity'
-import { UserSearch, UserX } from 'lucide-react'
+import { UserSearch } from 'lucide-react'
 import { DataEmpty } from '../../shared/DataEmpty'
 
 interface Props {

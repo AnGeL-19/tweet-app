@@ -1,5 +1,5 @@
 import { TweetRepository } from "@/core/ports/tweet.repository";
-import { Comment, CreateComment, CreatePost, Post } from "../entities/tweet.entity";
+import { Comment, Post } from "../entities/tweet.entity";
 
 
 export class TweetService implements TweetRepository {

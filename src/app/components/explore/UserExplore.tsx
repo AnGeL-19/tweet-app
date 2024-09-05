@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { UserRecommended } from '../home/whoFollow/UserRecommended'
 import { UserRecomment } from '@/core/domain/entities/user.entity'
 

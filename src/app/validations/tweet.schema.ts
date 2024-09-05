@@ -1,4 +1,4 @@
-import { z, ZodObject } from "zod";
+import { z } from "zod";
 
 
 export const imageSchema = z.custom<File>((file : File ) => {

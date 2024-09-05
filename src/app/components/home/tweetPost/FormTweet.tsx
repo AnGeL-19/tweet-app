@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { Textarea } from '../../ui/textarea'
 import { Button } from '../../ui/button'
 import { DropMenuAccesibility } from './DropMenuAccesibility'
@@ -11,16 +11,12 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Image, LoaderCircle } from 'lucide-react'
 import { Label } from '@radix-ui/react-label'
 import { ImageSelected } from '../../shared/image/ImageSelected'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { CreatePost, Post } from '@/core/domain/entities/tweet.entity'
+import { useMutation } from '@tanstack/react-query'
 import { CustomError } from '@/core/domain/errors/custom.error'
 import { useToast } from '../../ui/use-toast'
 import { tweetSservice } from '@/core/domain/services/index.service'
 
-interface PostQuery {
-  pageParams: number[],
-  pages: Array<Record<number, Post>>
-}
+
 
 export const FormTweet = () => {
 

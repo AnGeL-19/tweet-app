@@ -1,12 +1,10 @@
-import React, { useContext, useEffect, useRef } from 'react'
+import { useContext } from 'react'
 import { Separator } from '../../ui/separator'
 import { Comment } from './Comment'
 import { ContextPost } from '@/app/context/post/contextPost'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { tweetSservice } from '@/core/domain/services/index.service'
-import { Skeleton } from '../../ui/skeleton'
 import { CommentSkeleton } from './skeleton/CommentSkeleton'
-import { useInfiniteScroll } from '@/app/hooks/useInfiniteScroll'
 import { Button } from '../../ui/button'
 import { DataEmpty } from '../DataEmpty'
 
@@ -14,7 +12,7 @@ import { DataEmpty } from '../DataEmpty'
 export const Comments = () => {
 
   const { id, showComments } = useContext(ContextPost)
-  const {isLoading, data, fetchNextPage, isFetchingNextPage, hasNextPage, refetch} = useInfiniteQuery({
+  const {isLoading, data, fetchNextPage, isFetchingNextPage, hasNextPage } = useInfiniteQuery({
     queryKey: ['comments', id],
     initialPageParam: 1,
     // staleTime: 1000 * 60 * 60, // 60 minutes

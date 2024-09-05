@@ -1,5 +1,5 @@
 import { Skeleton } from '@/app/components/ui/skeleton'
-import React from 'react'
+
 
 export const CommentSkeleton = () => {
   return (

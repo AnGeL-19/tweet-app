@@ -1,8 +1,7 @@
 import { userService } from '@/core/domain/services/index.service';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom';
-import { UserRecommended } from '../../home/whoFollow/UserRecommended';
 import { UserExplore } from '../UserExplore';
 import { UserExploreSkeleton } from '../skeleton/UserExploreSkeleton';
 import { DataEmpty } from '../../shared/DataEmpty';
@@ -12,7 +11,7 @@ export const TabPeople = () => {
 
     const [searchParams, _] = useSearchParams()
 
-    const {isLoading, data, fetchNextPage, isFetchingNextPage, hasNextPage, refetch, isRefetching} = useInfiniteQuery({
+    const {isLoading, data, refetch, isRefetching} = useInfiniteQuery({
         queryKey: ['people', 'infinite'],
         initialPageParam: 1,
         // staleTime: 1000 * 60 * 60, // 60 minutes

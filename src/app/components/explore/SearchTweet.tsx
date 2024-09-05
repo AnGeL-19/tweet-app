@@ -1,5 +1,4 @@
 import { Search } from 'lucide-react'
-import React, { useEffect } from 'react'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 import { useSearchParams } from 'react-router-dom'

@@ -1,5 +1,5 @@
 
-import { Camera, LoaderCircle } from 'lucide-react'
+import { Camera } from 'lucide-react'
 import React, { useContext, useRef, useState } from 'react'
 import { Input } from '../../ui/input'
 import { Avatar, AvatarFallback, AvatarImage } from '../../ui/avatar'

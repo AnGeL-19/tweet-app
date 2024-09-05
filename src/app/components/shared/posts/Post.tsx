@@ -1,5 +1,5 @@
 
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { UserAvatar } from '../user/UserAvatar'
 import { Card, CardContent, CardHeader } from '../../ui/card'
 import { cn } from '@/app/lib/utils'

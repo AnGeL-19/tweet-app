@@ -1,19 +1,11 @@
 
 import { LoadingPage } from '@/app/components/shared/LoadingPage'
 import { useAppSelector } from '@/app/context/store/hook'
-import { useQuery } from '@tanstack/react-query'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { Outlet, useNavigate } from 'react-router'
 
-const getAuth = () => {
-  try {
-    
-  } catch (error) {
-    
-  }
-}
 
- const AuthLayout = () => {
+const AuthLayout = () => {
 
   const navigate = useNavigate()
 
