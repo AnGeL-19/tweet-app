@@ -20,7 +20,6 @@ import {
 import { Link } from 'react-router-dom'
 import { ContextAuth } from '@/app/context/auth/contextAuth'
 import { useMutation } from '@tanstack/react-query'
-import { CustomError } from '@/core/domain/errors/custom.error'
 import { useToast } from '../ui/use-toast'
 import { useAppSelector } from '@/app/context/store/hook'
   
@@ -46,9 +45,6 @@ export const DropMenuHeader = () => {
         }
         
        
-      },
-      onError: (error: CustomError) => {
-        console.log(error, 'SI HAY ERRORES', error.getDataValidation());
       }
     })
 

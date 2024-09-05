@@ -6,7 +6,6 @@ import { formatNumber } from '@/app/lib/formatNumber'
 import { Comment as IComment } from '@/core/domain/entities/tweet.entity'
 import { useMutation } from '@tanstack/react-query'
 import { tweetSservice } from '@/core/domain/services/index.service'
-import { CustomError } from '@/core/domain/errors/custom.error'
 
 
 interface Props {
@@ -33,10 +32,6 @@ export const Comment = ({ comment }: Props) => {
           }
          
         //   giveLikeComment(comment.id)
-    
-        },
-        onError: (error: CustomError) => {
-          console.log(error, 'SI HAY ERRORES', error.getDataValidation());
     
         }
       })

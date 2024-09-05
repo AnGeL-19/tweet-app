@@ -19,7 +19,6 @@ import { ImageSelected } from '../image/ImageSelected'
 import { ContextPost } from '@/app/context/post/contextPost'
 import { tweetSservice } from '@/core/domain/services/index.service'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { CustomError } from '@/core/domain/errors/custom.error'
 
 
  
@@ -68,10 +67,6 @@ export const FormComment = () => {
             // createComment(response)
           }
          
-    
-        },
-        onError: (error: CustomError) => {
-          console.log(error, 'SI HAY ERRORES', error.getDataValidation());
     
         }
       })

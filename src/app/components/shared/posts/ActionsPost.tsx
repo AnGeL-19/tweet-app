@@ -4,7 +4,6 @@ import {  Heart, MessageSquare, Repeat2 } from 'lucide-react'
 import { ContextPost } from '@/app/context/post/contextPost'
 import { useMutation } from '@tanstack/react-query'
 import { tweetSservice } from '@/core/domain/services/index.service'
-import { CustomError } from '@/core/domain/errors/custom.error'
 
 
 
@@ -27,10 +26,6 @@ export const ActionsPost = () => {
       // Invalidate and refetch
       giveLike()
 
-    },
-    onError: (error: CustomError) => {
-      console.log(error, 'SI HAY ERRORES', error.getDataValidation());
-
     }
   })
 
@@ -39,10 +34,6 @@ export const ActionsPost = () => {
     onSuccess: ( ) => {
       // Invalidate and refetch
       giveRetweet()
-    },
-    onError: (error: CustomError) => {
-      console.log(error, 'SI HAY ERRORES', error.getDataValidation());
-
     }
   })
 
@@ -51,10 +42,6 @@ export const ActionsPost = () => {
     onSuccess: ( ) => {
       // Invalidate and refetch
       giveSave()
-
-    },
-    onError: (error: CustomError) => {
-      console.log(error, 'SI HAY ERRORES', error.getDataValidation());
 
     }
   })

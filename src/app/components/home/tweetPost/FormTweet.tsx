@@ -12,7 +12,6 @@ import { Image, LoaderCircle } from 'lucide-react'
 import { Label } from '@radix-ui/react-label'
 import { ImageSelected } from '../../shared/image/ImageSelected'
 import { useMutation } from '@tanstack/react-query'
-import { CustomError } from '@/core/domain/errors/custom.error'
 import { useToast } from '../../ui/use-toast'
 import { tweetSservice } from '@/core/domain/services/index.service'
 
@@ -33,10 +32,6 @@ export const FormTweet = () => {
             })
             
           } 
-        },
-        onError: (error: CustomError) => {
-          console.log(error, 'SI HAY ERRORES', error.getDataValidation());
-          
         }
       })
 

@@ -6,8 +6,6 @@ import { type UserFollow as IUserFollow } from '@/core/domain/entities/user.enti
 import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { userService } from '@/core/domain/services/index.service';
-import { CustomError } from '@/core/domain/errors/custom.error';
-import { useToast } from '../ui/use-toast';
 import { useAppSelector } from '@/app/context/store/hook';
 import { formatNumber } from '@/app/lib/formatNumber';
 
@@ -16,8 +14,6 @@ interface Props {
 }
 
 export const UserFollow = ({user}:Props) => {
-
-  const { toast } = useToast()
 
   const userAuth = useAppSelector( state => state.auth.user )
 
@@ -37,14 +33,6 @@ export const UserFollow = ({user}:Props) => {
       }
       
      
-    },
-    onError: (error: CustomError) => {
-      console.log(error, 'SI HAY ERRORES', error.getDataValidation());
-      toast({
-        title: "Error follow",
-        description: 'the operation could not be performed',
-        variant:"destructive"
-    })
     }
   })
 

@@ -9,8 +9,6 @@ import { Button } from '../ui/button'
 import { useMutation } from '@tanstack/react-query'
 import { LoaderCircle } from 'lucide-react'
 
-import { CustomError } from '@/core/domain/errors/custom.error'
-
 import { useContext } from 'react'
 import { ContextAuth } from '@/app/context/auth/contextAuth'
 import { Login } from '@/core/domain/entities/auth.entity'

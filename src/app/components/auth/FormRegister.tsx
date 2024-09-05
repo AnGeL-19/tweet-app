@@ -10,7 +10,6 @@ import { useContext } from 'react'
 import { ContextAuth } from '@/app/context/auth/contextAuth'
 import { useMutation } from '@tanstack/react-query'
 import { UserRegister } from '@/core/domain/entities/user.entity'
-import { CustomError } from '@/core/domain/errors/custom.error'
 import { useToast } from '../ui/use-toast'
 import { LoaderCircle } from 'lucide-react'
 

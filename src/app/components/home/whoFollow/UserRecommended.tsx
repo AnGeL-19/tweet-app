@@ -7,8 +7,6 @@ import { UserRecomment } from '@/core/domain/entities/user.entity'
 import { useState } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import { userService } from '@/core/domain/services/index.service'
-import { CustomError } from '@/core/domain/errors/custom.error'
-import { useToast } from '../../ui/use-toast'
 
 interface Props {
   user: UserRecomment
@@ -16,7 +14,6 @@ interface Props {
 
 export const UserRecommended = ({user}:Props) => {
 
-  const { toast } = useToast()
 
   const [isFollow, setIsFollow] = useState(false)
 
@@ -32,16 +29,7 @@ export const UserRecommended = ({user}:Props) => {
       }else{
         setIsFollow(false)
       }
-      
      
-    },
-    onError: (error: CustomError) => {
-      console.log(error, 'SI HAY ERRORES', error.getDataValidation());
-      toast({
-        title: "Error follow",
-        description: 'the operation could not be performed',
-        variant:"destructive"
-    })
     }
   })
 

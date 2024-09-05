@@ -6,7 +6,6 @@ import { ContextAuth } from '@/app/context/auth/contextAuth';
 import { useToast } from '../../ui/use-toast';
 import { useMutation } from '@tanstack/react-query';
 import { userService } from '@/core/domain/services/index.service';
-import { CustomError } from '@/core/domain/errors/custom.error';
 import { AlertUpdate } from './AlertUpdate';
 import { Skeleton } from '../../ui/skeleton';
 import { Camera } from 'lucide-react';
@@ -52,10 +51,6 @@ export const ChangeBgImage = ({bgImg}:Props) => {
                 className: 'bg-red-200'
               })
           }
-        },
-        onError: (error: CustomError) => {
-          console.log(error, 'SI HAY ERRORES', error.getDataValidation());
-          
         }
     })
  

@@ -14,7 +14,6 @@ import { z } from 'zod'
 import { userService } from '@/core/domain/services/index.service'
 import { UpdateUser } from '@/core/domain/entities/user.entity'
 import { ContextAuth } from '@/app/context/auth/contextAuth'
-import { CustomError } from '@/core/domain/errors/custom.error'
 import { useToast } from '../../ui/use-toast'
 
 export const FormProfile = () => {
@@ -41,10 +40,6 @@ export const FormProfile = () => {
       }
       
      
-    },
-    onError: (error: CustomError) => {
-      console.log(error, 'SI HAY ERRORES', error.getDataValidation());
-      
     }
   })
 

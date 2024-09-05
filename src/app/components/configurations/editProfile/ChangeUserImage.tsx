@@ -8,7 +8,6 @@ import { getUrlPublicId } from '@/app/lib/getPublicId';
 import { AlertUpdate } from './AlertUpdate';
 import { useMutation } from '@tanstack/react-query';
 import { useToast } from '../../ui/use-toast';
-import { CustomError } from '@/core/domain/errors/custom.error';
 import { useAppSelector } from '@/app/context/store/hook';
 import { ContextAuth } from '@/app/context/auth/contextAuth';
 import { Skeleton } from '../../ui/skeleton';
@@ -55,10 +54,6 @@ export const ChangeUserImage = ({ name, img }: Props) => {
                 className: 'bg-red-200'
               })
           }
-        },
-        onError: (error: CustomError) => {
-          console.log(error, 'SI HAY ERRORES', error.getDataValidation());
-          
         }
     })
  

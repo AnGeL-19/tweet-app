@@ -59,7 +59,7 @@ type PropFactory = ErrorLoginResponse & ErrorRegisterResponse
 
 export class CustomError {
 
-    constructor(message: string, data?: PropFactory){
+    constructor(message: string, _?: PropFactory){
         throw new AppError(message, 500)
     }
 
