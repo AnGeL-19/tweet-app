@@ -25,7 +25,7 @@ export const TabPeople = () => {
           const posts = await userService.getUsers(params.pageParam, query);
           return posts;
         },
-        getNextPageParam: (lastPage, allPages, lastPageParam) => {
+        getNextPageParam: (lastPage, _, lastPageParam) => {
           if (lastPage.length === 0) {
             return undefined
           }

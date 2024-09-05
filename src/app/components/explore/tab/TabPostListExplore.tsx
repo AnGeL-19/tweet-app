@@ -23,7 +23,7 @@ export const TabPostListExplore = () => {
           const posts = await tweetSservice.getTweetsExplore(params.pageParam, query);
           return posts;
         },
-        getNextPageParam: (lastPage, allPages, lastPageParam) => {
+        getNextPageParam: (lastPage, _, lastPageParam) => {
           if (lastPage.length === 0) {
             return undefined
           }

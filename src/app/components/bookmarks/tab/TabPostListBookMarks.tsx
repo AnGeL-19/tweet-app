@@ -23,7 +23,7 @@ export const TabPostListBookMarks = () => {
           const posts = await tweetSservice.getTweetsBookmarks(params.pageParam, searchParams.get('filter') || '');
           return posts;
         },
-        getNextPageParam: (lastPage, allPages, lastPageParam) => {
+        getNextPageParam: (lastPage, _, lastPageParam) => {
           if (lastPage.length === 0) {
             return undefined
           }

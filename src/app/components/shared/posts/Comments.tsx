@@ -21,7 +21,7 @@ export const Comments = () => {
       const comments = await tweetSservice.getComments(id,params.pageParam);
       return comments;
     },
-    getNextPageParam: (lastPage, allPages, lastPageParam) => {
+    getNextPageParam: (lastPage, _, lastPageParam) => {
       if (!lastPage || lastPage.length === 0) {
         return undefined
       }

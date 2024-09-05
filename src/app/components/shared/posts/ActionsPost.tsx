@@ -23,7 +23,7 @@ export const ActionsPost = () => {
 
   const mutationLike = useMutation({
     mutationFn: (id: string) => tweetSservice.setLike(id),
-    onSuccess: ( response ) => {
+    onSuccess: ( ) => {
       // Invalidate and refetch
       giveLike()
 
@@ -36,7 +36,7 @@ export const ActionsPost = () => {
 
   const mutationRetweet = useMutation({
     mutationFn: (id: string) => tweetSservice.setRetweet(id),
-    onSuccess: ( response ) => {
+    onSuccess: ( ) => {
       // Invalidate and refetch
       giveRetweet()
     },
@@ -48,7 +48,7 @@ export const ActionsPost = () => {
 
   const mutationSave = useMutation({
     mutationFn: (id: string) => tweetSservice.setSave(id),
-    onSuccess: ( response ) => {
+    onSuccess: ( ) => {
       // Invalidate and refetch
       giveSave()
 

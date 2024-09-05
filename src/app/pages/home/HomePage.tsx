@@ -25,7 +25,7 @@ export const HomePage = () => {
       const posts = await tweetSservice.getTweets(params.pageParam);
       return posts;
     },
-    getNextPageParam: (lastPage, allPages, lastPageParam) => {
+    getNextPageParam: (lastPage, _, lastPageParam) => {
       if (lastPage.length === 0) {
         return undefined
       }

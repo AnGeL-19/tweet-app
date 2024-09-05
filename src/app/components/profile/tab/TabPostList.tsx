@@ -23,7 +23,7 @@ export const TabPostList = () => {
           const posts = await tweetSservice.getTweetsByUser(id!, params.pageParam, searchParams.get('filter') || '');
           return posts;
         },
-        getNextPageParam: (lastPage, allPages, lastPageParam) => {
+        getNextPageParam: (lastPage, _, lastPageParam) => {
           if (lastPage.length === 0) {
             return undefined
           }

@@ -24,7 +24,7 @@ export const FormTweet = () => {
     
     const mutation = useMutation({
         mutationFn: (data: FormData) => tweetSservice.createTweet(data), // aqui no agarra el login del metodo authRepository 
-        onSuccess: ( result, variables, context ) => {
+        onSuccess: ( result ) => {
         
           if (result) {
             toast({
