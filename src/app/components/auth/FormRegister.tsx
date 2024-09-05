@@ -35,10 +35,6 @@ export const FormRegister = () => {
         }
         
        
-      },
-      onError: (error: CustomError) => {
-        console.log(error, 'SI HAY ERRORES', error.getDataValidation());
-        
       }
     })
 
@@ -64,9 +60,9 @@ export const FormRegister = () => {
           <p className='text-darkLight text-center'>Join us and enjoy</p>
 
           {
-            mutation.error?.getDataValidation()
+            mutation.error
             &&
-            <span className='text-redPrimary block text-center mt-2'>{ mutation.error?.getDataValidation()?.msg }</span>
+            <span className='text-redPrimary block text-center mt-2'>{ mutation.error.message }</span>
           }
 
           <Form {...form}>

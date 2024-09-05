@@ -6,7 +6,7 @@ import { Auth, Logout } from "@/core/domain/entities/auth.entity";
 import { AuthResponse, LogoutResponse } from "../mappers/responses/auth.response";
 import { AuthMapper } from "../mappers/mapper/auth.mapper";
 import axios from "axios";
-import { CustomError } from "@/core/domain/errors/custom.error";
+import { CustomError, LoginError, RegisterError } from "@/core/domain/errors/custom.error";
 import { UserRegister } from "@/core/domain/entities/user.entity";
 
 
@@ -28,14 +28,14 @@ export class HttpAuthRepository implements AuthRepository {
             
             if (axios.isAxiosError(error)) {
                 if (error.response?.status === 401) {
-                    throw new CustomError('Unauthorized: Invalid credentials');
+                    throw new LoginError('Unauthorized: Invalid credentials');
                 } else if (error.response?.status === 500) {
-                    throw new CustomError('Server error: Please try again later');
+                    throw new LoginError('Server error: Please try again later');
                 } else {
-                    throw new CustomError(`Unexpected error: ${error.message}`, error.response?.data);
+                    throw new LoginError(`Unexpected error: ${error.message}`, error.response?.data);
                 }
             } else {
-                throw new CustomError('An unknown error occurred');
+                throw new LoginError('An unknown error occurred');
             }
           }
     }
@@ -52,14 +52,14 @@ export class HttpAuthRepository implements AuthRepository {
             
             if (axios.isAxiosError(error)) {
                 if (error.response?.status === 401) {
-                    throw new CustomError('Unauthorized: Invalid credentials');
+                    throw new RegisterError('Unauthorized: Invalid credentials');
                 } else if (error.response?.status === 500) {
-                    throw new CustomError('Server error: Please try again later');
+                    throw new RegisterError('Server error: Please try again later');
                 } else {
-                    throw new CustomError(`Unexpected error: ${error.message}`, error.response?.data);
+                    throw new RegisterError(`Unexpected error: ${error.message}`, error.response?.data);
                 }
             } else {
-                throw new CustomError('An unknown error occurred');
+                throw new RegisterError('An unknown error occurred');
             }
           }
     }
