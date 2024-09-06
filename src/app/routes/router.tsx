@@ -4,11 +4,13 @@ import {
 } from "react-router-dom";
 
 import { LoadingPage } from "../components/shared/LoadingPage";
-import ConfigurationsLayout from "../pages/layout/ConfigurationsLayout";
+
 
 
 const AuthLayout = lazy(() => import('../pages/layout/AuthLayout'));
 const MainLayout = lazy(() => import('../pages/layout/MainLayout'));
+const ConfigurationsLayout = lazy(() => import('../pages/layout/ConfigurationsLayout'));
+const ChatGroupLayout = lazy(() => import('../pages/layout/ChatGroupLayout'));
 
 export const router = createBrowserRouter([
   {
@@ -113,6 +115,32 @@ export const router = createBrowserRouter([
               },
             ]
           },
+          {
+            path: "chats/",
+            element: (
+              <Suspense fallback={<LoadingPage/>}>
+                <ChatGroupLayout />
+              </Suspense>
+              ),
+              children: [
+                {
+                  index: true,
+                  path: "",
+                  async lazy() {
+                    let { ChatPage } = await import("../pages/chats/ChatPage");
+                    return { Component: ChatPage };
+                  },
+                },
+                {
+                  index: true,
+                  path: ":name_user",
+                  async lazy() {
+                    let { ChatWhitUser } = await import("../pages/chats/ChatWhitUser");
+                    return { Component: ChatWhitUser };
+                  },
+                },
+              ]
+          }
         
     ]
   }

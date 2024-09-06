@@ -1,6 +1,6 @@
 
 export const PrivacityPage = () => {
   return (
-    <div>PrivacityPage</div>
+    <div>Coming soon - PrivacityPage</div>
   )
 }

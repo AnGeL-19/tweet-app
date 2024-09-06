@@ -64,10 +64,12 @@ export const DropMenuHeader = () => {
             </Link>
         </DropdownMenuItem>
         <DropdownMenuItem className='cursor-pointer flex gap-1 px-3 py-1 rounded'>
-            <UsersRound className='h-5 w-5' />
-            <DropdownMenuLabel className='font-normal text-sm'>
-                Group Chat
-            </DropdownMenuLabel>
+            <Link to={`/chats/`} className='flex items-center gap-1'>
+              <UsersRound className='h-5 w-5' />
+              <DropdownMenuLabel className='font-normal text-sm'>
+                  Group Chat
+              </DropdownMenuLabel>
+            </Link>
         </DropdownMenuItem>
         <DropdownMenuItem className='cursor-pointer flex gap-1 px-3 py-1 rounded'>
           <Link to={`/account/edit/`} className='flex items-center gap-1'>
