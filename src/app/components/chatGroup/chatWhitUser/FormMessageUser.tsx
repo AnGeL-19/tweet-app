@@ -35,7 +35,7 @@ export const FormMessageUser = () => {
           // ✅ This will be type-safe and validated.
 
 
-          socket.emit('chat message', 'jala');
+          socket.emit('chat from', values.message);
           // console.log(values);
           
           // mutation.mutateAsync()

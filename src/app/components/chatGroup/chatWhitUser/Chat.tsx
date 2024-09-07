@@ -1,8 +1,22 @@
+import { useEffect } from 'react'
 import { Message } from './Message'
+import { socket } from '@/adapters/http/socket';
 
 
 export const Chat = () => {
 
+  useEffect(() => {
+
+    socket.on('chat to', (msg) => {
+      console.log('message to ', msg);
+    });
+  
+    return () => {
+      socket.off('chat to')
+    }
+    
+  }, [])
+  
 
 
   return (
