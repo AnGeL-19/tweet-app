@@ -6,7 +6,7 @@ import { useInfiniteQuery } from '@tanstack/react-query'
 import { tweetSservice } from '@/core/domain/services/index.service'
 import { CommentSkeleton } from './skeleton/CommentSkeleton'
 import { Button } from '../../ui/button'
-import { DataEmpty } from '../DataEmpty'
+import { DataEmpty } from '../common/DataEmpty'
 
 
 export const Comments = () => {

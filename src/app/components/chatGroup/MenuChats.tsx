@@ -31,7 +31,7 @@ export const MenuChats = () => {
             <div className='flex flex-col'>
             
                 <div className='flex flex-col'>
-                    <h3 className='hidden lg:flex font-medium text-xl text-darkPrimary'>Chat Group</h3>
+                    <h3 className='hidden lg:flex font-medium text-xl text-darkPrimary'>Chats</h3>
                     <div className='flex lg:hidden w-full justify-center items-center'>
                         <MessageCircle className='w-8 h-8' />
                     </div>

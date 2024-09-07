@@ -2,7 +2,7 @@
 import { formatNumber } from '@/app/lib/formatNumber'
 import { UserAvatar } from '../../shared/user/UserAvatar'
 import { UserRecomment } from '@/core/domain/entities/user.entity'
-import { ButtonFollow } from '../../shared/ButtonFollow'
+import { ButtonFollow } from '../../shared/common/ButtonFollow'
 
 interface Props {
   user: UserRecomment

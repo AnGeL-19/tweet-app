@@ -1,7 +1,18 @@
-import React from 'react'
+import { ExploreUsersConnect } from '@/app/components/chatGroup/chatExplore/ExploreUsersConnect'
+import { UsersWhoWantConnect } from '@/app/components/chatGroup/chatExplore/UsersWhoWantConnect'
+
 
 export const ChatPage = () => {
+
+ 
+
   return (
-    <div>Coming soon - ChatPage</div>
+    <main className='flex flex-col gap-5'>
+      <h2 className='text-xl font-medium text-darkPrimary'>Explore and connect with others</h2>
+
+      <UsersWhoWantConnect />
+
+      <ExploreUsersConnect />
+    </main>
   )
 }

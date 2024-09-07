@@ -1,6 +1,7 @@
+import { socket } from '@/adapters/http/socket'
 import { Header } from '@/app/components/header/Header'
-import { Footer } from '@/app/components/shared/Footer'
-import { LoadingPage } from '@/app/components/shared/LoadingPage'
+import { Footer } from '@/app/components/shared/common/Footer'
+import { LoadingPage } from '@/app/components/shared/common/LoadingPage'
 import { useAppSelector } from '@/app/context/store/hook'
 import { useEffect } from 'react'
 import { Outlet, useNavigate } from 'react-router'
@@ -12,10 +13,37 @@ import { Outlet, useNavigate } from 'react-router'
   const logged = useAppSelector(state => state.auth.logged)
 
   useEffect(() => {
+
+    
+    // socket.on('connect', () => {
+    //   console.log('Conectado');
+    // });
+    // socket.on('disconnect', () => {
+    //   console.log('desconectado');
+    // });
+    
+  
+    return () => {
+      // socket.off('connect', () => {
+      //   console.log('Conectado afuera');
+      // });
+
+      // socket.off('disconnect', () => {
+      //   console.log('desconectado afuera');
+      // });
+    }
+
+  }, [])
+  
+
+  useEffect(() => {
     if (!logged) {
+      socket.disconnect()
       navigate("/auth/login", {
         replace: true
       });
+    }else{
+      socket.connect()
     }
   }, [logged])
 

@@ -4,8 +4,9 @@ import { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom';
 import { UserExplore } from '../UserExplore';
 import { UserExploreSkeleton } from '../skeleton/UserExploreSkeleton';
-import { DataEmpty } from '../../shared/DataEmpty';
-import { UserSearch } from 'lucide-react';
+import { DataEmpty } from '../../shared/common/DataEmpty';
+import { MessageCircle, UserSearch } from 'lucide-react';
+import { Button } from '../../ui/button';
 
 export const TabPeople = () => {
 
@@ -51,7 +52,9 @@ export const TabPeople = () => {
           ( data?.pages.flat().length !== 0 )
           ? 
           <>
-            {data?.pages.flat().map( (user) => (<UserExplore key={user.id} user={user} />) )}
+            {data?.pages.flat().map( (user) => (
+              <UserExplore key={user.id} user={user} />
+            ) )}
             <div></div>
           </>
           : <DataEmpty text='No users' iconRender={<UserSearch className='w-4 h-4' />}  />

@@ -3,7 +3,7 @@ import {
   createBrowserRouter,
 } from "react-router-dom";
 
-import { LoadingPage } from "../components/shared/LoadingPage";
+import { LoadingPage } from "../components/shared/common/LoadingPage";
 
 
 

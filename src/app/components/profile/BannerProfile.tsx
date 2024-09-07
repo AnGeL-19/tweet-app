@@ -2,7 +2,7 @@ import { Suspense, lazy } from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import { User } from '@/core/domain/entities/user.entity'
 import { useAppSelector } from '@/app/context/store/hook'
-import { ButtonFollow } from '../shared/ButtonFollow'
+import { ButtonFollow } from '../shared/common/ButtonFollow'
 
 const DialogUserFollow = lazy(() => import('./DialogUserFollow'))
 

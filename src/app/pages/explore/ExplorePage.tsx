@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { TabTweet } from '@/app/components/shared/tabs/TabTweet'
 
-import { SearchTweet } from '@/app/components/explore/SearchTweet'
+import { SearchTweet } from '@/app/components/shared/common/SearchTweet'
 import { TabPostListExplore } from '@/app/components/explore/tab/TabPostListExplore'
 import { TabPeople } from '@/app/components/explore/tab/TabPeople'
 
