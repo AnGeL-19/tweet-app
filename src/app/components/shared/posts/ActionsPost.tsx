@@ -1,6 +1,6 @@
 import  { useContext } from 'react'
 import { Button } from '../../ui/button'
-import {  Heart, MessageSquare, Repeat2 } from 'lucide-react'
+import {  Bookmark, Heart, MessageSquare, Repeat2 } from 'lucide-react'
 import { ContextPost } from '@/app/context/post/contextPost'
 import { useMutation } from '@tanstack/react-query'
 import { tweetSservice } from '@/core/domain/services/index.service'
@@ -73,7 +73,7 @@ export const ActionsPost = () => {
         <Button 
           onClick={() => mutationSave.mutate(id) }
           className={`w-1/4 flex gap-3 bg-transparent ${ saved ? 'hover:bg-blue-100' : 'hover:bg-zinc-100' }`}>
-          <Heart className={`h-5 w-5 ${ saved ? 'text-blueSave' : 'text-darkLight' }`}  />
+          <Bookmark className={`h-5 w-5 ${ saved ? 'text-blueSave' : 'text-darkLight' }`}  />
           <span className={`hidden sm:flex  ${ saved ? 'text-blueSave' : 'text-darkLight' }`}>{saved ? 'Saved' : 'Save'}</span>
         </Button>
     </div>
