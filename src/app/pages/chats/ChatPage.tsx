@@ -12,7 +12,7 @@ export const ChatPage = () => {
 
       <UsersWhoWantConnect />
 
-      <ExploreUsersConnect />
+      {/* <ExploreUsersConnect /> */}
     </main>
   )
 }

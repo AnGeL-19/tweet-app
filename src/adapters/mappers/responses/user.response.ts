@@ -45,7 +45,7 @@ export interface UserByIDResponse {
     isFollowing: boolean;
 }
 
-export interface UserFollowResponse {
+export interface UserFollowsResponse {
     ok:     boolean;
     length: number;
     data:   UserFollowResponse[];

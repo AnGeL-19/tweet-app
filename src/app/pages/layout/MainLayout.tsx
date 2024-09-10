@@ -11,30 +11,9 @@ import { Outlet, useNavigate } from 'react-router'
   const navigate = useNavigate()
 
   const logged = useAppSelector(state => state.auth.logged)
+  const user = useAppSelector(state => state.auth.user)
 
-  useEffect(() => {
 
-    
-    // socket.on('connect', () => {
-    //   console.log('Conectado');
-    // });
-    // socket.on('disconnect', () => {
-    //   console.log('desconectado');
-    // });
-    
-  
-    return () => {
-      // socket.off('connect', () => {
-      //   console.log('Conectado afuera');
-      // });
-
-      // socket.off('disconnect', () => {
-      //   console.log('desconectado afuera');
-      // });
-    }
-
-  }, [])
-  
 
   useEffect(() => {
     if (!logged) {
