@@ -1,29 +1,31 @@
-import { useRef } from 'react'
+
 import { Separator } from '../ui/separator'
 import { NavLink } from 'react-router-dom'
-import {  MessageCircle, Settings } from 'lucide-react'
+import {  MessageCircle } from 'lucide-react'
 import { Avatar, AvatarFallback } from '../ui/avatar'
 import { AvatarImage } from '@radix-ui/react-avatar'
+import { useInfiniteQuery } from '@tanstack/react-query'
+import { connectService } from '@/core/domain/services/index.service'
+import { Skeleton } from '../ui/skeleton'
 
 export const MenuChats = () => {
 
-    const navCongig = useRef([
-        {
-            to: '/chats/angel',
-            name: 'Angel M',
-            prfileImage: 'https://res.cloudinary.com/dajit1a8r/image/upload/c_fill,w_80,h_80/v1725477462/user-icon_e4vzuq.webp'
+    const {isLoading, data } = useInfiniteQuery({
+        queryKey: ['user-connects', 'infinite'],
+        initialPageParam: 1,
+        staleTime: 1000 * 60 * 60, // 60 minutes
+        queryFn: async params => {
+          const users = await connectService.getConnections(params.pageParam);
+          return users;
         },
-        {
-            to: '/chats/kroenen',
-            name: 'Kroenen',
-            prfileImage: 'https://res.cloudinary.com/dajit1a8r/image/upload/v1725576539/xvl1ablex1svm5rahgur.jpg'
+        getNextPageParam: (lastPage, _, lastPageParam) => {
+          if (lastPage.length === 0) {
+            return undefined
+          }
+          return lastPageParam + 1
         },
-        {
-            to: '/chats/best',
-            name: 'Best',
-            prfileImage: 'https://res.cloudinary.com/dajit1a8r/image/upload/v1725497056/kagpzqmfsxogpi0hq4sv.png'
-        }
-    ])
+        
+    });
 
     return (
         <div className='w-fit lg:w-full lg:max-w-[315px] sm:min-h-screen p-2 sm:p-4 bg-white rounded shadow'>
@@ -45,19 +47,24 @@ export const MenuChats = () => {
                         
                         <ul className='flex flex-col'>
                             {
-                                navCongig.current.map((navigation) => (
-                                    <li key={navigation.name}>
-                                        <NavLink to={navigation.to}>
+                                isLoading
+                                ? <div className='flex gap-3 items-center'>
+                                    <Skeleton  className='w-10 h-10 rounded-full bg-zinc-300' />
+                                    <Skeleton  className='w-20 h-5 bg-zinc-300' />
+                                </div>
+                                : data?.pages.flat().map((user) => (
+                                    <li key={user.id}>
+                                        <NavLink to={`/chats/${user.connectId}/${user.id}`}>
                                             {
                                                 ({ isActive }) => (
                                                     <>
                                                         <div className={`flex gap-4 items-center p-2 hover:bg-zinc-200 rounded-md group ${isActive ? 'bg-zinc-100' : ''}`}>
                                                             <Avatar>
-                                                                <AvatarImage src={navigation.prfileImage}></AvatarImage>
-                                                                <AvatarFallback>{navigation.name}</AvatarFallback>
+                                                                <AvatarImage src={user.profileImage}></AvatarImage>
+                                                                <AvatarFallback>{user.name}</AvatarFallback>
                                                             </Avatar>
                                                             <span className={`hidden lg:flex text-base font-medium text-darkPrimary`}>
-                                                                {navigation.name}
+                                                                {user.name}
                                                             </span>
                                                         </div>
                                                     </>

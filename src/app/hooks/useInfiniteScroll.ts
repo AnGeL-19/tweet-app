@@ -15,6 +15,8 @@ export const useInfiniteScroll = ({ fn, threshold = 1 }:Options) => {
         const observer = new IntersectionObserver( 
             entries => {
                 if (entries[0].isIntersecting) {
+                    console.log('ENTRAAAA');
+                    
                     fn()
                 }
             },

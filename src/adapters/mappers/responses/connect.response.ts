@@ -1,6 +1,6 @@
 import { UserFollowResponse } from "./user.response";
 
-export interface UserConnectResponse {
+export interface UserRecommendConnectResponse {
     ok:     boolean;
     length: number;
     data:   ConnectResponse[];
@@ -12,4 +12,17 @@ export interface ConnectResponse {
     date:        Date;
     isConnected: boolean;
     cid:         string;
+}
+
+export interface UsersConnectResponse {
+    ok:     boolean;
+    length: number;
+    data:   UserConnectResponse[];
+}
+
+export interface UserConnectResponse {
+    _id:     string;
+    name:    string;
+    imgUser: string;
+    connectId: string;
 }

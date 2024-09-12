@@ -1,10 +1,22 @@
-import { Connect } from "@/core/domain/entities/connect.entity";
-import { UserConnectResponse } from "../responses/connect.response";
+import { Connect, UserConnect } from "@/core/domain/entities/connect.entity";
+import { UserRecommendConnectResponse, UsersConnectResponse } from "../responses/connect.response";
 
 export class ConnectMapper {
 
+    static mapperUserConnect(response: UsersConnectResponse): UserConnect[] | [] {
 
-    static mapperUserConnect(response: UserConnectResponse): Connect[] | null {
+        const { data } = response;
+
+        return data.map( (user) => ({
+            id: user._id,
+            name: user.name,
+            profileImage: user.imgUser,
+            connectId: user.connectId
+        }))
+
+    }
+
+    static mapperUserRecommendConnect(response: UserRecommendConnectResponse): Connect[] | [] {
         
         const { data } = response
 

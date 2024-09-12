@@ -1,19 +1,20 @@
+import { Message } from "@/core/domain/entities/chat.entity";
 import { CustomError } from "@/core/domain/errors/custom.error";
-import { ConnectRepository } from "@/core/ports/connect.repository";
+import { ChatRepository } from "@/core/ports/chat.repository";
 import axios from "axios";
-import { UserRecommendConnectResponse, UsersConnectResponse } from "../mappers/responses/connect.response";
 import { tweetApi } from "../http/api";
-import { ConnectMapper } from "../mappers/mapper/connect.mapper";
-import { Connect, UserConnect } from "@/core/domain/entities/connect.entity";
+import { MessagesResponses } from "../mappers/responses/chat.response";
+import { ChatMapper } from "../mappers/mapper/chat.mapper";
 
-export class HttpConnectRepository implements ConnectRepository {
 
-    async getConnections(page: number): Promise<UserConnect[] | []> {
+export class HttpChatRepository implements ChatRepository {
+
+    async getMessages(page: number, connectId: string): Promise<Message[] | []> {
         try {
 
-            const { data } = await tweetApi.get<UsersConnectResponse>(`connect/`)
+            const { data } = await tweetApi.get<MessagesResponses>(`chat/messages/${connectId}?page=${page}`)
             
-            return ConnectMapper.mapperUserConnect(data);
+            return ChatMapper.messagesMapper(data);
 
         } catch (error) {
             console.log(error);
@@ -32,12 +33,12 @@ export class HttpConnectRepository implements ConnectRepository {
         }
     }
 
-    async getPeopleWhoWantConnect(page: number): Promise<Connect[] | []> {
+    async sendMessage(data: Message): Promise<Message | null> {
         try {
 
-            const { data } = await tweetApi.get<UserRecommendConnectResponse>(`connect/recommend`)
+            // const { data } = await tweetApi.get<UsersConnectResponse>(`connect/`)
             
-            return ConnectMapper.mapperUserRecommendConnect(data);
+            return null
 
         } catch (error) {
             console.log(error);

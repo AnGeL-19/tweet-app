@@ -6,6 +6,8 @@ import { HttpAuthRepository } from "@/adapters/repository/auth.repository";
 import { AuthService } from "./auth.service";
 import { HttpConnectRepository } from "@/adapters/repository/connect.repository";
 import { ConnectService } from "./connect.service";
+import { HttpChatRepository } from "@/adapters/repository/chat.repository";
+import { ChatService } from "./chat.service";
 
 
 const userRepository = new HttpUserRepository()
@@ -19,3 +21,6 @@ export const authService = new AuthService(authRespository)
 
 const connectRespository = new HttpConnectRepository()
 export const connectService = new ConnectService(connectRespository)
+
+const chatRespository = new HttpChatRepository()
+export const chatService = new ChatService(chatRespository)

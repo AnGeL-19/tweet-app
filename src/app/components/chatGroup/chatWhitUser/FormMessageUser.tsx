@@ -1,27 +1,22 @@
-import React from 'react'
+
 import { Form, FormControl, FormField, FormItem, FormMessage } from '../../ui/form'
-import { useMutation } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
 import { messageSchema } from '@/app/validations/message.schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Input } from '../../ui/input'
 import { Button } from '../../ui/button'
-import { LoaderCircle, Send } from 'lucide-react'
+import { Send } from 'lucide-react'
 import { z } from 'zod'
-import io from 'socket.io-client'
 import { socket } from '@/adapters/http/socket'
+import { useAppSelector } from '@/app/context/store/hook'
+import { useParams } from 'react-router'
 
 export const FormMessageUser = () => {
 
-    const mutation = useMutation({
-        // mutationFn: (data: Login) => authLogin(data), // aqui no agarra el login del metodo authRepository 
-        onSuccess: ( response ) => {
-          // Invalidate and refetch
-    
-          
-         
-        }
-      })
+    const { connect_id, user_id } = useParams()
+
+
+      const user = useAppSelector(state => state.auth.user)
     
       const form = useForm<z.infer<typeof messageSchema>>({
           resolver: zodResolver(messageSchema),
@@ -34,12 +29,23 @@ export const FormMessageUser = () => {
           // Do something with the form values.
           // ✅ This will be type-safe and validated.
 
+          const chatUser = {
+            id: user?.id,
+            name: user?.name,
+            profileImage: user?.profileImage
+          }
 
-          socket.emit('chat from', values.message);
+          socket.emit('sendMessage', {
+              connectId: connect_id,
+              user: chatUser,
+              message: values.message,
+              userTo: user_id
+          } );
           // console.log(values);
           
           // mutation.mutateAsync()
-    
+          form.reset()
+
         }
 
 
@@ -66,12 +72,13 @@ export const FormMessageUser = () => {
             <Button type="submit" 
                     size='sm' 
                     className=' bg-white text-black hover:text-white absolute top-1 right-1'
-                    disabled={mutation.isPending || !form.watch('message')}
+                    disabled={!form.watch('message')}
             >
             {
-                mutation.isPending
-                ? <LoaderCircle className='animate-spin w-5 h-5' />
-                : <Send className='w-5 h-5' />
+                // mutation.isPending
+                // ? <LoaderCircle className='animate-spin w-5 h-5' />
+                // : 
+                <Send className='w-5 h-5' />
             }
             </Button>
         </form>

@@ -1,10 +1,15 @@
-import React from 'react'
+
 import { Link } from 'react-router-dom'
 import { Button } from '../../ui/button'
 import { ArrowLeftCircle } from 'lucide-react'
 import { Avatar, AvatarFallback, AvatarImage } from '../../ui/avatar'
 
-export const HeaderChat = () => {
+interface Props {
+  img: string;
+  name: string;
+}
+
+export const HeaderChat = ({img, name}:Props) => {
   return (
     <div className='flex gap-3 items-center mb-2'>
         <Link to={'/chats'}>
@@ -14,11 +19,11 @@ export const HeaderChat = () => {
         </Link>
         <div className={`w-full flex gap-4 items-center p-2`}>
         <Avatar>
-            <AvatarImage src={'https://res.cloudinary.com/dajit1a8r/image/upload/v1725576539/xvl1ablex1svm5rahgur.jpg'}></AvatarImage>
-            <AvatarFallback>Angel</AvatarFallback>
+            <AvatarImage src={img}></AvatarImage>
+            <AvatarFallback>{name}</AvatarFallback>
         </Avatar>
         <span className={`text-xl font-medium text-darkPrimary`}>
-            Angel
+            {name}
         </span>
         </div>
     </div>

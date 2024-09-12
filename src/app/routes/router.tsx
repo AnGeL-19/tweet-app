@@ -133,7 +133,7 @@ export const router = createBrowserRouter([
                 },
                 {
                   index: true,
-                  path: ":name_user",
+                  path: ":connect_id/:user_id",
                   async lazy() {
                     let { ChatWhitUser } = await import("../pages/chats/ChatWhitUser");
                     return { Component: ChatWhitUser };
