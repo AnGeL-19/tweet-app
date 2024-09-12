@@ -19,7 +19,7 @@ export const Chat = () => {
 
   const [isChating, setIsChating] = useState(false)
 
-  const {isLoading, data, refetch ,fetchNextPage, isFetching, hasNextPage } = useInfiniteQuery({
+  const {isLoading, data ,refetch ,fetchNextPage, isFetching, hasNextPage } = useInfiniteQuery({
     queryKey: ['messages', connect_id],
     initialPageParam: 1,
     staleTime: 1000 * 60 * 60, // 60 minutes
@@ -36,28 +36,29 @@ export const Chat = () => {
     
   });
 
-
   useEffect(() => {
 
     socket.on('receiveMessage', (obj : IMessage) => {
-      console.log('message to ', obj); 
-
 
       queryClient.setQueryData(['messages', connect_id], (data : any) => {
 
         const { pages, pageParams } = data;
 
-        const existMessage = [...pages].reverse().flat().some( ( message: IMessage )  => message.id === obj.id )
+        const existMessage = pages.flat().some( ( message: IMessage )  => message.id === obj.id )
 
-        console.log();
-        
-        const addMessagetopages = existMessage ? [...[...pages].reverse().flat()] : [...[...pages].reverse().flat(), obj]
+        const pagesNewMessage = [...pages.reverse()]
+
+        if (!existMessage) {
+          const index = pagesNewMessage.length - 1;
+          const lastPage = pagesNewMessage[index]
+          pagesNewMessage[index] = [ ...lastPage, obj ]
+        }
 
         setIsChating(true)
 
         return {
           pageParams,
-          pages: addMessagetopages
+          pages: pagesNewMessage
         }
 
       })
@@ -71,14 +72,17 @@ export const Chat = () => {
   }, [])
 
   useEffect(() => {
-    
-    if (scrollRef.current && isChating) {
-
+  
+    if(scrollRef.current) {
+      if (isChating || data?.pageParams.length === 1) {
         scrollRef.current.scrollTop = scrollRef.current.scrollHeight
-        setIsChating(false)
-    }       
+      }else{
+        scrollRef.current.scrollTop = scrollRef.current.scrollTop
+      }
+    } 
 
-  }, [data?.pages])
+
+  }, [data?.pages, isChating])
 
   useEffect(() => {
     refetch()
@@ -86,7 +90,10 @@ export const Chat = () => {
   
   
   const { ref } = useInfiniteScroll({
-    fn:  fetchNextPage,
+    fn:  () => {
+      fetchNextPage()
+      setIsChating(false)
+    },
     threshold: 1
   })
 
