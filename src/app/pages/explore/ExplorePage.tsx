@@ -32,7 +32,7 @@ export const ExplorePage = () => {
       value: 'media',
       title: 'Media',
       selected: false,
-      componentRender: () => <span>Comming soon Media</span>
+      componentRender: () => <TabPostListExplore />
     }
   ])
 

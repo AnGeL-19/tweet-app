@@ -24,7 +24,7 @@ export const BookMarksPage = () => {
       value: 'media',
       title: 'Media',
       selected: false,
-      componentRender: () => <span>Coming soon</span>
+      componentRender: () => <TabPostListBookMarks />
     },
     {
       value: 'likes',

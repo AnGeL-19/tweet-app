@@ -42,7 +42,7 @@ export const ProfilePage = () => {
       value: 'media',
       title: 'Media',
       selected: false,
-      componentRender: () => <span>Coming soon</span>
+      componentRender: () => <TabPostList />
     },
     {
       value: 'likes',
