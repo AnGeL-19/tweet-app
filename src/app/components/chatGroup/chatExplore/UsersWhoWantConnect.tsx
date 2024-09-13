@@ -40,25 +40,22 @@ export const UsersWhoWantConnect = () => {
 
         {
           isLoading
-          ? <>
-            <UserExploreSkeleton />
-            <UserExploreSkeleton />
-          </>
+          ? <UserExploreSkeleton />
           : 
           ( data?.pages.flat().length !== 0 )
           ? 
           <>
             {data?.pages.flat().map( (cn) => (
-              <UserExplore key={cn?.id} user={cn!.userFrom}>
+              <UserExplore key={cn.id} user={cn!.userFrom}>
 
                 <div className='flex flex-col pt-2'>
                   <span className='inline-block text-sm text-darkLight font-bold mb-2'>This user wants to connect with you</span>
-                  <ButtonConnect userToId={cn?.userFrom.id} />
+                  <ButtonConnect userToId={cn.userFrom.id} />
                 </div>
                 
               </UserExplore>
             ))}
-            <div></div>
+            <div key={'empty'}></div>
           </>
           : <DataEmpty text='No users' iconRender={<UserSearch className='w-4 h-4' />}  />
         }
@@ -67,14 +64,3 @@ export const UsersWhoWantConnect = () => {
       </section>
   )
 }
-{/* <UserExplore key={cn?.id} user={cn!.userFrom}>
-
-<div className='flex flex-col pt-2'>
-  <span className='inline-block text-sm text-darkLight font-bold mb-2'>This user wants to connect with you</span>
-  <Button size='sm' className='w-fit' onClick={ () => handleConnect(cn?.userFrom.id)}>
-    <MessageCircle className='w-5 h-5 mr-2' />
-    Connect 
-  </Button>
-</div>
-
-</UserExplore> */}

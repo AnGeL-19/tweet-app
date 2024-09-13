@@ -10,7 +10,7 @@ export const ChatWhitUser = () => {
 
   const { user_id } = useParams()
 
-  const { data, isLoading, refetch, isRefetching } = useQuery({ 
+  const { data, isLoading, isRefetching } = useQuery({ 
     queryKey: ['chat-user', user_id], queryFn: () => userService.getUserById(user_id || ''),
     staleTime: 1000 * 60 * 60, // 60 minutes 
   })

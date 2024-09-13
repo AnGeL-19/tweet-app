@@ -43,6 +43,13 @@ export interface UserByIDResponse {
     ok:   boolean;
     data: UserResponse;
     isFollowing: boolean;
+    connect: StatusConnectResponse
+}
+
+export interface StatusConnectResponse {
+    connectId: string;
+    isConnected: boolean;
+    isPending: boolean;
 }
 
 export interface UserFollowsResponse {

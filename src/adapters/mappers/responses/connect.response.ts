@@ -1,4 +1,4 @@
-import { UserFollowResponse } from "./user.response";
+import { StatusConnectResponse, UserFollowResponse } from "./user.response";
 
 export interface UserRecommendConnectResponse {
     ok:     boolean;
@@ -11,7 +11,7 @@ export interface ConnectResponse {
     userTo:      UserFollowResponse;
     date:        Date;
     isConnected: boolean;
-    cid:         string;
+    _id:         string;
 }
 
 export interface UsersConnectResponse {
@@ -30,4 +30,5 @@ export interface UserConnectResponse {
 export interface ConnectUserResponse {
     ok: boolean;
     message: string;
+    connect: StatusConnectResponse;
 }

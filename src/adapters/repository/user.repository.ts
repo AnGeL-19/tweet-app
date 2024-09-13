@@ -1,7 +1,7 @@
 import { Trend } from "@/core/domain/entities/trend.entity";
 import { ChangeImage, UpdateUser, User, UserFollow, UserFollowUnfollow, UserRecomment } from "@/core/domain/entities/user.entity";
 import { UserRepository } from "@/core/ports/user.repository";
-import { TrendsResponse, UpdateImageResponse, UpdateUserResponse, UserByIDResponse, UserFollowResponse, UserFollowUnfollowResponse, UserRecommentsResponse, UsersResponse } from "../mappers/responses/user.response";
+import { TrendsResponse, UpdateImageResponse, UpdateUserResponse, UserByIDResponse, UserFollowsResponse, UserFollowUnfollowResponse, UserRecommentsResponse, UsersResponse } from "../mappers/responses/user.response";
 import { tweetApi } from "../http/api";
 import { UserMapper } from "../mappers/mapper/user.mapper";
 import axios from "axios";
@@ -85,7 +85,7 @@ export class HttpUserRepository implements UserRepository {
     async getUsersFollow(query: string, id: string): Promise<UserFollow[] | null> {
         try {
 
-            const { data } = await tweetApi.get<UserFollowResponse>(`user/${query}/${id}`)
+            const { data } = await tweetApi.get<UserFollowsResponse>(`user/${query}/${id}`)
         
             return UserMapper.mapperUserFllow(data);
 

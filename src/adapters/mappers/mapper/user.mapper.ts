@@ -1,11 +1,11 @@
 import { Trend } from "@/core/domain/entities/trend.entity";
-import { TrendsResponse, UpdateImageResponse, UpdateUserResponse, UserByIDResponse, UserFollowResponse, UserFollowUnfollowResponse, UserRecommentsResponse } from "../responses/user.response";
+import { TrendsResponse, UpdateImageResponse, UpdateUserResponse, UserByIDResponse, UserFollowsResponse, UserFollowUnfollowResponse, UserRecommentsResponse } from "../responses/user.response";
 import { ChangeImage, User, UserFollow, UserFollowUnfollow, UserRecomment } from "@/core/domain/entities/user.entity";
 
 
 export class UserMapper {
 
-    static mapperUserFllow( response: UserFollowResponse ): UserFollow[] {
+    static mapperUserFllow( response: UserFollowsResponse ): UserFollow[] {
 
         const { data } = response
 
@@ -23,7 +23,7 @@ export class UserMapper {
 
     static mapperUser( response: UserByIDResponse ): User {
 
-        const { data, isFollowing } = response
+        const { data, isFollowing, connect } = response
 
         return {
             id: data.uid,
@@ -34,7 +34,12 @@ export class UserMapper {
             backGroundImage: data.imgUserBackground,
             numFollowers: data.nfollowers,
             numFollowing: data.nfollowing,
-            isFollowing: isFollowing
+            isFollowing: isFollowing,
+            connect: {
+                connectId: connect.connectId,
+                isConnected: connect.isConnected,
+                isPending: connect.isPending
+            }
         }
 
     }

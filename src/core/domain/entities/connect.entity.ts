@@ -14,6 +14,12 @@ export interface UserConnect extends Pick<User, 'id' | 'name' | 'profileImage' >
 }
 
 export interface UserConnected {
-    connected: boolean;
+    connect: StatusConect;
     message: string;
+}
+
+export interface StatusConect {
+    connectId: string;
+    isConnected: boolean;
+    isPending: boolean;
 }

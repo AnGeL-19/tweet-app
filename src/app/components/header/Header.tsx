@@ -49,7 +49,8 @@ export const Header = () => {
             </div>  
 
             <div className='flex gap-3 items-center'>
-                <Notifications />
+                {/* <Notifications /> */}
+                
             
 
                 <AvatarHeader />

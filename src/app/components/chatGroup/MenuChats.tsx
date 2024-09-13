@@ -7,6 +7,7 @@ import { AvatarImage } from '@radix-ui/react-avatar'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { connectService } from '@/core/domain/services/index.service'
 import { Skeleton } from '../ui/skeleton'
+import { DataEmpty } from '../shared/common/DataEmpty'
 
 export const MenuChats = () => {
 
@@ -52,7 +53,10 @@ export const MenuChats = () => {
                                     <Skeleton  className='w-10 h-10 rounded-full bg-zinc-300' />
                                     <Skeleton  className='w-20 h-5 bg-zinc-300' />
                                 </div>
-                                : data?.pages.flat().map((user) => (
+                                : 
+                                data?.pages.flat().length !== 0
+                                ?
+                                data?.pages.flat().map((user) => (
                                     <li key={user.id}>
                                         <NavLink to={`/chats/${user.connectId}/${user.id}`}>
                                             {
@@ -74,6 +78,7 @@ export const MenuChats = () => {
 
                                     </li>
                                 ))
+                                : <DataEmpty text='No users'  />
                             }
                         </ul>
                     </nav>

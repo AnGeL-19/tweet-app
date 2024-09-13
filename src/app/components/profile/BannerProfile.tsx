@@ -77,7 +77,10 @@ export const BannerProfile = ({ user }:Props) => {
                     userAuth?.id !== user.id
                     && 
                     <div className='flex gap-2 items-center'>
-                        <ButtonConnect userToId={user.id} />
+                        <ButtonConnect 
+                            userToId={user.id} 
+                            connect={user.connect}
+                        />
                         <ButtonFollow userId={user.id} isFolling={user.isFollowing} />
                     </div>
                     

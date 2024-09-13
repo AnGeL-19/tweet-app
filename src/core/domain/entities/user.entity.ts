@@ -1,3 +1,4 @@
+import { StatusConect } from "./connect.entity";
 
 export interface User{
     id: string;
@@ -9,7 +10,10 @@ export interface User{
     numFollowers: number;
     numFollowing: number;
     isFollowing?: boolean;
+    connect?: StatusConect
 }
+
+
 
 export interface UpdateUser extends Pick<User, 'name' | 'bio'> {
     password?: string;
@@ -29,7 +33,7 @@ export interface UserFollowUnfollow {
     isFollow: boolean;
 }
 
-export interface UserFollow extends Omit<User, 'email' | 'backGroundImage' | 'numFollowing' >{
+export interface UserFollow extends Omit<User, 'email' | 'backGroundImage' | 'numFollowing' | 'connect' >{
     isFollowing: boolean;
 }
 

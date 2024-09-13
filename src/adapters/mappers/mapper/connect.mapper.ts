@@ -5,11 +5,15 @@ export class ConnectMapper {
 
     static mapperConnect(response: ConnectUserResponse): UserConnected {
 
-        const { ok, message } = response;
+        const { message, connect } = response;
 
         return {
-            connected: ok,
-            message
+            message,
+            connect: {
+                connectId: connect.connectId,
+                isConnected: connect.isConnected,
+                isPending: connect.isPending
+            }
         }
 
     }
@@ -32,7 +36,7 @@ export class ConnectMapper {
         const { data } = response
 
         return data.map(( cn ) => ({
-            id: cn.cid,
+            id: cn._id,
             date: cn.date,
             isConnected: cn.isConnected,
             userFrom: {

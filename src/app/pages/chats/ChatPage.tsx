@@ -1,4 +1,4 @@
-import { ExploreUsersConnect } from '@/app/components/chatGroup/chatExplore/ExploreUsersConnect'
+
 import { UsersWhoWantConnect } from '@/app/components/chatGroup/chatExplore/UsersWhoWantConnect'
 
 
@@ -12,7 +12,6 @@ export const ChatPage = () => {
 
       <UsersWhoWantConnect />
 
-      {/* <ExploreUsersConnect /> */}
     </main>
   )
 }
