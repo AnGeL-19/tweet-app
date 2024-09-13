@@ -11,21 +11,42 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Image, LoaderCircle } from 'lucide-react'
 import { Label } from '@radix-ui/react-label'
 import { ImageSelected } from '../../shared/image/ImageSelected'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useToast } from '../../ui/use-toast'
 import { tweetSservice } from '@/core/domain/services/index.service'
+
 
 
 
 export const FormTweet = () => {
 
     const { toast } = useToast()
+
+    const queryClient = useQueryClient()
     
     const mutation = useMutation({
-        mutationFn: (data: FormData) => tweetSservice.createTweet(data), // aqui no agarra el login del metodo authRepository 
+        mutationFn: (data: FormData) => tweetSservice.createTweet(data), 
         onSuccess: ( result ) => {
         
           if (result) {
+
+            queryClient.setQueryData(['posts', 'infinite'], ( data: any ) => {
+
+              const { pages, pageParams } = data;
+    
+              const updateQuery = [...pages]
+    
+              const index = 0;
+              const lastPage = updateQuery[index]
+              updateQuery[index] = [ result, ...lastPage ]
+              
+              return {
+                pageParams,
+                pages: updateQuery
+              }
+            
+            })
+
             toast({
                 title: "Post created success",
                 description: 'Thank you for sharing, enjoy sharing'
