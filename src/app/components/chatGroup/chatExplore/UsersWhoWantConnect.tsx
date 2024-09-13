@@ -1,17 +1,17 @@
 
 import { UserExploreSkeleton } from '../../explore/skeleton/UserExploreSkeleton'
 import { UserExplore } from '../../explore/UserExplore'
-import { Button } from '../../ui/button'
-import { MessageCircle, UserSearch } from 'lucide-react'
+
+import {  UserSearch } from 'lucide-react'
 import { DataEmpty } from '../../shared/common/DataEmpty'
-import { socket } from '@/adapters/http/socket'
-import { useAppSelector } from '@/app/context/store/hook'
+
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { connectService } from '@/core/domain/services/index.service'
+import { ButtonConnect } from '../../shared/common/ButtonConnect'
 
 export const UsersWhoWantConnect = () => {
 
-    const user = useAppSelector(state => state.auth.user)
+
 
     const {isLoading, data } = useInfiniteQuery({
       queryKey: ['recommend-connect', 'infinite'],
@@ -31,12 +31,6 @@ export const UsersWhoWantConnect = () => {
     });
 
 
-  const handleConnect = ( userToId: string ) => {
-    socket.emit('connect-users', {
-      userFrom: user,
-      userTo: userToId
-    })
-  }
 
   return (
     <section>
@@ -59,10 +53,7 @@ export const UsersWhoWantConnect = () => {
 
                 <div className='flex flex-col pt-2'>
                   <span className='inline-block text-sm text-darkLight font-bold mb-2'>This user wants to connect with you</span>
-                  <Button size='sm' className='w-fit' onClick={ () => handleConnect(cn?.userFrom.id)}>
-                    <MessageCircle className='w-5 h-5 mr-2' />
-                    Connect 
-                  </Button>
+                  <ButtonConnect userToId={cn?.userFrom.id} />
                 </div>
                 
               </UserExplore>

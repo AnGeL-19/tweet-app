@@ -26,3 +26,8 @@ export interface UserConnectResponse {
     imgUser: string;
     connectId: string;
 }
+
+export interface ConnectUserResponse {
+    ok: boolean;
+    message: string;
+}

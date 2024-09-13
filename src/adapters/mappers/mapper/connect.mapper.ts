@@ -1,7 +1,18 @@
-import { Connect, UserConnect } from "@/core/domain/entities/connect.entity";
-import { UserRecommendConnectResponse, UsersConnectResponse } from "../responses/connect.response";
+import { Connect, UserConnect, UserConnected } from "@/core/domain/entities/connect.entity";
+import { ConnectUserResponse, UserRecommendConnectResponse, UsersConnectResponse } from "../responses/connect.response";
 
 export class ConnectMapper {
+
+    static mapperConnect(response: ConnectUserResponse): UserConnected {
+
+        const { ok, message } = response;
+
+        return {
+            connected: ok,
+            message
+        }
+
+    }
 
     static mapperUserConnect(response: UsersConnectResponse): UserConnect[] | [] {
 

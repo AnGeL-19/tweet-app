@@ -12,3 +12,8 @@ export interface Connect {
 export interface UserConnect extends Pick<User, 'id' | 'name' | 'profileImage' >{
     connectId: string
 }
+
+export interface UserConnected {
+    connected: boolean;
+    message: string;
+}
