@@ -19,10 +19,14 @@ export const Chat = () => {
 
   const [isChating, setIsChating] = useState(false)
 
-  const {isLoading, data ,refetch ,fetchNextPage, isFetching, hasNextPage } = useInfiniteQuery({
+  const {isLoading, data ,refetch ,fetchNextPage, isFetching } = useInfiniteQuery({
     queryKey: ['messages', connect_id],
     initialPageParam: 1,
-    staleTime: 1000 * 60 * 60, // 60 minutes
+    staleTime: 1000 * 60 * 60,  // Los datos son frescos por 60 minutos (60 minutos sin refetch)
+    // cacheTime: 1000 * 60 * 30, // Mantén los datos en caché por 30 minutos
+    refetchOnWindowFocus: false,  // No refetch cuando vuelves a la ventana
+    refetchOnReconnect: false,    // No refetch al reconectar a internet
+    refetchOnMount: false,
     queryFn: async params => {
       const users = await chatService.getMessages(params.pageParam, connect_id || '' );
       return users;
@@ -77,7 +81,7 @@ export const Chat = () => {
       if (isChating || data?.pageParams.length === 1) {
         scrollRef.current.scrollTop = scrollRef.current.scrollHeight
       }else{
-        scrollRef.current.scrollTop = scrollRef.current.scrollTop
+        scrollRef.current.scrollTop = scrollRef.current.scrollTop / 2
       }
     } 
 
@@ -108,18 +112,19 @@ export const Chat = () => {
         >
           
           {
-            hasNextPage && <div ref={ref}></div>
+            data?.pages[data.pages.length-1].length !== 0 && <div ref={ref}></div>
           }
+         
 
           {
             isFetching 
             && 
             <div className='w-full'>
               <MessageSkeleton key={'csk1'} />
-              <MessageSkeleton key={'csk2'} />
             </div>
           }
 
+          
           {
             isLoading
             ? 

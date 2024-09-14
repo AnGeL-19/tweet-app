@@ -16,7 +16,11 @@ export const UsersWhoWantConnect = () => {
     const {isLoading, data } = useInfiniteQuery({
       queryKey: ['recommend-connect', 'infinite'],
       initialPageParam: 1,
-      staleTime: 1000 * 60 * 60, // 60 minutes
+      staleTime: 1000 * 60 * 5,  // Los datos son frescos por 5 minutos (5 minutos sin refetch)
+      // cacheTime: 1000 * 60 * 30, // Mantén los datos en caché por 30 minutos
+      refetchOnWindowFocus: false,  // No refetch cuando vuelves a la ventana
+      refetchOnReconnect: false,    // No refetch al reconectar a internet
+      refetchOnMount: false,
       queryFn: async params => {
         const users = await connectService.getPeopleWhoWantConnect(params.pageParam);
         return users;
@@ -35,7 +39,7 @@ export const UsersWhoWantConnect = () => {
   return (
     <section>
         <h3 className='text-base font-medium text-darkLight'>People who want to connect with you</h3>
-        {/* NOTIFICACIONES DE GENTE QUE QUIERE CONECTAR CONTIGO */}
+ 
         <div className='w-full grid grid-cols-auto-fit-users gap-4 mt-3'>
 
         {

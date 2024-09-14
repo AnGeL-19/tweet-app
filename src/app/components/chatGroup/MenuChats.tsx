@@ -14,7 +14,11 @@ export const MenuChats = () => {
     const {isLoading, data } = useInfiniteQuery({
         queryKey: ['user-connects', 'infinite'],
         initialPageParam: 1,
-        staleTime: 1000 * 60 * 60, // 60 minutes
+        staleTime: 1000 * 60 * 60,  // Los datos son frescos por 60 minutos (60 minutos sin refetch)
+        // cacheTime: 1000 * 60 * 30, // Mantén los datos en caché por 30 minutos
+        refetchOnWindowFocus: false,  // No refetch cuando vuelves a la ventana
+        refetchOnReconnect: false,    // No refetch al reconectar a internet
+        refetchOnMount: false,
         queryFn: async params => {
           const users = await connectService.getConnections(params.pageParam);
           return users;

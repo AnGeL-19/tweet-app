@@ -1,5 +1,5 @@
 import { UserRecomment } from '@/core/domain/entities/user.entity'
-import React, { useRef } from 'react'
+import { useRef } from 'react'
 import { UserExploreSkeleton } from '../../explore/skeleton/UserExploreSkeleton'
 import { UserExplore } from '../../explore/UserExplore'
 import { Button } from '../../ui/button'

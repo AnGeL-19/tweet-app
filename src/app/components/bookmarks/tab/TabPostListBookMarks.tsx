@@ -18,7 +18,11 @@ export const TabPostListBookMarks = () => {
     const {isLoading, data, fetchNextPage, isFetchingNextPage, hasNextPage, refetch, isRefetching} = useInfiniteQuery({
         queryKey: ['posts-bookmarks', 'infinite'],
         initialPageParam: 1,
-        staleTime: 1000 * 60 * 60, // 60 minutes
+        staleTime: 1000 * 60 * 10,  // Los datos son frescos por 10 minutos (5 minutos sin refetch)
+        // cacheTime: 1000 * 60 * 30, // Mantén los datos en caché por 30 minutos
+        refetchOnWindowFocus: false,  // No refetch cuando vuelves a la ventana
+        refetchOnReconnect: false,    // No refetch al reconectar a internet
+        refetchOnMount: false,
         queryFn: async params => {
           const posts = await tweetSservice.getTweetsBookmarks(params.pageParam, searchParams.get('filter') || '');
           return posts;
