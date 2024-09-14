@@ -34,11 +34,13 @@ export const HomePage = () => {
     
   });
 
-  // useEffect(() => {
-  //   refetch()
-  // }, [user?.id])
 
   const { positionTopDown } = useScrollSticky()
+
+  useEffect(() => {
+    refetch()
+  }, [user?.id])
+  
 
   return (
     <div className='flex flex-grow gap-6 px-4 '>
