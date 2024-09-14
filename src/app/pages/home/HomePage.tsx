@@ -34,9 +34,9 @@ export const HomePage = () => {
     
   });
 
-  useEffect(() => {
-    refetch()
-  }, [user?.id])
+  // useEffect(() => {
+  //   refetch()
+  // }, [user?.id])
 
   const { positionTopDown } = useScrollSticky()
 
