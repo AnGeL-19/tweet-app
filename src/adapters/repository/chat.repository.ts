@@ -1,10 +1,11 @@
-import { Message } from "@/core/domain/entities/chat.entity";
+import { Message, SendMessage } from "@/core/domain/entities/chat.entity";
 import { CustomError } from "@/core/domain/errors/custom.error";
 import { ChatRepository } from "@/core/ports/chat.repository";
 import axios from "axios";
 import { tweetApi } from "../http/api";
 import { MessagesResponses } from "../mappers/responses/chat.response";
 import { ChatMapper } from "../mappers/mapper/chat.mapper";
+import { socket } from "../http/socket";
 
 
 export class HttpChatRepository implements ChatRepository {
@@ -33,12 +34,10 @@ export class HttpChatRepository implements ChatRepository {
         }
     }
 
-    async sendMessage(data: Message): Promise<Message | null> {
+    async sendMessage(data: SendMessage): Promise<void> {
         try {
 
-            // const { data } = await tweetApi.get<UsersConnectResponse>(`connect/`)
-            
-            return null
+           await socket.emit('sendMessage', data);
 
         } catch (error) {
             console.log(error);

@@ -1,5 +1,5 @@
 import { ChatRepository } from "@/core/ports/chat.repository"
-import { Message } from "../entities/chat.entity";
+import { Message, SendMessage } from "../entities/chat.entity";
 
 
 
@@ -12,8 +12,8 @@ export class ChatService implements ChatRepository {
         return this.chatRepository.getMessages(page, connectId)
     }
     
-    sendMessage(data: Message): Promise<Message | null> {
-        throw new Error("Method not implemented.");
+    async sendMessage(data: SendMessage): Promise<void> {
+        this.chatRepository.sendMessage(data)
     }
 
 

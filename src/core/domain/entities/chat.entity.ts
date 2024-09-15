@@ -8,3 +8,10 @@ export interface Message {
     date: Date;
     user: UserMessage;
 }
+
+export interface SendMessage {
+    connectId: string;
+    user: UserMessage;
+    message: string;
+    userTo: string;
+}

@@ -7,9 +7,10 @@ import { Input } from '../../ui/input'
 import { Button } from '../../ui/button'
 import { Send } from 'lucide-react'
 import { z } from 'zod'
-import { socket } from '@/adapters/http/socket'
 import { useAppSelector } from '@/app/context/store/hook'
 import { useParams } from 'react-router'
+import { chatService } from '@/core/domain/services/index.service'
+import { SendMessage } from '@/core/domain/entities/chat.entity'
 
 export const FormMessageUser = () => {
 
@@ -30,20 +31,20 @@ export const FormMessageUser = () => {
           // ✅ This will be type-safe and validated.
 
           const chatUser = {
-            id: user?.id,
-            name: user?.name,
-            profileImage: user?.profileImage
+            id: user!.id,
+            name: user!.name,
+            profileImage: user!.profileImage
           }
 
-          socket.emit('sendMessage', {
-              connectId: connect_id,
-              user: chatUser,
-              message: values.message,
-              userTo: user_id
-          } );
-          // console.log(values);
-          
-          // mutation.mutateAsync()
+          const data: SendMessage = {
+            connectId: connect_id || '',
+            user: chatUser,
+            message: values.message,
+            userTo: user_id!
+        } 
+
+          chatService.sendMessage(data)
+        
           form.reset()
 
         }

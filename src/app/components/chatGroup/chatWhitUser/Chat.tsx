@@ -42,7 +42,9 @@ export const Chat = () => {
 
   useEffect(() => {
 
+
     socket.on('receiveMessage', (obj : IMessage) => {
+    
 
       queryClient.setQueryData(['messages', connect_id], (data : any) => {
 
@@ -68,10 +70,6 @@ export const Chat = () => {
       })
 
     });
-  
-    return () => {
-      socket.off('chat to')
-    }
     
   }, [])
 
