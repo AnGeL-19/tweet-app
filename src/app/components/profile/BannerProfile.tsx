@@ -21,7 +21,7 @@ export const BannerProfile = ({ user }:Props) => {
         <div className='flex gap-5 flex-col items-center md:flex-row md:items-start'>
             <div className='relative -mt-32 md:-mt-20 mb-0 md:mb-10'>
                 
-                <Avatar className='h-40 w-40 border-4 border-white shadow-sm'>
+                <Avatar className='h-40 w-40 border-4 border-white shadow-sm object-contain'>
                     <AvatarImage src={user.profileImage}>
                     </AvatarImage>
                     <AvatarFallback>

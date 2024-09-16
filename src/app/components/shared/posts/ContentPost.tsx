@@ -14,11 +14,11 @@ export const ContentPost = ({ description, img }:Props) => {
       {
         img
         &&
-        <div className='w-auto h-auto max-h-[375px] rounded-md overflow-hidden mb-4'>
+        <div className='w-auto max-h-[375px] rounded-md overflow-hidden mb-4'>
           <img 
             loading='lazy'
             src={img}
-            className='object-contain'
+            className='w-full h-full object-contain max-h-[375px]'
             alt='post-i'
           />
         </div>

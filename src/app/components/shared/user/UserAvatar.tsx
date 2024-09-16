@@ -14,7 +14,7 @@ export const UserAvatar = ({ user: { id, name, profileImage }, info }:Props) => 
         className='flex gap-3 w-fit'
         to={`/profile/${id}`}
     >
-        <Avatar>
+        <Avatar className='object-contain'>
             <AvatarImage  src={profileImage} />
             <AvatarFallback className='text-black'>{name}</AvatarFallback>
         </Avatar>
