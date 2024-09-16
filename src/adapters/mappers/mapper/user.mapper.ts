@@ -1,11 +1,19 @@
 import { Trend } from "@/core/domain/entities/trend.entity";
-import { TrendsResponse, UpdateImageResponse, UpdateUserResponse, UserByIDResponse, UserFollowsResponse, UserFollowUnfollowResponse, UserRecommentsResponse } from "../responses/user.response";
+import { 
+    TrendsResponse, 
+    UpdateImageResponse, 
+    UpdateUserResponse, 
+    UserByIDResponse, 
+    UserFollowsResponse, 
+    UserFollowUnfollowResponse, 
+    UserRecommentsResponse 
+} from "../responses/user.response";
 import { ChangeImage, User, UserFollow, UserFollowUnfollow, UserRecomment } from "@/core/domain/entities/user.entity";
 
 
 export class UserMapper {
 
-    static mapperUserFllow( response: UserFollowsResponse ): UserFollow[] {
+    static mapperUserFllow(response: UserFollowsResponse): UserFollow[] {
 
         const { data } = response
 
@@ -21,7 +29,7 @@ export class UserMapper {
     }
 
 
-    static mapperUser( response: UserByIDResponse ): User {
+    static mapperUser(response: UserByIDResponse): User {
 
         const { data, isFollowing, connect } = response
 
@@ -44,7 +52,7 @@ export class UserMapper {
 
     }
 
-    static mapperUserUpdated( response: UpdateUserResponse ): User {
+    static mapperUserUpdated(response: UpdateUserResponse): User {
 
         const { data } = response
 
@@ -61,7 +69,7 @@ export class UserMapper {
 
     }
 
-    static mapperFollowUnfollow( response: UserFollowUnfollowResponse ): UserFollowUnfollow {
+    static mapperFollowUnfollow(response: UserFollowUnfollowResponse): UserFollowUnfollow {
 
         return {
             ok: response.ok,
@@ -71,9 +79,9 @@ export class UserMapper {
 
     }
 
-    static mapperHashtags( response: TrendsResponse ): Trend[] {
+    static mapperHashtags(response: TrendsResponse): Trend[] {
 
-        const { data  } = response;
+        const { data } = response;
 
         return data.map((hashtag) => ({
             id: hashtag.hid,
@@ -83,9 +91,9 @@ export class UserMapper {
 
     }
 
-    static mapperUserRecomments( response: UserRecommentsResponse ): UserRecomment[] {
+    static mapperUserRecomments(response: UserRecommentsResponse): UserRecomment[] {
 
-        const { data  } = response;
+        const { data } = response;
 
         return data.map((user) => ({
             id: user.uid,
@@ -98,7 +106,7 @@ export class UserMapper {
 
     }
 
-    static mapperUpdateImage( response: UpdateImageResponse ): ChangeImage | null {
+    static mapperUpdateImage(response: UpdateImageResponse): ChangeImage | null {
         return {
             ok: response.ok,
             message: response.msg,

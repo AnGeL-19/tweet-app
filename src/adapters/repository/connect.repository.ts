@@ -35,7 +35,7 @@ export class HttpConnectRepository implements ConnectRepository {
     async getConnections(page: number): Promise<UserConnect[] | []> {
         try {
 
-            const { data } = await tweetApi.get<UsersConnectResponse>(`connect/`)
+            const { data } = await tweetApi.get<UsersConnectResponse>(`connect?page=${page}`)
             
             return ConnectMapper.mapperUserConnect(data);
 
@@ -59,7 +59,7 @@ export class HttpConnectRepository implements ConnectRepository {
     async getPeopleWhoWantConnect(page: number): Promise<Connect[] | []> {
         try {
 
-            const { data } = await tweetApi.get<UserRecommendConnectResponse>(`connect/recommend`)
+            const { data } = await tweetApi.get<UserRecommendConnectResponse>(`connect/recommend?page=${page}`)
             
             return ConnectMapper.mapperUserRecommendConnect(data);
 

@@ -11,9 +11,6 @@ import { Outlet, useNavigate } from 'react-router'
   const navigate = useNavigate()
 
   const logged = useAppSelector(state => state.auth.logged)
-  const user = useAppSelector(state => state.auth.user)
-
-
 
   useEffect(() => {
     if (!logged) {

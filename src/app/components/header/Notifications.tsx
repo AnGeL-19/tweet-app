@@ -6,11 +6,10 @@ import {
   } from "@/app/components/ui/popover"
 import { toast } from "sonner"
 
-import { UserFollow as IUserFollow, User } from "@/core/domain/entities/user.entity"
+import { User } from "@/core/domain/entities/user.entity"
 import { Bell } from "lucide-react"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { UserAvatar } from "../shared/user/UserAvatar"
-import { IUserAvatar } from "@/app/interfaces/post.interface"
 import { formatNumber } from "@/app/lib/formatNumber"
 
   

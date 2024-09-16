@@ -3,8 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { NavLinkItem } from './NavLinkItem'
 import { AvatarHeader } from './AvatarHeader'
 import { Bookmark, Compass, Home } from 'lucide-react'
-import { useAppSelector } from '@/app/context/store/hook'
-import { Notifications } from './Notifications'
+
 
 export const Header = () => {
 
@@ -49,10 +48,6 @@ export const Header = () => {
             </div>  
 
             <div className='flex gap-3 items-center'>
-                {/* <Notifications /> */}
-                
-            
-
                 <AvatarHeader />
             </div>
           
