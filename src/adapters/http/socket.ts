@@ -7,7 +7,7 @@ export const socket =  io(apiUrlSocket,{
     autoConnect: false,
     withCredentials: true, // Asegúrate de enviar las credenciales
     extraHeaders: {
-        Authorization: token
+        "Authorization": token
     }
 });
 
