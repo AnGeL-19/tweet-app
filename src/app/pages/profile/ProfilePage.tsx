@@ -17,7 +17,11 @@ export const ProfilePage = () => {
 
   const { data, isLoading, refetch, isRefetching } = useQuery({ 
     queryKey: ['user', id], queryFn: () => userService.getUserById(id || ''),
-    // staleTime: 1000 * 60 * 60, // 60 minutes 
+    staleTime: 1000 * 60 * 10,  // Los datos son frescos por 10 minutos (5 minutos sin refetch)
+    // cacheTime: 1000 * 60 * 30, // Mantén los datos en caché por 30 minutos
+    refetchOnWindowFocus: false,  // No refetch cuando vuelves a la ventana
+    refetchOnReconnect: false,    // No refetch al reconectar a internet
+    refetchOnMount: false,
   })
 
   useEffect(() => {
@@ -42,7 +46,7 @@ export const ProfilePage = () => {
       value: 'media',
       title: 'Media',
       selected: false,
-      componentRender: () => <span>Coming soon</span>
+      componentRender: () => <TabPostList />
     },
     {
       value: 'likes',

@@ -1,5 +1,5 @@
 
-import { LoadingPage } from '@/app/components/shared/LoadingPage'
+import { LoadingPage } from '@/app/components/shared/common/LoadingPage'
 import { useAppSelector } from '@/app/context/store/hook'
 import { useEffect } from 'react'
 import { Outlet, useNavigate } from 'react-router'

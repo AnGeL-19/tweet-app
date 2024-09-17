@@ -2,6 +2,6 @@
 
 export const ThemePage = () => {
   return (
-    <div>ThemePage</div>
+    <div>Coming soon - ThemePage</div>
   )
 }

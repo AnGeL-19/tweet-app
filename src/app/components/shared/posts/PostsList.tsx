@@ -4,7 +4,7 @@ import { PostProvider } from '@/app/context/post/PostProvider'
 import { type Post as IPost } from '@/core/domain/entities/tweet.entity'
 import { useInfiniteScroll } from '@/app/hooks/useInfiniteScroll'
 import { PostSkeleton } from './skeleton/PostSkeleton'
-import { DataEmpty } from '../DataEmpty'
+import { DataEmpty } from '../common/DataEmpty'
 
 interface Props {
   posts: IPost[],

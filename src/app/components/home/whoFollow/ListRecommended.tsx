@@ -3,7 +3,7 @@ import { UserRecommended } from './UserRecommended'
 import { Separator } from '../../ui/separator'
 import { UserRecomment } from '@/core/domain/entities/user.entity'
 import { UserSearch } from 'lucide-react'
-import { DataEmpty } from '../../shared/DataEmpty'
+import { DataEmpty } from '../../shared/common/DataEmpty'
 
 interface Props {
   users: UserRecomment[]

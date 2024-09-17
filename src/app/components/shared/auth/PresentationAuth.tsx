@@ -1,6 +1,6 @@
 
 import React, { useRef } from 'react'
-import { Footer } from '../Footer'
+import { Footer } from '../common/Footer'
 
 
 interface Props {

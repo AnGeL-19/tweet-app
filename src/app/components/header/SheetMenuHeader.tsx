@@ -63,7 +63,7 @@ export const SheetMenuHeader = () => {
             <CircleUserRound className='h-5 w-5' />
             Profile
           </Link>
-          <Link to='/group' className='p-2 hover:bg-zinc-100 text-center flex gap-2 items-center rounded'>
+          <Link to={`/chats/`} className='p-2 hover:bg-zinc-100 text-center flex gap-2 items-center rounded'>
             <UsersRound className='h-5 w-5' />
             Group Chat
           </Link>

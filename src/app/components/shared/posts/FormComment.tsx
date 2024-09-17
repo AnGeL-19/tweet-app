@@ -53,21 +53,23 @@ export const FormComment = () => {
 
             queryClient.setQueryData(['comments', id], (data : any) => {
 
-                const { pages, ...rest } = data;
-
-                pages[0] = [response, ...pages[0]]
-
+                const { pages, pageParams } = data;
+    
+                const updateQuery = [...pages]
+      
+                const index = 0;
+                const lastPage = updateQuery[index]
+                updateQuery[index] = [ response, ...lastPage ]
+                
                 return {
-                    ...rest,
-                    pages
+                  pageParams,
+                  pages: updateQuery
                 }
 
             })
-            // queryClient.invalidateQueries(['projects'])
-            // createComment(response)
+
           }
-         
-    
+
         }
       })
     

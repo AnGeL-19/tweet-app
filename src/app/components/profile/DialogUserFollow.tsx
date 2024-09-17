@@ -12,7 +12,7 @@ import { UserFollow } from './UserFollow';
 import { useQuery } from '@tanstack/react-query';
 import { userService } from '@/core/domain/services/index.service';
 import { DialogDescription } from '@radix-ui/react-dialog';
-import { DataEmpty } from '../shared/DataEmpty';
+import { DataEmpty } from '../shared/common/DataEmpty';
 import { UserAvatarSkeleton } from '../shared/skeleton/UserAvatarSkeleton';
 
 interface Props {

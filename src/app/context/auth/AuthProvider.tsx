@@ -29,6 +29,7 @@ export const AuthProvider = ({children}: Props) => {
     const authenticated = ( data: Auth ) => {
         
         dispatch(login(data))
+        window.localStorage.setItem('token', data.token)
 
     }
 
@@ -37,7 +38,7 @@ export const AuthProvider = ({children}: Props) => {
         const { message, ...rest } = data
 
         dispatch(logout(rest))
-
+        window.localStorage.removeItem('token')
     }
 
     const authLogin = async ( data: Login ): Promise<Auth | null> => {
@@ -59,6 +60,8 @@ export const AuthProvider = ({children}: Props) => {
 
         if (response) {
             dispatch(login(response))
+
+            window.localStorage.setItem('token', response.token)
         }else{
             deauthenticate({
                 logged: false,
@@ -66,6 +69,7 @@ export const AuthProvider = ({children}: Props) => {
                 token: '',
                 user: null
             })
+            window.localStorage.removeItem('token')
         }
 
     }

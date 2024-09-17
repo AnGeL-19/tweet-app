@@ -3,7 +3,7 @@ import { UserAvatar } from '../shared/user/UserAvatar'
 import { type UserFollow as IUserFollow } from '@/core/domain/entities/user.entity'
 import { useAppSelector } from '@/app/context/store/hook';
 import { formatNumber } from '@/app/lib/formatNumber';
-import { ButtonFollow } from '../shared/ButtonFollow';
+import { ButtonFollow } from '../shared/common/ButtonFollow';
 
 interface Props {
     user: IUserFollow;

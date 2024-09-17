@@ -6,7 +6,7 @@ import { useInfiniteQuery } from '@tanstack/react-query'
 import { tweetSservice } from '@/core/domain/services/index.service'
 import { CommentSkeleton } from './skeleton/CommentSkeleton'
 import { Button } from '../../ui/button'
-import { DataEmpty } from '../DataEmpty'
+import { DataEmpty } from '../common/DataEmpty'
 
 
 export const Comments = () => {
@@ -15,7 +15,7 @@ export const Comments = () => {
   const {isLoading, data, fetchNextPage, isFetchingNextPage, hasNextPage } = useInfiniteQuery({
     queryKey: ['comments', id],
     initialPageParam: 1,
-    // staleTime: 1000 * 60 * 60, // 60 minutes
+    staleTime: 1000 * 60 * 60, // 60 minutes
     enabled: showComments,
     queryFn: async params => {
       const comments = await tweetSservice.getComments(id,params.pageParam);

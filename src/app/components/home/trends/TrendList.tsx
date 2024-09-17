@@ -1,7 +1,7 @@
 
 import { Trend } from './Trend'
 import { Trend as ITrend } from '@/core/domain/entities/trend.entity'
-import { DataEmpty } from '../../shared/DataEmpty'
+import { DataEmpty } from '../../shared/common/DataEmpty'
 
 
 

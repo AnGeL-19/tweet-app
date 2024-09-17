@@ -2,6 +2,6 @@
 
 export const NotificationPage = () => {
   return (
-    <div>NotificationPage</div>
+    <div>Coming soon - NotificationPage</div>
   )
 }

@@ -1,16 +1,18 @@
 
 import { UserRecommended } from '../home/whoFollow/UserRecommended'
-import { UserRecomment } from '@/core/domain/entities/user.entity'
+import { UserFollow, UserRecomment } from '@/core/domain/entities/user.entity'
 
 interface Props{
-    user: UserRecomment
+    user: UserRecomment | UserFollow,
+    children?: React.ReactNode
 }
 
-export const UserExplore = ({ user }: Props) => {
+export const UserExplore = ({ user, children }: Props) => {
   return (
     <article className='w-full rounded bg-white shadow p-2'>
+        <UserRecommended user={user}  />
 
-        <UserRecommended key={user.id} user={user} />
+        {children}
     </article>
   )
 }

@@ -4,7 +4,9 @@ import { NavLinkItem } from './NavLinkItem'
 import { AvatarHeader } from './AvatarHeader'
 import { Bookmark, Compass, Home } from 'lucide-react'
 
+
 export const Header = () => {
+
 
     const routes = useRef([
         {
@@ -24,6 +26,9 @@ export const Header = () => {
         }
     ])
 
+
+    
+
   return (
     <div className='sticky z-50 top-0 left-0 w-full'>
         <header className='w-full h-16 px-5 bg-white'> 
@@ -42,7 +47,9 @@ export const Header = () => {
 
             </div>  
 
-            <AvatarHeader />
+            <div className='flex gap-3 items-center'>
+                <AvatarHeader />
+            </div>
           
             </nav>
         </header>

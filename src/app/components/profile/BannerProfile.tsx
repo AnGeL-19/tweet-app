@@ -2,7 +2,8 @@ import { Suspense, lazy } from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import { User } from '@/core/domain/entities/user.entity'
 import { useAppSelector } from '@/app/context/store/hook'
-import { ButtonFollow } from '../shared/ButtonFollow'
+import { ButtonFollow } from '../shared/common/ButtonFollow'
+import { ButtonConnect } from '../shared/common/ButtonConnect'
 
 const DialogUserFollow = lazy(() => import('./DialogUserFollow'))
 
@@ -20,7 +21,7 @@ export const BannerProfile = ({ user }:Props) => {
         <div className='flex gap-5 flex-col items-center md:flex-row md:items-start'>
             <div className='relative -mt-32 md:-mt-20 mb-0 md:mb-10'>
                 
-                <Avatar className='h-40 w-40 border-4 border-white shadow-sm'>
+                <Avatar className='h-40 w-40 border-4 border-white shadow-sm object-contain'>
                     <AvatarImage src={user.profileImage}>
                     </AvatarImage>
                     <AvatarFallback>
@@ -74,8 +75,15 @@ export const BannerProfile = ({ user }:Props) => {
             
                 {
                     userAuth?.id !== user.id
-                    &&
-                    <ButtonFollow userId={user.id} isFolling={user.isFollowing} />
+                    && 
+                    <div className='flex gap-2 items-center'>
+                        <ButtonConnect 
+                            userToId={user.id} 
+                            connect={user.connect}
+                        />
+                        <ButtonFollow userId={user.id} isFolling={user.isFollowing} />
+                    </div>
+                    
                 }
                 
 

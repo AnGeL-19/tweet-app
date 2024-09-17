@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button } from '../ui/button'
+import { Button } from '../../ui/button'
 import { UserMinus, UserPlus } from 'lucide-react'
 import { useMutation } from '@tanstack/react-query';
 import { userService } from '@/core/domain/services/index.service';
