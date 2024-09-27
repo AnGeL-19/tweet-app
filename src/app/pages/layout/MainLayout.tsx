@@ -1,4 +1,4 @@
-import { socket } from '@/adapters/http/socket'
+// import { socket } from '@/adapters/http/socket'
 import { Header } from '@/app/components/header/Header'
 import { Footer } from '@/app/components/shared/common/Footer'
 import { LoadingPage } from '@/app/components/shared/common/LoadingPage'
@@ -14,12 +14,12 @@ import { Outlet, useNavigate } from 'react-router'
 
   useEffect(() => {
     if (!logged) {
-      socket.disconnect()
+      // socket.disconnect()
       navigate("/auth/login", {
         replace: true
       });
     }else{
-      socket.connect()
+      // socket.connect()
     }
   }, [logged])
 
