@@ -3,7 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import { User } from '@/core/domain/entities/user.entity'
 import { useAppSelector } from '@/app/context/store/hook'
 import { ButtonFollow } from '../shared/common/ButtonFollow'
-import { ButtonConnect } from '../shared/common/ButtonConnect'
+// import { ButtonConnect } from '../shared/common/ButtonConnect'
 
 const DialogUserFollow = lazy(() => import('./DialogUserFollow'))
 
@@ -77,10 +77,10 @@ export const BannerProfile = ({ user }:Props) => {
                     userAuth?.id !== user.id
                     && 
                     <div className='flex gap-2 items-center'>
-                        <ButtonConnect 
+                        {/* <ButtonConnect 
                             userToId={user.id} 
                             connect={user.connect}
-                        />
+                        /> */}
                         <ButtonFollow userId={user.id} isFolling={user.isFollowing} />
                     </div>
                     

@@ -10,7 +10,7 @@ import { LoadingPage } from "../components/shared/common/LoadingPage";
 const AuthLayout = lazy(() => import('../pages/layout/AuthLayout'));
 const MainLayout = lazy(() => import('../pages/layout/MainLayout'));
 const ConfigurationsLayout = lazy(() => import('../pages/layout/ConfigurationsLayout'));
-const ChatGroupLayout = lazy(() => import('../pages/layout/ChatGroupLayout'));
+// const ChatGroupLayout = lazy(() => import('../pages/layout/ChatGroupLayout'));
 
 export const router = createBrowserRouter([
   {
@@ -115,32 +115,32 @@ export const router = createBrowserRouter([
               },
             ]
           },
-          {
-            path: "chats/",
-            element: (
-              <Suspense fallback={<LoadingPage/>}>
-                <ChatGroupLayout />
-              </Suspense>
-              ),
-              children: [
-                {
-                  index: true,
-                  path: "",
-                  async lazy() {
-                    let { ChatPage } = await import("../pages/chats/ChatPage");
-                    return { Component: ChatPage };
-                  },
-                },
-                {
-                  index: true,
-                  path: ":connect_id/:user_id",
-                  async lazy() {
-                    let { ChatWhitUser } = await import("../pages/chats/ChatWhitUser");
-                    return { Component: ChatWhitUser };
-                  },
-                },
-              ]
-          }
+          // {
+          //   path: "chats/",
+          //   element: (
+          //     <Suspense fallback={<LoadingPage/>}>
+          //       <ChatGroupLayout />
+          //     </Suspense>
+          //     ),
+          //     children: [
+          //       {
+          //         index: true,
+          //         path: "",
+          //         async lazy() {
+          //           let { ChatPage } = await import("../pages/chats/ChatPage");
+          //           return { Component: ChatPage };
+          //         },
+          //       },
+          //       {
+          //         index: true,
+          //         path: ":connect_id/:user_id",
+          //         async lazy() {
+          //           let { ChatWhitUser } = await import("../pages/chats/ChatWhitUser");
+          //           return { Component: ChatWhitUser };
+          //         },
+          //       },
+          //     ]
+          // }
         
     ]
   }

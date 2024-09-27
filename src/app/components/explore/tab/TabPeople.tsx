@@ -40,7 +40,7 @@ export const TabPeople = () => {
 
     const { ref } = useInfiniteScroll({
       fn:  fetchNextPage,
-      threshold: 1
+      threshold: .4
     })
 
     useEffect(() => {

@@ -17,7 +17,7 @@ export const PostsList = ({ posts, onEndReached, isFetching, hasNextPage }: Prop
 
   const { ref } = useInfiniteScroll({
     fn:  onEndReached ?? function(){},
-    threshold: 1
+    threshold: .7
   })
   
 
