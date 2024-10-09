@@ -113,7 +113,7 @@ export const ChangeUserImage = ({ name, img }: Props) => {
                         <Skeleton className='h-24 w-24 border-2 sm:h-32 sm:w-32 sm:border-4 border-white rounded-full shadow-md' />
                     ) 
                     : (
-                        <Avatar className='h-24 w-24 border-2 sm:h-32 sm:w-32 sm:border-4 border-white shadow-md'>
+                        <Avatar className='h-24 w-24 border-2 sm:h-32 sm:w-32 sm:border-4 bg-white border-white shadow-md'>
                             <AvatarImage src={image}>
                             </AvatarImage>
                             <AvatarFallback>
